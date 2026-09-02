@@ -2,6 +2,7 @@ import { Component, HostListener, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, NavigationStart, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import { I18n } from './core/i18n';
 import { PageTransition } from './core/page-transition';
 import { Portfolio } from './core/portfolio';
 import { Seo } from './core/seo';
@@ -14,6 +15,7 @@ import { Seo } from './core/seo';
 })
 export class App {
   protected readonly transition = inject(PageTransition);
+  protected readonly i18n = inject(I18n);
   protected readonly data = toSignal(inject(Portfolio).getData());
   protected readonly menuOpen = signal(false);
 

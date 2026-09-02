@@ -1,0 +1,170 @@
+{
+  "logo": "Yanal.",
+  "home": {
+    "name": "ينال الحسن",
+    "roles": [
+      {
+        "text": "مهندس برمجيات",
+        "i": 4
+      },
+      {
+        "text": "مطور Full-Stack",
+        "i": 3
+      },
+      {
+        "text": "مطور Back-End",
+        "i": 2
+      },
+      {
+        "text": "مطور Java",
+        "i": 1
+      }
+    ],
+    "summary": "مهندس برمجيات ذو خبرة في بناء تطبيقات قابلة للتوسع باستخدام Java وSpring Boot وAngular والخدمات المصغّرة. أعمل حالياً على أنظمة مصرفية مؤسسية، مع التركيز على حلول موزّعة وآمنة وموثوقة.",
+    "cvUrl": "files/Yanal CV.pdf",
+    "cvLabel": "تحميل السيرة",
+    "image": "images/home.webp",
+    "socials": [
+      {
+        "url": "https://github.com/YanalThaer",
+        "icon": "bxl-github",
+        "label": "GitHub"
+      },
+      {
+        "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
+        "icon": "bxl-linkedin",
+        "label": "LinkedIn"
+      }
+    ]
+  },
+  "services": [
+    {
+      "title": "الباك إند والخدمات المصغّرة",
+      "description": "أبني خدمات Java وSpring Boot للأنظمة الموزّعة، بما في ذلك واجهات REST والعمل المعتمد على الأحداث مع Kafka.",
+      "icon": "bx-server"
+    },
+    {
+      "title": "التطوير المتكامل",
+      "description": "أربط واجهات Angular بواجهات الباك إند، وأسلّم تطبيقات ويب مكتملة مع التركيز على كود واضح وقابل للصيانة.",
+      "icon": "bx-code-alt"
+    },
+    {
+      "title": "البيانات وواجهات البرمجة",
+      "description": "أصمم وأعمل مع MySQL وSQL Server وMongoDB، وأدمج واجهات البرمجة مع الانتباه للأداء ونماذج البيانات الواضحة.",
+      "icon": "bx-data"
+    }
+  ],
+  "resume": {
+    "tabs": ["الخبرة", "التعليم", "المهارات", "نبذة"],
+    "experience": [
+      {
+        "year": "06-2025 - حتى الآن",
+        "title": "مهندس برمجيات",
+        "company": "البنك السعودي للاستثمار",
+        "description": "تطوير خدمات باك إند وميزات Angular لأنظمة مصرفية مؤسسية. العمل يشمل Java وSpring Boot والخدمات المصغّرة، مع التركيز على تسليم آمن وموثوق."
+      },
+      {
+        "year": "01-2025 - 05-2025",
+        "title": "متدرب مطور Full-Stack",
+        "company": "أورنج الأردن",
+        "description": "بناء تطبيقات Laravel متكاملة، منها Pro Gym Hub وDesign Hive. تصميم مخططات MySQL وتحسين الاستعلامات ودمج واجهات REST ضمن فريق."
+      },
+      {
+        "year": "09-2024 - 12-2024",
+        "title": "متدرب مطور Java",
+        "company": "FintechPath",
+        "description": "إكمال برنامج تدريب باك إند يركز على Java وواجهات البرمجة والعمل العملي على المشاريع كأساس للتطوير المؤسسي."
+      }
+    ],
+    "education": [
+      {
+        "year": "10-2020 - 02-2025",
+        "title": "بكالوريوس علوم الحاسوب",
+        "company": "جامعة الزيتونة الأردنية",
+        "description": "تخرجت في علوم الحاسوب. شملت المساقات هياكل البيانات والبرمجة كائنية التوجه وقواعد البيانات وهندسة البرمجيات."
+      }
+    ],
+    "skills": [
+      { "name": "Java", "icon": "bxl-java" },
+      { "name": "Spring Boot", "icon": "bxl-spring-boot" },
+      { "name": "Angular", "icon": "bxl-angular" },
+      { "name": "Microservices", "icon": "bx-sitemap" },
+      { "name": "Apache Kafka", "icon": "bx-broadcast" },
+      { "name": "JavaScript", "icon": "bxl-javascript" },
+      { "name": "HTML5", "icon": "bxl-html5" },
+      { "name": "CSS", "icon": "bxl-css3" },
+      { "name": "PHP", "icon": "bxl-php" },
+      { "name": "Laravel", "icon": "bxl-php" },
+      { "name": "MySQL", "icon": "bxs-data" },
+      { "name": "SQL Server", "icon": "bxs-data" },
+      { "name": "MongoDB", "icon": "bxs-data" },
+      { "name": "Git and GitHub", "icon": "bxl-github" }
+    ],
+    "about": "أنا مهندس برمجيات أستمتع ببناء تطبيقات عملية وعالية الجودة. عملي يشمل Java وSpring Boot وAngular والخدمات المصغّرة، مع اهتمام قوي بالكود النظيف وحل مشكلات حقيقية ضمن فرق العمل. أتعلم بسرعة وأبحث عن فرص للتحسين مع كل مشروع."
+  },
+  "projects": [
+    {
+      "number": "04",
+      "title": "Pro Gym Hub",
+      "description": "منصة لإدارة النوادي الرياضية تربط الأندية والمدربين والأعضاء. تتولى الاشتراكات وتتبع التقدم والعمليات اليومية في تطبيق Laravel واحد.",
+      "tech": "PHP, Laravel, MySQL, HTML, CSS, JavaScript",
+      "github": "https://github.com/YanalThaer/Orange-ProGymHub.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "03",
+      "title": "Design Hive",
+      "description": "مجتمع للمصممين لنشر أعمالهم والتفاعل عبر الملفات الشخصية والرسائل والإعجابات والتعليقات. مبني بـ Laravel وAjax.",
+      "tech": "HTML, CSS, JavaScript, Laravel, Ajax",
+      "github": "https://github.com/YanalThaer/Orange-DesignHive.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "02",
+      "title": "Giving Hands",
+      "description": "تطبيق ويب يساعد الناس في الأردن على إيجاد الجمعيات الخيرية والتواصل معها. حصل على المركز الرابع من بين أكثر من 25 فريقاً في هاكاثون Code for Good.",
+      "tech": "HTML, CSS, JavaScript, Bootstrap, Local Storage",
+      "github": "https://github.com/YanalThaer/GivingTree.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "01",
+      "title": "Bright Future",
+      "description": "مشروع تخرج يدعم الأشخاص ذوي متلازمة داون عبر محتوى تعليمي وخدمات وفرص. الباك إند مبني بـ Java وSpring Boot وSQL Server.",
+      "tech": "Spring Boot, Java, Maven, SQL Server",
+      "github": null,
+      "liveUrl": null,
+      "image": null
+    }
+  ],
+  "contact": {
+    "title": "تواصل معي",
+    "description": "يمكنك الوصول إليّ عبر الهاتف أو البريد أو واتساب. لإرسال رسالة أطول، عبّئ النموذج — رقم الهاتف فيه اختياري.",
+    "details": [
+      {
+        "icon": "bxs-phone",
+        "kind": "phone",
+        "label": "الهاتف",
+        "value": "+962 779576855"
+      },
+      {
+        "icon": "bxs-envelope",
+        "kind": "email",
+        "label": "البريد",
+        "value": "yanalthaer33@gmail.com"
+      },
+      {
+        "icon": "bxs-map",
+        "kind": "address",
+        "label": "العنوان",
+        "value": "عمّان، الأردن"
+      }
+    ],
+    "web3forms": {
+      "accessKey": "471a2972-27e2-4da6-aa84-28baa0f51374"
+    }
+  }
+}

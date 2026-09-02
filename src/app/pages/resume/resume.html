@@ -1,8 +1,8 @@
 @if (data(); as portfolio) {
   <section class="resume" [class.active]="transition.contentActive()" aria-labelledby="resume-heading">
-    <h1 id="resume-heading" class="sr-only">Resume</h1>
+    <h1 id="resume-heading" class="sr-only">{{ i18n.t().resume }}</h1>
     <div class="resume-container">
-      <div class="resume-box" role="tablist" aria-label="Resume sections">
+      <div class="resume-box" role="tablist" [attr.aria-label]="i18n.t().resumeSections">
         @for (tab of portfolio.resume.tabs; track tab; let idx = $index) {
           <button
             class="resume-btn"
@@ -27,7 +27,13 @@
           id="resume-panel-0"
           aria-labelledby="resume-tab-0"
         >
-          <h2 class="heading">My <span>{{ portfolio.resume.tabs[0] }}</span></h2>
+          <h2 class="heading">
+            @if (i18n.t().headingMy) {
+              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[0] }}</span>
+            } @else {
+              <span>{{ portfolio.resume.tabs[0] }}</span>
+            }
+          </h2>
           @for (item of portfolio.resume.experience; track item.title) {
             <div class="resume-list">
               <article class="resume-item">
@@ -47,7 +53,13 @@
           id="resume-panel-1"
           aria-labelledby="resume-tab-1"
         >
-          <h2 class="heading">My <span>{{ portfolio.resume.tabs[1] }}</span></h2>
+          <h2 class="heading">
+            @if (i18n.t().headingMy) {
+              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[1] }}</span>
+            } @else {
+              <span>{{ portfolio.resume.tabs[1] }}</span>
+            }
+          </h2>
           <div class="resume-list">
             @for (item of portfolio.resume.education; track item.title) {
               <article class="resume-item">
@@ -67,7 +79,13 @@
           id="resume-panel-2"
           aria-labelledby="resume-tab-2"
         >
-          <h2 class="heading">My <span>{{ portfolio.resume.tabs[2] }}</span></h2>
+          <h2 class="heading">
+            @if (i18n.t().headingMy) {
+              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[2] }}</span>
+            } @else {
+              <span>{{ portfolio.resume.tabs[2] }}</span>
+            }
+          </h2>
           <div class="resume-list">
             @for (skill of portfolio.resume.skills; track skill.name) {
               <div class="resume-item">

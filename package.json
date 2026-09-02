@@ -11,6 +11,7 @@
     "update-from-cv": "node scripts/update-from-cv.mjs",
     "update-from-linkedin": "node scripts/update-from-cv.mjs --from-linkedin",
     "update-linkedin": "node scripts/update-from-cv.mjs --linkedin-only",
+    "update-ar": "node scripts/update-from-cv.mjs --translate-ar",
     "update-photo": "node scripts/update-photo.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

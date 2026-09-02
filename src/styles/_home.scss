@@ -29,7 +29,7 @@
         content: attr(data-text);
         position: absolute;
         width: 0;
-        border-right: 0.2rem solid $main-color;
+        border-inline-end: 0.2rem solid $main-color;
         color: $main-color;
         white-space: nowrap;
         overflow: hidden;
@@ -50,7 +50,7 @@
     gap: 1.2rem;
 
     .sci {
-      margin-left: 0.8rem;
+      margin-inline-start: 0.8rem;
 
       a {
         display: inline-flex;

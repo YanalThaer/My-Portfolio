@@ -1,8 +1,8 @@
 @if (data(); as portfolio) {
   <section class="portfolio" [class.active]="transition.contentActive()" aria-labelledby="projects-heading">
-    <h2 id="projects-heading" class="heading">Latest <span>Projects</span></h2>
+    <h2 id="projects-heading" class="heading">{{ i18n.t().latestLead }} <span>{{ i18n.t().latestSpan }}</span></h2>
 
-    <div class="project-filters" role="group" aria-label="Filter projects by technology">
+    <div class="project-filters" role="group" [attr.aria-label]="i18n.t().filterGroup">
       @for (tech of techFilters(); track tech) {
         <button
           type="button"
@@ -11,30 +11,28 @@
           [attr.aria-pressed]="selectedTech() === tech"
           (click)="selectTech(tech)"
         >
-          {{ tech }}
+          {{ tech === 'All' ? i18n.t().filterAll : tech }}
         </button>
       }
     </div>
 
     <p class="filter-count">
       @if (selectedTech() === 'All') {
-        Showing {{ filteredProjects().length }} projects
+        {{ i18n.showingCount(filteredProjects().length) }}
       } @else {
-        {{ filteredProjects().length }}
-        {{ filteredProjects().length === 1 ? 'project' : 'projects' }}
-        using {{ selectedTech() }}
+        {{ i18n.usingCount(filteredProjects().length, selectedTech()) }}
       }
     </p>
 
     <div class="portfolio-container">
       @if (filteredProjects().length === 0) {
-        <p class="filter-empty">No projects match this filter yet.</p>
+        <p class="filter-empty">{{ i18n.t().noMatch }}</p>
       }
       @for (project of filteredProjects(); track projectTrack(project)) {
         <article class="portfolio-box">
           @if (project.image) {
             <div class="project-media">
-              <img [src]="project.image" [alt]="project.title + ' preview'" />
+              <img [src]="project.image" [alt]="project.title + ' ' + i18n.t().preview" />
             </div>
           }
 
@@ -54,10 +52,10 @@
                   [href]="project.liveUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  [attr.aria-label]="project.title + ' live demo'"
+                  [attr.aria-label]="project.title + ' ' + i18n.t().liveDemo"
                 >
                   <i class="bx bx-link-external" aria-hidden="true"></i>
-                  <span>Live demo</span>
+                  <span>{{ i18n.t().liveDemo }}</span>
                 </a>
               }
               @if (project.github) {
@@ -66,14 +64,14 @@
                   [href]="project.github"
                   target="_blank"
                   rel="noopener noreferrer"
-                  [attr.aria-label]="project.title + ' GitHub repository'"
+                  [attr.aria-label]="project.title + ' ' + i18n.t().githubRepo"
                 >
                   <i class="bx bxl-github" aria-hidden="true"></i>
-                  <span>GitHub repository</span>
+                  <span>{{ i18n.t().githubRepo }}</span>
                 </a>
               }
               @if (!project.github && !project.liveUrl) {
-                <p>Private repository</p>
+                <p>{{ i18n.t().privateRepo }}</p>
               }
             </div>
           </div>

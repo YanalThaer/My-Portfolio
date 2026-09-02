@@ -52,6 +52,7 @@ export interface ProjectItem {
 
 export interface ContactDetail {
   icon: string;
+  kind?: 'phone' | 'email' | 'address';
   label: string;
   value: string;
 }

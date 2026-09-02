@@ -3,12 +3,11 @@
 header {
   position: fixed;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   width: 100%;
   padding: 2rem 9%;
   background: $bg-color;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   z-index: 100;
   visibility: hidden;
@@ -32,11 +31,15 @@ header {
   font-weight: 700;
 }
 
+nav {
+  margin-inline-start: auto;
+}
+
 nav a {
   font-size: 2rem;
   color: $white-color;
   font-weight: 500;
-  margin-left: 3.5rem;
+  margin-inline-start: 3.5rem;
   transform: 0.5s;
 
   &:hover,
@@ -52,6 +55,26 @@ nav a {
   background: transparent;
   color: $white-color;
   line-height: 1;
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-inline-start: 1.6rem;
+}
+
+.lang-toggle {
+  border: 0.15rem solid $main-color;
+  background: transparent;
+  color: $main-color;
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 3.8rem;
 }
 
 .bars-box {

@@ -1,8 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { emailValue } from './contact-links';
+import { I18n } from './i18n';
 import { Portfolio } from './portfolio';
 import { PortfolioData } from './portfolio.model';
 
@@ -14,6 +17,7 @@ export class Seo {
   private readonly meta = inject(Meta);
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
+  private readonly i18n = inject(I18n);
   private data: PortfolioData | null = null;
 
   constructor() {
@@ -27,6 +31,8 @@ export class Seo {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.update();
     });
+
+    toObservable(this.i18n.lang).subscribe(() => this.update());
   }
 
   private update(): void {
@@ -36,9 +42,10 @@ export class Seo {
 
     const name = this.data.home.name;
     const description = this.data.home.summary;
-    const pageTitle = this.pageTitle(name);
+    const pageTitle = this.i18n.pageTitle(this.router.url.split('?')[0], name);
     const image = this.absoluteUrl('images/og.jpg');
     const url = this.absoluteUrl(this.router.url.replace(/^\//, ''));
+    const locale = this.i18n.lang() === 'ar' ? 'ar_JO' : 'en_US';
 
     this.title.setTitle(pageTitle);
     this.meta.updateTag({ name: 'description', content: description });
@@ -46,6 +53,7 @@ export class Seo {
     this.meta.updateTag({ name: 'robots', content: 'index, follow' });
     this.meta.updateTag({ name: 'theme-color', content: '#1f242d' });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({ property: 'og:locale', content: locale });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:image', content: image });
@@ -56,22 +64,6 @@ export class Seo {
     this.meta.updateTag({ name: 'twitter:image', content: image });
     this.setCanonical(url);
     this.setJsonLd(name, description, pageTitle, url, image);
-  }
-
-  private pageTitle(name: string): string {
-    const path = this.router.url.split('?')[0];
-    const pages: Record<string, string> = {
-      '/': `${name} | Software Engineer`,
-      '/work': `Work | ${name}`,
-      '/resume': `Resume | ${name}`,
-      '/projects': `Projects | ${name}`,
-      '/contact': `Contact | ${name}`,
-      '/404': `Page not found | ${name}`,
-    };
-    if (path && !pages[path] && path !== '/') {
-      return `Page not found | ${name}`;
-    }
-    return pages[path] || `${name} | Software Engineer`;
   }
 
   private absoluteUrl(path: string): string {
@@ -102,22 +94,22 @@ export class Seo {
   ): void {
     const origin = this.absoluteUrl('');
     const sameAs = this.data?.home.socials.map((item) => item.url).filter(Boolean) || [];
-    const email = this.data?.contact.details.find((item) =>
-      item.label.toLowerCase().includes('email'),
-    )?.value;
+    const email = emailValue(this.data?.contact.details);
     const payload = {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'WebSite',
-          name: `${name} | Software Engineer`,
+          name: `${name} | ${this.i18n.t().jobTitle}`,
           url: origin,
+          inLanguage: this.i18n.lang() === 'ar' ? 'ar' : 'en',
         },
         {
           '@type': 'WebPage',
           name: pageTitle,
           url,
           isPartOf: { '@id': origin },
+          inLanguage: this.i18n.lang() === 'ar' ? 'ar' : 'en',
         },
         {
           '@type': 'Person',
@@ -125,11 +117,11 @@ export class Seo {
           url: origin,
           image,
           description,
-          jobTitle: 'Software Engineer',
+          jobTitle: this.i18n.t().jobTitle,
           email: email ? `mailto:${email}` : undefined,
           address: {
             '@type': 'PostalAddress',
-            addressLocality: 'Amman',
+            addressLocality: this.i18n.lang() === 'ar' ? 'عمّان' : 'Amman',
             addressCountry: 'JO',
           },
           sameAs,

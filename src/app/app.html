@@ -1,27 +1,37 @@
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">{{ i18n.t().skip }}</a>
 
 <header [class.active]="transition.headerActive()">
-  <a routerLink="/" class="logo" aria-label="Yanal home">{{ data()?.logo || 'Yanal.' }}</a>
-
-  <button
-    type="button"
-    class="bx"
-    [class.bx-menu]="!menuOpen()"
-    [class.bx-x]="menuOpen()"
-    id="menu-icon"
-    [attr.aria-expanded]="menuOpen()"
-    aria-controls="primary-nav"
-    [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
-    (click)="toggleMenu()"
-  ></button>
+  <a routerLink="/" class="logo" [attr.aria-label]="i18n.t().logoHome">{{ data()?.logo || 'Yanal.' }}</a>
 
   <nav id="primary-nav" aria-label="Primary" [class.active]="menuOpen()">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    <a routerLink="/work" routerLinkActive="active">Work</a>
-    <a routerLink="/resume" routerLinkActive="active">Resume</a>
-    <a routerLink="/projects" routerLinkActive="active">Projects</a>
-    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ i18n.t().navHome }}</a>
+    <a routerLink="/work" routerLinkActive="active">{{ i18n.t().navWork }}</a>
+    <a routerLink="/resume" routerLinkActive="active">{{ i18n.t().navResume }}</a>
+    <a routerLink="/projects" routerLinkActive="active">{{ i18n.t().navProjects }}</a>
+    <a routerLink="/contact" routerLinkActive="active">{{ i18n.t().navContact }}</a>
   </nav>
+
+  <div class="header-tools">
+    <button
+      type="button"
+      class="lang-toggle"
+      (click)="i18n.toggle()"
+      [attr.aria-label]="i18n.lang() === 'ar' ? i18n.t().switchToEn : i18n.t().switchToAr"
+    >
+      {{ i18n.lang() === 'ar' ? 'EN' : 'ع' }}
+    </button>
+    <button
+      type="button"
+      class="bx"
+      [class.bx-menu]="!menuOpen()"
+      [class.bx-x]="menuOpen()"
+      id="menu-icon"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-nav"
+      [attr.aria-label]="menuOpen() ? i18n.t().closeMenu : i18n.t().openMenu"
+      (click)="toggleMenu()"
+    ></button>
+  </div>
 </header>
 
 <div class="bars-box" [class.active]="transition.barsActive()" aria-hidden="true">

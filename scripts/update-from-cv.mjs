@@ -1,7 +1,9 @@
-// npm run update-from-cv -- "C:\Users\AS\Desktop\Yanal-CV-new.pdf" يحدث الموقع من الـ CV + تقرير + نص LinkedIn + صورة إذا بالـ PDF
-// npm run update-from-linkedin -- "C:\Users\AS\Downloads\Profile.pdf" يحدث الموقع من LinkedIn PDF + صورة اذا بالـ PDF
-// npm run update-linkedin يجهّز نص النسخ لLinkedIn من الموقع الحالي
+// npm run update-from-cv -- "C:\Users\AS\Desktop\Yanal-CV-new.pdf" يحدث الإنجليزي من الـ CV ثم يترجم العربي
+// npm run update-from-linkedin -- "C:\Users\AS\Downloads\Profile.pdf" يحدث الإنجليزي من LinkedIn PDF ثم يترجم العربي
+// npm run update-linkedin يجهّز نص النسخ لLinkedIn من الموقع الحالي (إنجليزي فقط)
+// npm run update-ar يترجم public/data/portfolio.json الحالي إلى portfolio.ar.json
 // npm run update-photo -- "C:\Users\AS\Desktop\me.jpg" يحدث الصورة فقط
+// أضف --skip-ar لأي تحديث CV/LinkedIn إذا بدك الإنجليزي بدون ترجمة عربية
 
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -13,6 +15,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const dataPath = path.join(root, 'public', 'data', 'portfolio.json');
 const backupPath = path.join(root, 'public', 'data', 'portfolio.backup.json');
+const arabicDataPath = path.join(root, 'public', 'data', 'portfolio.ar.json');
+const arabicBackupPath = path.join(root, 'public', 'data', 'portfolio.ar.backup.json');
 const reportPath = path.join(root, 'reports', 'cv-update-report.txt');
 const linkedinReportPath = path.join(root, 'reports', 'linkedin-update.txt');
 const cvDest = path.join(root, 'public', 'files', 'Yanal CV.pdf');
@@ -62,12 +66,19 @@ const SERVICE_ICONS = [
 
 loadEnv(path.join(root, '.env'));
 
+const FLAGS = new Set([
+  '--dry-run',
+  '--linkedin-only',
+  '--from-linkedin',
+  '--skip-ar',
+  '--translate-ar',
+]);
 const dryRun = process.argv.includes('--dry-run');
 const linkedinOnly = process.argv.includes('--linkedin-only');
 const fromLinkedIn = process.argv.includes('--from-linkedin');
-const args = process.argv
-  .slice(2)
-  .filter((arg) => arg !== '--dry-run' && arg !== '--linkedin-only' && arg !== '--from-linkedin');
+const skipAr = process.argv.includes('--skip-ar');
+const translateArOnly = process.argv.includes('--translate-ar');
+const args = process.argv.slice(2).filter((arg) => !FLAGS.has(arg));
 
 if (!existsSync(dataPath)) {
   console.error(`portfolio.json not found: ${dataPath}`);
@@ -85,6 +96,18 @@ if (!apiKey) {
   console.error('Missing GEMINI_API_KEY.');
   console.error('Copy .env.example to .env and paste your Google AI Studio key.');
   process.exit(1);
+}
+
+if (translateArOnly) {
+  try {
+    const portfolio = JSON.parse(readFileSync(dataPath, 'utf8'));
+    const arNote = await updateArabicPortfolio(apiKey, portfolio, { dryRun, required: true });
+    console.log(arNote);
+    process.exit(0);
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
 }
 
 if (fromLinkedIn && !args[0]) {
@@ -242,12 +265,18 @@ if (dryRun) {
   if (photo) {
     console.log('Dry run: photo was found but not saved.');
   }
+  console.log('Dry run: Arabic translation was not run.');
   openReport(reportPath);
   process.exit(0);
 }
 
 writeFileSync(backupPath, JSON.stringify(current, null, 2) + '\n', 'utf8');
 writeFileSync(dataPath, JSON.stringify(next, null, 2) + '\n', 'utf8');
+
+let arNote = 'Arabic translation skipped (--skip-ar). English JSON is up to date.';
+if (!skipAr) {
+  arNote = await updateArabicPortfolio(apiKey, next, { dryRun: false, required: false });
+}
 
 if (!fromLinkedIn) {
   mkdirSync(path.dirname(cvDest), { recursive: true });
@@ -257,12 +286,16 @@ if (!fromLinkedIn) {
   writeLinkedInGuide(next);
 }
 
-console.log(report);
+const fullReport = report + arNote + '\n';
+writeReportFile(reportPath, fullReport);
+
+console.log(fullReport);
 console.log(
   fromLinkedIn
     ? 'Updated public/data/portfolio.json from the LinkedIn PDF.'
     : 'Updated public/data/portfolio.json from the CV.',
 );
+console.log(arNote);
 console.log(`Backup saved to ${path.relative(root, backupPath)}`);
 console.log(`Report file: ${path.relative(root, reportPath)}`);
 if (!fromLinkedIn) {
@@ -349,11 +382,17 @@ function loadEnv(envPath) {
 }
 
 async function generatePortfolioJson(key, textPrompt, pdfData) {
+  const systemText =
+    'You are a careful assistant that converts CVs into portfolio JSON. Never invent facts. Return valid JSON only.';
   let lastError = '';
 
   for (const model of MODELS) {
     try {
-      const text = await callGemini(key, model, textPrompt, pdfData, true);
+      const text = await callGemini(key, model, textPrompt, {
+        pdfData,
+        schema: responseSchema,
+        systemText,
+      });
       return parseJson(text);
     } catch (error) {
       lastError = error instanceof Error ? error.message : String(error);
@@ -363,7 +402,7 @@ async function generatePortfolioJson(key, textPrompt, pdfData) {
 
   for (const model of MODELS) {
     try {
-      const text = await callGemini(key, model, textPrompt, pdfData, false);
+      const text = await callGemini(key, model, textPrompt, { pdfData, systemText });
       return parseJson(text);
     } catch (error) {
       lastError = error instanceof Error ? error.message : String(error);
@@ -374,32 +413,33 @@ async function generatePortfolioJson(key, textPrompt, pdfData) {
   throw new Error(`Gemini could not update the portfolio. Last error: ${lastError}`);
 }
 
-async function callGemini(key, model, textPrompt, pdfData, withSchema) {
+async function callGemini(key, model, textPrompt, options = {}) {
+  const { pdfData, schema, systemText } = options;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`;
+  const parts = [{ text: textPrompt }];
+  if (pdfData) {
+    parts.push({ inline_data: { mime_type: 'application/pdf', data: pdfData } });
+  }
+
   const body = {
     systemInstruction: {
       parts: [
         {
-          text: 'You are a careful assistant that converts CVs into portfolio JSON. Never invent facts. Return valid JSON only.',
+          text:
+            systemText ||
+            'You are a careful assistant that converts CVs into portfolio JSON. Never invent facts. Return valid JSON only.',
         },
       ],
     },
-    contents: [
-      {
-        parts: [
-          { text: textPrompt },
-          { inline_data: { mime_type: 'application/pdf', data: pdfData } },
-        ],
-      },
-    ],
+    contents: [{ parts }],
     generationConfig: {
       temperature: 0.2,
       responseMimeType: 'application/json',
     },
   };
 
-  if (withSchema) {
-    body.generationConfig.responseSchema = responseSchema;
+  if (schema) {
+    body.generationConfig.responseSchema = schema;
   }
 
   const response = await fetch(url, {
@@ -428,6 +468,290 @@ function parseJson(text) {
     .replace(/\s*```$/i, '')
     .trim();
   return JSON.parse(cleaned);
+}
+
+const AR_TABS = ['الخبرة', 'التعليم', 'المهارات', 'نبذة'];
+const AR_CV_LABEL = 'تحميل السيرة';
+const AR_CONTACT_LABELS = {
+  phone: 'الهاتف',
+  email: 'البريد',
+  address: 'العنوان',
+};
+
+function arabicFieldsSchema() {
+  const timeline = {
+    type: 'OBJECT',
+    properties: {
+      year: { type: 'STRING' },
+      title: { type: 'STRING' },
+      company: { type: 'STRING' },
+      description: { type: 'STRING' },
+    },
+    required: ['year', 'title', 'company', 'description'],
+  };
+
+  return {
+    type: 'OBJECT',
+    properties: {
+      home: {
+        type: 'OBJECT',
+        properties: {
+          name: { type: 'STRING' },
+          summary: { type: 'STRING' },
+          roles: { type: 'ARRAY', items: { type: 'STRING' } },
+        },
+        required: ['name', 'summary', 'roles'],
+      },
+      services: {
+        type: 'ARRAY',
+        items: {
+          type: 'OBJECT',
+          properties: {
+            title: { type: 'STRING' },
+            description: { type: 'STRING' },
+          },
+          required: ['title', 'description'],
+        },
+      },
+      resume: {
+        type: 'OBJECT',
+        properties: {
+          experience: { type: 'ARRAY', items: timeline },
+          education: { type: 'ARRAY', items: timeline },
+          about: { type: 'STRING' },
+        },
+        required: ['experience', 'education', 'about'],
+      },
+      projects: {
+        type: 'ARRAY',
+        items: {
+          type: 'OBJECT',
+          properties: {
+            title: { type: 'STRING' },
+            description: { type: 'STRING' },
+          },
+          required: ['title', 'description'],
+        },
+      },
+      contact: {
+        type: 'OBJECT',
+        properties: {
+          title: { type: 'STRING' },
+          description: { type: 'STRING' },
+          address: { type: 'STRING' },
+        },
+        required: ['title', 'description', 'address'],
+      },
+    },
+    required: ['home', 'services', 'resume', 'projects', 'contact'],
+  };
+}
+
+function extractTranslatable(english) {
+  return {
+    home: {
+      name: english.home.name,
+      summary: english.home.summary,
+      roles: (english.home.roles || []).map((role) => role.text),
+    },
+    services: (english.services || []).map((service) => ({
+      title: service.title,
+      description: service.description,
+    })),
+    resume: {
+      experience: (english.resume.experience || []).map(cleanTimeline),
+      education: (english.resume.education || []).map(cleanTimeline),
+      about: english.resume.about,
+    },
+    projects: (english.projects || []).map((project) => ({
+      title: project.title,
+      description: project.description,
+    })),
+    contact: {
+      title: english.contact.title,
+      description: english.contact.description,
+      address: findDetail(english, 'address'),
+    },
+  };
+}
+
+function buildArabicPrompt(fields) {
+  return `Translate this English portfolio content into professional Modern Standard Arabic.
+
+Return JSON only, matching the schema. Keep every fact identical. Do not add, remove, or invent details.
+
+Rules:
+- Use clear professional Arabic suitable for a company portfolio.
+- Person name: Yanal Al-hasan -> ينال الحسن. Keep that spelling if the English name is the same person.
+- Keep product and project titles in English (Pro Gym Hub, Design Hive, Giving Hands, Bright Future, and similar).
+- Keep technology names in English (Java, Spring Boot, Angular, Kafka, MySQL, SQL Server, MongoDB, Laravel, PHP, HTML, CSS, JavaScript, GitHub, REST, Ajax, Maven, Bootstrap).
+- Translate job titles.
+- Translate company and university names when a well-known Arabic form exists (Orange Jordan -> أورنج الأردن, The Saudi Investment Bank -> البنك السعودي للاستثمار, Al-Zaytoonah University of Jordan -> جامعة الزيتونة الأردنية). Otherwise transliterate.
+- In dates, replace Present with حتى الآن. Keep the rest of the date format the same.
+- Translate the contact title, description, and address (Amman, Jordan -> عمّان، الأردن).
+- Do not translate phone numbers, emails, or URLs.
+
+English content:
+${JSON.stringify(fields, null, 2)}`;
+}
+
+async function generateArabicFields(key, english) {
+  const fields = extractTranslatable(english);
+  const prompt = buildArabicPrompt(fields);
+  const systemText =
+    'You translate portfolio JSON from English to Arabic. Never invent facts. Return valid JSON only.';
+  const schema = arabicFieldsSchema();
+  let lastError = '';
+
+  for (const model of MODELS) {
+    try {
+      const text = await callGemini(key, model, prompt, { schema, systemText });
+      return parseJson(text);
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+      console.warn(`${model} Arabic translation failed: ${lastError}`);
+    }
+  }
+
+  for (const model of MODELS) {
+    try {
+      const text = await callGemini(key, model, prompt, { systemText });
+      return parseJson(text);
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+      console.warn(`${model} Arabic translation (no schema) failed: ${lastError}`);
+    }
+  }
+
+  throw new Error(`Gemini could not translate the portfolio. Last error: ${lastError}`);
+}
+
+function roleText(translatedRoles, index, fallback) {
+  const item = Array.isArray(translatedRoles) ? translatedRoles[index] : null;
+  if (typeof item === 'string' && item.trim()) {
+    return item.trim();
+  }
+  if (item && typeof item === 'object' && String(item.text || '').trim()) {
+    return String(item.text).trim();
+  }
+  return fallback;
+}
+
+function arabicYear(year) {
+  return String(year || '')
+    .replace(/\bPresent\b/gi, 'حتى الآن')
+    .trim();
+}
+
+function mapArabicTimeline(englishList, translatedList) {
+  return (englishList || []).map((item, index) => {
+    const translated = Array.isArray(translatedList) ? translatedList[index] || {} : {};
+    return {
+      year: arabicYear(translated.year || item.year),
+      title: String(translated.title || item.title || '').trim(),
+      company: String(translated.company || item.company || '').trim(),
+      description: String(translated.description || item.description || '').trim(),
+    };
+  });
+}
+
+function contactKind(detail) {
+  if (detail.kind === 'phone' || detail.kind === 'email' || detail.kind === 'address') {
+    return detail.kind;
+  }
+  const label = String(detail.label || '').toLowerCase();
+  if (label.includes('phone') || label.includes('هاتف')) {
+    return 'phone';
+  }
+  if (label.includes('email') || label.includes('بريد') || String(detail.value || '').includes('@')) {
+    return 'email';
+  }
+  return 'address';
+}
+
+function applyArabicTranslation(english, translated) {
+  const t = translated || {};
+  return {
+    logo: english.logo,
+    home: {
+      ...english.home,
+      name: String(t.home?.name || english.home.name).trim(),
+      summary: String(t.home?.summary || english.home.summary).trim(),
+      cvLabel: AR_CV_LABEL,
+      roles: (english.home.roles || []).map((role, index) => ({
+        ...role,
+        text: roleText(t.home?.roles, index, role.text),
+      })),
+    },
+    services: (english.services || []).map((service, index) => {
+      const item = Array.isArray(t.services) ? t.services[index] || {} : {};
+      return {
+        ...service,
+        title: String(item.title || service.title).trim(),
+        description: String(item.description || service.description).trim(),
+      };
+    }),
+    resume: {
+      tabs: AR_TABS,
+      experience: mapArabicTimeline(english.resume.experience, t.resume?.experience),
+      education: mapArabicTimeline(english.resume.education, t.resume?.education),
+      skills: english.resume.skills,
+      about: String(t.resume?.about || english.resume.about).trim(),
+    },
+    projects: (english.projects || []).map((project, index) => {
+      const item = Array.isArray(t.projects) ? t.projects[index] || {} : {};
+      return {
+        ...project,
+        title: project.title,
+        description: String(item.description || project.description).trim(),
+        tech: project.tech,
+        github: project.github,
+        liveUrl: project.liveUrl,
+        image: project.image,
+      };
+    }),
+    contact: {
+      title: String(t.contact?.title || 'تواصل معي').trim(),
+      description: String(t.contact?.description || english.contact.description).trim(),
+      details: (english.contact.details || []).map((detail) => {
+        const kind = contactKind(detail);
+        return {
+          ...detail,
+          kind,
+          label: AR_CONTACT_LABELS[kind] || detail.label,
+          value:
+            kind === 'address'
+              ? String(t.contact?.address || detail.value).trim()
+              : detail.value,
+        };
+      }),
+      web3forms: english.contact.web3forms,
+    },
+  };
+}
+
+async function updateArabicPortfolio(key, english, { dryRun: skipWrite = false, required = false } = {}) {
+  try {
+    const translated = await generateArabicFields(key, english);
+    const nextArabic = applyArabicTranslation(english, translated);
+
+    if (skipWrite) {
+      return 'Dry run: Arabic translation succeeded but portfolio.ar.json was not saved.';
+    }
+
+    if (existsSync(arabicDataPath)) {
+      writeFileSync(arabicBackupPath, readFileSync(arabicDataPath, 'utf8'), 'utf8');
+    }
+    writeFileSync(arabicDataPath, JSON.stringify(nextArabic, null, 2) + '\n', 'utf8');
+    return `Updated ${path.relative(root, arabicDataPath)} from the English portfolio JSON.`;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (required) {
+      throw new Error(message);
+    }
+    console.warn(`Arabic translation failed: ${message}`);
+    return 'English JSON updated, but Arabic translation failed. Run: npm run update-ar';
+  }
 }
 
 function mergePortfolio(base, generated) {
@@ -495,18 +819,21 @@ function mergePortfolio(base, generated) {
       details: [
         {
           icon: 'bxs-phone',
+          kind: 'phone',
           label: 'Phone',
-          value: String(contact.phone || findDetail(base, 'Phone')).trim(),
+          value: String(contact.phone || findDetail(base, 'phone')).trim(),
         },
         {
           icon: 'bxs-envelope',
+          kind: 'email',
           label: 'Email',
-          value: String(contact.email || findDetail(base, 'Email')).trim(),
+          value: String(contact.email || findDetail(base, 'email')).trim(),
         },
         {
           icon: 'bxs-map',
+          kind: 'address',
           label: 'Address',
-          value: String(contact.address || findDetail(base, 'Address')).trim(),
+          value: String(contact.address || findDetail(base, 'address')).trim(),
         },
       ],
       web3forms: base.contact.web3forms,
@@ -587,8 +914,13 @@ function normalizeGithub(value) {
   return url;
 }
 
-function findDetail(portfolio, label) {
-  return portfolio.contact.details.find((item) => item.label === label)?.value || '';
+function findDetail(portfolio, kindOrLabel) {
+  const key = String(kindOrLabel || '').toLowerCase();
+  return (
+    portfolio.contact.details.find(
+      (item) => item.kind === key || String(item.label || '').toLowerCase() === key,
+    )?.value || ''
+  );
 }
 
 function logoFromName(name) {

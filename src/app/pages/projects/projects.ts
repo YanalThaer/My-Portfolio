@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PageTransition } from '../../core/page-transition';
+import { I18n } from '../../core/i18n';
 import { Portfolio } from '../../core/portfolio';
 import { ProjectItem } from '../../core/portfolio.model';
 
@@ -23,6 +24,7 @@ const GENERIC_TECH = new Set([
 })
 export class Projects {
   protected readonly data = toSignal(inject(Portfolio).getData());
+  protected readonly i18n = inject(I18n);
   protected readonly transition = inject(PageTransition);
   protected readonly selectedTech = signal('All');
 

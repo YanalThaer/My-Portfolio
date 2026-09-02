@@ -40,7 +40,7 @@
 
   .heading {
     font-size: 3.5rem;
-    text-align: left;
+    text-align: start;
   }
 }
 
@@ -102,7 +102,7 @@
 
         span {
           color: $white-color;
-          margin-left: 1rem;
+          margin-inline-start: 1rem;
           font-size: 1.5rem;
         }
       }
@@ -145,7 +145,7 @@
 
   .company {
     position: relative;
-    margin-left: 2rem;
+    margin-inline-start: 2rem;
     margin-bottom: 2rem;
 
     &::before {
@@ -156,7 +156,7 @@
       padding: 0.5rem;
       background: $main-color;
       border-radius: 50%;
-      margin-left: -2rem;
+      margin-inline-start: -2rem;
     }
   }
 }

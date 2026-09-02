@@ -52,7 +52,7 @@
     .field {
       display: flex;
       flex-direction: column;
-      text-align: left;
+      text-align: start;
       min-width: 0;
     }
 
@@ -109,7 +109,7 @@
     font-size: 3rem;
     padding: 1.2rem;
     border-radius: 0.6rem;
-    margin-right: 1.5rem;
+    margin-inline-end: 1.5rem;
   }
 
   .detail p:first-child {

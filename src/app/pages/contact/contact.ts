@@ -3,8 +3,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WEB3FORMS_ACCESS_KEY } from '../../core/env';
 import { contactHref, phoneValue, whatsappUrlFromDetails } from '../../core/contact-links';
+import { I18n } from '../../core/i18n';
 import { PageTransition } from '../../core/page-transition';
 import { Portfolio } from '../../core/portfolio';
+import { ContactDetail } from '../../core/portfolio.model';
 
 type FormField = 'from_name' | 'email_id' | 'phone' | 'message';
 
@@ -17,6 +19,7 @@ type FormField = 'from_name' | 'email_id' | 'phone' | 'message';
 })
 export class Contact {
   private readonly portfolio = inject(Portfolio);
+  protected readonly i18n = inject(I18n);
   private readonly fb = inject(FormBuilder);
 
   protected readonly data = toSignal(this.portfolio.getData());
@@ -39,7 +42,7 @@ export class Contact {
 
     if (this.form.invalid || this.sending()) {
       this.form.markAllAsTouched();
-      this.status.set('Please fix the highlighted fields.');
+      this.status.set(this.i18n.t().fixFields);
       this.statusColor.set('#ff6b6b');
       return;
     }
@@ -47,13 +50,13 @@ export class Contact {
     const accessKey =
       WEB3FORMS_ACCESS_KEY.trim() || this.data()?.contact.web3forms?.accessKey?.trim();
     if (!accessKey) {
-      this.status.set('Contact form is not configured yet.');
+      this.status.set(this.i18n.t().formNotConfigured);
       this.statusColor.set('#ff6b6b');
       return;
     }
 
     this.sending.set(true);
-    this.status.set('Sending message...');
+    this.status.set(this.i18n.t().sendingMessage);
     this.statusColor.set('');
 
     const value = this.form.getRawValue();
@@ -69,7 +72,7 @@ export class Contact {
           access_key: accessKey,
           name: value.from_name,
           email: value.email_id,
-          phone: value.phone.trim() || 'Not provided',
+          phone: value.phone.trim() || this.i18n.t().notProvided,
           message: value.message,
           subject: `Portfolio message from ${value.from_name}`,
           from_name: 'Yanal Portfolio',
@@ -82,14 +85,14 @@ export class Contact {
         throw new Error(result.message || 'Failed to send message.');
       }
 
-      this.status.set('Message sent successfully!');
+      this.status.set(this.i18n.t().sent);
       this.statusColor.set('green');
       this.submitted.set(false);
       this.form.reset();
       setTimeout(() => this.status.set(''), 4000);
     } catch (error) {
       console.error('Web3Forms error:', error);
-      this.status.set('Failed to send message. Please try again.');
+      this.status.set(this.i18n.t().sendFailed);
       this.statusColor.set('red');
     } finally {
       this.sending.set(false);
@@ -108,21 +111,21 @@ export class Contact {
     }
     if (errors['required']) {
       const messages: Record<FormField, string> = {
-        from_name: 'Please enter your name.',
-        email_id: 'Please enter your email.',
+        from_name: this.i18n.t().nameRequired,
+        email_id: this.i18n.t().emailRequired,
         phone: '',
-        message: 'Please enter a message.',
+        message: this.i18n.t().messageRequired,
       };
       return messages[name];
     }
     if (errors['email']) {
-      return 'Please enter a valid email address.';
+      return this.i18n.t().emailInvalid;
     }
-    return 'Please check this field.';
+    return this.i18n.t().checkField;
   }
 
-  hrefFor(label: string, value: string): string | null {
-    return contactHref(label, value);
+  hrefFor(detail: ContactDetail): string | null {
+    return contactHref(detail.label, detail.value, detail.kind);
   }
 
   whatsappUrl(): string | null {

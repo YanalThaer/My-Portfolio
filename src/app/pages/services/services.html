@@ -1,12 +1,12 @@
 @if (data(); as portfolio) {
   <section class="service" [class.active]="transition.contentActive()" aria-labelledby="services-heading">
-    <h2 id="services-heading" class="heading">What I <span>Do</span></h2>
+    <h2 id="services-heading" class="heading">{{ i18n.t().whatIDoLead }} <span>{{ i18n.t().whatIDoSpan }}</span></h2>
     <div class="services-container">
       @for (service of portfolio.services; track service.title) {
         <article class="services-box">
           <div class="icon">
             <i [class]="'bx ' + service.icon" aria-hidden="true"></i>
-            <a routerLink="/contact" [attr.aria-label]="'Contact me about ' + service.title">
+            <a routerLink="/contact" [attr.aria-label]="i18n.t().contactAbout + ' ' + service.title">
               <i class="bx bx-arrow-back" aria-hidden="true"></i>
             </a>
           </div>

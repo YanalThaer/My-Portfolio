@@ -3,13 +3,13 @@
     <div class="home-detail">
       <h1>{{ portfolio.home.name }}</h1>
       <p class="sr-only">
-        I'm a
+        {{ i18n.t().imA }}
         @for (role of portfolio.home.roles; track role.text; let last = $last) {
           {{ role.text }}@if (!last) {, }
         }.
       </p>
       <h2 aria-hidden="true">
-        I'm a
+        {{ i18n.t().imA }}
         @for (role of portfolio.home.roles; track role.text) {
           <span [style.--i]="role.i" [attr.data-text]="role.text">{{ role.text }}</span>
         }
@@ -17,7 +17,7 @@
       <p>{{ portfolio.home.summary }}</p>
       <div class="btn-sci">
         <a [href]="portfolio.home.cvUrl" class="btn" download>{{ portfolio.home.cvLabel }}</a>
-        <a routerLink="/contact" class="btn btn-outline">Contact Me</a>
+        <a routerLink="/contact" class="btn btn-outline">{{ i18n.t().contactMe }}</a>
         <div class="sci">
           @for (social of portfolio.home.socials; track social.url) {
             <a [href]="social.url" [attr.aria-label]="social.label" target="_blank" rel="noopener noreferrer">
@@ -25,7 +25,7 @@
             </a>
           }
           @if (whatsappUrl(); as whatsapp) {
-            <a [href]="whatsapp" aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+            <a [href]="whatsapp" [attr.aria-label]="i18n.t().whatsappChat" target="_blank" rel="noopener noreferrer">
               <i class="bx bxl-whatsapp" aria-hidden="true"></i>
             </a>
           }

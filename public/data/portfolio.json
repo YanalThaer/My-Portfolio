@@ -146,16 +146,19 @@
     "details": [
       {
         "icon": "bxs-phone",
+        "kind": "phone",
         "label": "Phone",
         "value": "+962 779576855"
       },
       {
         "icon": "bxs-envelope",
+        "kind": "email",
         "label": "Email",
         "value": "yanalthaer33@gmail.com"
       },
       {
         "icon": "bxs-map",
+        "kind": "address",
         "label": "Address",
         "value": "Amman, Jordan"
       }

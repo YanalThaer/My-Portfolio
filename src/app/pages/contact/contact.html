@@ -5,7 +5,7 @@
         <h2 id="contact-heading">{{ portfolio.contact.title }}</h2>
         <p class="desc">{{ portfolio.contact.description }}</p>
         @for (detail of portfolio.contact.details; track detail.label) {
-          @if (hrefFor(detail.label, detail.value); as href) {
+          @if (hrefFor(detail); as href) {
             <a class="contact-detail contact-detail-link" [href]="href">
               <i [class]="'bx ' + detail.icon" aria-hidden="true"></i>
               <div class="detail">
@@ -32,7 +32,7 @@
           >
             <i class="bx bxl-whatsapp" aria-hidden="true"></i>
             <div class="detail">
-              <p>WhatsApp</p>
+              <p>{{ i18n.t().whatsapp }}</p>
               <p>{{ whatsappLabel() }}</p>
             </div>
           </a>
@@ -41,7 +41,7 @@
 
       <div class="contact-box">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-          <h2 class="heading">Contact <span>Me</span></h2>
+          <h2 class="heading">{{ i18n.t().contactLead }} <span>{{ i18n.t().contactSpan }}</span></h2>
           <input
             class="honeypot"
             type="checkbox"
@@ -52,12 +52,12 @@
           />
           <div class="field-box">
             <div class="field">
-              <label class="sr-only" for="from_name">Full name</label>
+              <label class="sr-only" for="from_name">{{ i18n.t().fullName }}</label>
               <input
                 id="from_name"
                 type="text"
                 formControlName="from_name"
-                placeholder="Full name"
+                [placeholder]="i18n.t().fullName"
                 autocomplete="name"
                 [class.invalid]="showError('from_name')"
                 [attr.aria-invalid]="showError('from_name')"
@@ -68,12 +68,12 @@
               }
             </div>
             <div class="field">
-              <label class="sr-only" for="email_id">Email address</label>
+              <label class="sr-only" for="email_id">{{ i18n.t().emailAddress }}</label>
               <input
                 id="email_id"
                 type="email"
                 formControlName="email_id"
-                placeholder="Email address"
+                [placeholder]="i18n.t().emailAddress"
                 autocomplete="email"
                 [class.invalid]="showError('email_id')"
                 [attr.aria-invalid]="showError('email_id')"
@@ -84,21 +84,21 @@
               }
             </div>
             <div class="field field-wide">
-              <label class="sr-only" for="phone">Phone number</label>
+              <label class="sr-only" for="phone">{{ i18n.t().phoneOptional }}</label>
               <input
                 id="phone"
                 type="tel"
                 formControlName="phone"
-                placeholder="Phone number (optional)"
+                [placeholder]="i18n.t().phoneOptional"
                 autocomplete="tel"
               />
             </div>
             <div class="field field-wide">
-              <label class="sr-only" for="message">Your message</label>
+              <label class="sr-only" for="message">{{ i18n.t().yourMessage }}</label>
               <textarea
                 id="message"
                 formControlName="message"
-                placeholder="Your message"
+                [placeholder]="i18n.t().yourMessage"
                 [class.invalid]="showError('message')"
                 [attr.aria-invalid]="showError('message')"
                 [attr.aria-describedby]="showError('message') ? 'message-error' : null"
@@ -110,7 +110,7 @@
           </div>
 
           <button type="submit" class="btn" [disabled]="sending()">
-            {{ sending() ? 'Sending...' : 'Send Message' }}
+            {{ sending() ? i18n.t().sending : i18n.t().sendMessage }}
           </button>
           <div id="form-status" role="status" aria-live="polite" [style.color]="statusColor()">
             {{ status() }}
