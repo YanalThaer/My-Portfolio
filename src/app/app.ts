@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationStart, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { PageTransition } from './core/page-transition';
 import { Portfolio } from './core/portfolio';
 import { Seo } from './core/seo';
@@ -18,9 +19,13 @@ export class App {
 
   constructor() {
     inject(Seo);
+    const insights = injectSpeedInsights({ framework: 'angular' });
     inject(Router).events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.menuOpen.set(false);
+      }
+      if (event instanceof NavigationEnd) {
+        insights?.setRoute(event.urlAfterRedirects);
       }
     });
   }
