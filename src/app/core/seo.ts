@@ -51,7 +51,6 @@ export class Seo {
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ name: 'author', content: name });
     this.meta.updateTag({ name: 'robots', content: 'index, follow' });
-    this.meta.updateTag({ name: 'theme-color', content: '#1f242d' });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:locale', content: locale });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });

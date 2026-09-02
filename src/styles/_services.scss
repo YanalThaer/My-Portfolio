@@ -10,6 +10,7 @@
     background: $second-bg-color;
     border: 0.2rem solid $second-bg-color;
     border-radius: 1rem;
+    box-shadow: $card-shadow;
     transition: 0.5s;
 
     &:hover {

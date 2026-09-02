@@ -14,6 +14,15 @@ export interface UiStrings {
   closeMenu: string;
   switchToEn: string;
   switchToAr: string;
+  switchToLight: string;
+  switchToDark: string;
+  chooseAccent: string;
+  accentColor: string;
+  customAccent: string;
+  backgroundColor: string;
+  customBackground: string;
+  defaultBackground: string;
+  resetTheme: string;
   contactMe: string;
   imA: string;
   whatsappChat: string;
@@ -72,6 +81,15 @@ const UI: Record<Lang, UiStrings> = {
     closeMenu: 'Close menu',
     switchToEn: 'Switch to English',
     switchToAr: 'Switch to Arabic',
+    switchToLight: 'Switch to light theme',
+    switchToDark: 'Switch to dark theme',
+    chooseAccent: 'Choose colors',
+    accentColor: 'Accent color',
+    customAccent: 'Custom color',
+    backgroundColor: 'Background',
+    customBackground: 'Custom background',
+    defaultBackground: 'Default background',
+    resetTheme: 'Reset to default',
     contactMe: 'Contact Me',
     imA: "I'm a",
     whatsappChat: 'Chat on WhatsApp',
@@ -129,6 +147,15 @@ const UI: Record<Lang, UiStrings> = {
     closeMenu: 'إغلاق القائمة',
     switchToEn: 'التبديل إلى الإنجليزية',
     switchToAr: 'التبديل إلى العربية',
+    switchToLight: 'التبديل إلى الثيم الفاتح',
+    switchToDark: 'التبديل إلى الثيم الغامق',
+    chooseAccent: 'اختيار الألوان',
+    accentColor: 'لون الثيم',
+    customAccent: 'لون مخصص',
+    backgroundColor: 'الخلفية',
+    customBackground: 'خلفية مخصصة',
+    defaultBackground: 'الخلفية الافتراضية',
+    resetTheme: 'إعادة للرئيسي',
     contactMe: 'تواصل معي',
     imA: 'أنا',
     whatsappChat: 'محادثة واتساب',

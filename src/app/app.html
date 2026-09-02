@@ -1,7 +1,29 @@
 <a href="#main-content" class="skip-link">{{ i18n.t().skip }}</a>
 
 <header [class.active]="transition.headerActive()">
-  <a routerLink="/" class="logo" [attr.aria-label]="i18n.t().logoHome">{{ data()?.logo || 'Yanal.' }}</a>
+  <a routerLink="/" class="logo" [attr.aria-label]="i18n.t().logoHome">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <rect x="1" y="1" width="30" height="30" rx="8" fill="var(--bg-color)" />
+      <rect
+        x="1"
+        y="1"
+        width="30"
+        height="30"
+        rx="8"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      />
+      <path
+        d="M9.6 8.4 L16 17.8 L22.4 8.4 M16 16.6 V23.8"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </a>
 
   <nav id="primary-nav" aria-label="Primary" [class.active]="menuOpen()">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ i18n.t().navHome }}</a>
@@ -14,12 +36,101 @@
   <div class="header-tools">
     <button
       type="button"
-      class="lang-toggle"
+      class="tool-btn lang-toggle"
       (click)="i18n.toggle()"
       [attr.aria-label]="i18n.lang() === 'ar' ? i18n.t().switchToEn : i18n.t().switchToAr"
     >
       {{ i18n.lang() === 'ar' ? 'EN' : 'ع' }}
     </button>
+    <button
+      type="button"
+      class="tool-btn theme-toggle"
+      (click)="theme.toggle()"
+      [attr.aria-pressed]="theme.mode() === 'light'"
+      [attr.aria-label]="theme.mode() === 'dark' ? i18n.t().switchToLight : i18n.t().switchToDark"
+    >
+      <i
+        class="bx"
+        [class.bx-sun]="theme.mode() === 'dark'"
+        [class.bx-moon]="theme.mode() === 'light'"
+        aria-hidden="true"
+      ></i>
+    </button>
+    <div class="accent-picker">
+      <button
+        type="button"
+        class="tool-btn accent-toggle"
+        (click)="toggleAccentPanel($event)"
+        [attr.aria-expanded]="accentOpen()"
+        [attr.aria-label]="i18n.t().chooseAccent"
+      >
+        <i class="bx bx-palette" aria-hidden="true"></i>
+      </button>
+      @if (accentOpen()) {
+        <div
+          class="accent-panel"
+          role="dialog"
+          [attr.aria-label]="i18n.t().chooseAccent"
+          (click)="$event.stopPropagation()"
+        >
+          <p class="accent-panel-title">{{ i18n.t().accentColor }}</p>
+          <div class="accent-swatches">
+            @for (preset of theme.presets; track preset.hex) {
+              <button
+                type="button"
+                class="accent-swatch"
+                [class.active]="theme.accent() === preset.hex"
+                [style.background]="preset.hex"
+                [attr.aria-label]="i18n.lang() === 'ar' ? preset.ar : preset.en"
+                [attr.aria-pressed]="theme.accent() === preset.hex"
+                (click)="theme.setAccent(preset.hex)"
+              ></button>
+            }
+            <label class="accent-swatch accent-custom" [class.active]="!isPresetAccent()">
+              <input
+                type="color"
+                [value]="theme.accent()"
+                [attr.aria-label]="i18n.t().customAccent"
+                (input)="onCustomAccent($event)"
+              />
+            </label>
+          </div>
+          <p class="accent-panel-title">{{ i18n.t().backgroundColor }}</p>
+          <div class="accent-swatches">
+            <button
+              type="button"
+              class="accent-swatch accent-default"
+              [class.active]="theme.background() === null"
+              [attr.aria-label]="i18n.t().defaultBackground"
+              [attr.aria-pressed]="theme.background() === null"
+              (click)="theme.setBackground(null)"
+            ></button>
+            @for (preset of theme.backgrounds; track preset.hex) {
+              <button
+                type="button"
+                class="accent-swatch"
+                [class.active]="theme.background() === preset.hex"
+                [style.background]="preset.hex"
+                [attr.aria-label]="i18n.lang() === 'ar' ? preset.ar : preset.en"
+                [attr.aria-pressed]="theme.background() === preset.hex"
+                (click)="theme.setBackground(preset.hex)"
+              ></button>
+            }
+            <label class="accent-swatch accent-custom" [class.active]="isCustomBackground()">
+              <input
+                type="color"
+                [value]="theme.currentBackground()"
+                [attr.aria-label]="i18n.t().customBackground"
+                (input)="onCustomBackground($event)"
+              />
+            </label>
+          </div>
+          <button type="button" class="accent-reset" (click)="theme.reset()">
+            {{ i18n.t().resetTheme }}
+          </button>
+        </div>
+      }
+    </div>
     <button
       type="button"
       class="bx"

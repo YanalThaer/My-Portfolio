@@ -141,6 +141,11 @@
   }
 }
 
+html[data-theme='light'] .home-img .img-item {
+  background: #1f242d;
+  border-color: #1f242d;
+}
+
 @keyframes rotate-border {
   100% {
     transform: rotate(360deg);

@@ -12,6 +12,12 @@ header {
   z-index: 100;
   visibility: hidden;
   opacity: 0;
+  transition: background-color 0.25s ease;
+
+  html[data-theme='light'] & {
+    border-bottom: 0.1rem solid $divider;
+    box-shadow: 0 0.4rem 1.2rem #1c232d0a;
+  }
 
   &.active {
     animation: show-header $transition-header ease forwards;
@@ -26,9 +32,15 @@ header {
 }
 
 .logo {
-  font-size: 3rem;
-  color: $white-color;
-  font-weight: 700;
+  display: inline-flex;
+  color: $main-color;
+  flex-shrink: 0;
+
+  svg {
+    display: block;
+    width: 3.8rem;
+    height: 3.8rem;
+  }
 }
 
 nav {
@@ -64,7 +76,10 @@ nav a {
   margin-inline-start: 1.6rem;
 }
 
-.lang-toggle {
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0.15rem solid $main-color;
   background: transparent;
   color: $main-color;
@@ -75,6 +90,102 @@ nav a {
   line-height: 1;
   cursor: pointer;
   min-width: 3.8rem;
+  min-height: 3.4rem;
+}
+
+.lang-toggle {
+  font-family: inherit;
+}
+
+.theme-toggle .bx,
+.accent-toggle .bx {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.accent-picker {
+  position: relative;
+}
+
+.accent-panel {
+  position: absolute;
+  top: calc(100% + 1rem);
+  inset-inline-end: 0;
+  z-index: 120;
+  width: 24rem;
+  padding: 1.4rem;
+  border-radius: 1rem;
+  background: $second-bg-color;
+  border: 0.15rem solid $divider;
+  box-shadow: $card-shadow, 0 1rem 2.4rem #00000040;
+}
+
+.accent-panel-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-align: start;
+
+  &:not(:first-child) {
+    margin-top: 1.6rem;
+  }
+}
+
+.accent-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.8rem;
+}
+
+.accent-swatch {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  padding: 0;
+  border: 0.2rem solid transparent;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0.1rem #00000026;
+
+  &.active {
+    border-color: $white-color;
+    box-shadow: 0 0 0 0.15rem $main-color;
+  }
+}
+
+.accent-custom {
+  position: relative;
+  overflow: hidden;
+  background:
+    conic-gradient(from 90deg, #7cf03d, #22d3ee, #60a5fa, #a78bfa, #f472b6, #fb923c, #facc15, #7cf03d);
+
+  input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+}
+
+.accent-default {
+  background:
+    linear-gradient(135deg, #1f242d 50%, #eef1f5 50%);
+}
+
+.accent-reset {
+  width: 100%;
+  margin-top: 1.6rem;
+  padding: 0.8rem 1.2rem;
+  border: 0.15rem solid $main-color;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: $main-color;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .bars-box {

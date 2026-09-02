@@ -26,7 +26,7 @@
   }
 
   &.active {
-    background: rgba($main-color, 0.12);
+    background: $main-soft;
   }
 }
 
@@ -58,6 +58,7 @@
   border: 0.15rem solid $second-bg-color;
   border-radius: 1.2rem;
   overflow: hidden;
+  box-shadow: $card-shadow;
   transition: border-color 0.3s;
 
   &:hover {
@@ -108,7 +109,7 @@
   list-style: none;
   margin: 1.8rem 0 2rem;
   padding: 0 0 1.8rem;
-  border-bottom: 0.1rem solid rgba($white-color, 0.16);
+  border-bottom: 0.1rem solid $divider;
 
   li {
     padding: 0.45rem 1.1rem;

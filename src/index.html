@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <title>Yanal Al-hasan | Software Engineer</title>
@@ -8,6 +8,29 @@
   <meta name="description" content="Software engineer experienced in Java, Spring Boot, Angular, and microservices. Based in Amman, Jordan.">
   <meta name="author" content="Yanal Al-hasan">
   <meta name="theme-color" content="#1f242d">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('portfolio-theme');
+        var resolved = theme === 'light' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', resolved);
+        var accent = localStorage.getItem('portfolio-accent');
+        if (accent && /^#[0-9a-fA-F]{6}$/.test(accent)) {
+          document.documentElement.style.setProperty('--accent', accent.toLowerCase());
+        }
+        var bg = localStorage.getItem('portfolio-bg');
+        if (bg && /^#[0-9a-fA-F]{6}$/.test(bg)) {
+          document.documentElement.style.setProperty('--bg-color', bg.toLowerCase());
+        }
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) {
+          meta.setAttribute('content', bg && /^#[0-9a-fA-F]{6}$/.test(bg) ? bg.toLowerCase() : resolved === 'light' ? '#eef1f5' : '#1f242d');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <meta name="google-site-verification" content="QgFRszoVa0ttdU3t6OyBVE91VCjlPSMJR0rQoIYWy0U" />
   <meta property="og:type" content="website">
   <meta property="og:title" content="Yanal Al-hasan | Software Engineer">

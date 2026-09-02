@@ -1,8 +1,11 @@
-$bg-color: #1f242d;
-$second-bg-color: #323946;
-$main-color: #7cf03d;
-$white-color: #fff;
-$disabled-color: #fff3;
+$bg-color: var(--bg-color);
+$second-bg-color: var(--second-bg-color);
+$main-color: var(--main-color);
+$white-color: var(--text-color);
+$disabled-color: var(--disabled-color);
+$main-soft: var(--main-soft);
+$divider: var(--divider);
+$card-shadow: var(--card-shadow);
 $font-family: 'Poppins', sans-serif;
 
 $transition-bar: 0.22s;
