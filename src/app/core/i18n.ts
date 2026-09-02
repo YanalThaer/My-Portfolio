@@ -23,6 +23,7 @@ export interface UiStrings {
   customBackground: string;
   defaultBackground: string;
   resetTheme: string;
+  themeLockedHint: string;
   contactMe: string;
   imA: string;
   whatsappChat: string;
@@ -90,6 +91,7 @@ const UI: Record<Lang, UiStrings> = {
     customBackground: 'Custom background',
     defaultBackground: 'Default background',
     resetTheme: 'Reset to default',
+    themeLockedHint: 'Light and dark are locked while colors are customized. Press Reset to unlock them.',
     contactMe: 'Contact Me',
     imA: "I'm a",
     whatsappChat: 'Chat on WhatsApp',
@@ -156,6 +158,7 @@ const UI: Record<Lang, UiStrings> = {
     customBackground: 'خلفية مخصصة',
     defaultBackground: 'الخلفية الافتراضية',
     resetTheme: 'إعادة للرئيسي',
+    themeLockedHint: 'الفاتح والغامق مقفولان أثناء تخصيص الألوان. اضغط إعادة للرئيسي حتى يشتغلوا.',
     contactMe: 'تواصل معي',
     imA: 'أنا',
     whatsappChat: 'محادثة واتساب',

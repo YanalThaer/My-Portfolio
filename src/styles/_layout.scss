@@ -91,6 +91,11 @@ nav a {
   cursor: pointer;
   min-width: 3.8rem;
   min-height: 3.4rem;
+
+  &:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
 }
 
 .lang-toggle {
@@ -175,6 +180,14 @@ nav a {
     linear-gradient(135deg, #1f242d 50%, #eef1f5 50%);
 }
 
+.accent-lock-hint {
+  margin-top: 1.6rem;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  text-align: start;
+}
+
 .accent-reset {
   width: 100%;
   margin-top: 1.6rem;
@@ -186,6 +199,10 @@ nav a {
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.accent-lock-hint + .accent-reset {
+  margin-top: 1rem;
 }
 
 .bars-box {

@@ -60,6 +60,9 @@ export class ThemeService {
   readonly currentBackground = computed(
     () => this.background() ?? (this.mode() === 'light' ? DEFAULT_BG_LIGHT : DEFAULT_BG_DARK),
   );
+  readonly isCustomized = computed(
+    () => this.accent() !== DEFAULT_ACCENT || this.background() !== null,
+  );
 
   constructor() {
     effect(() => {
@@ -82,6 +85,9 @@ export class ThemeService {
   }
 
   toggle(): void {
+    if (this.isCustomized()) {
+      return;
+    }
     this.mode.update((theme) => (theme === 'dark' ? 'light' : 'dark'));
   }
 

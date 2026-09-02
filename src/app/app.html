@@ -45,9 +45,17 @@
     <button
       type="button"
       class="tool-btn theme-toggle"
-      (click)="theme.toggle()"
+      [disabled]="theme.isCustomized()"
+      [attr.title]="theme.isCustomized() ? i18n.t().themeLockedHint : null"
       [attr.aria-pressed]="theme.mode() === 'light'"
-      [attr.aria-label]="theme.mode() === 'dark' ? i18n.t().switchToLight : i18n.t().switchToDark"
+      [attr.aria-label]="
+        theme.isCustomized()
+          ? i18n.t().themeLockedHint
+          : theme.mode() === 'dark'
+            ? i18n.t().switchToLight
+            : i18n.t().switchToDark
+      "
+      (click)="theme.toggle()"
     >
       <i
         class="bx"
@@ -125,6 +133,9 @@
               />
             </label>
           </div>
+          @if (theme.isCustomized()) {
+            <p class="accent-lock-hint">{{ i18n.t().themeLockedHint }}</p>
+          }
           <button type="button" class="accent-reset" (click)="theme.reset()">
             {{ i18n.t().resetTheme }}
           </button>
