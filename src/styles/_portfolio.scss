@@ -107,6 +107,16 @@
     margin: 0.8rem 0 1.2rem;
   }
 
+  .project-title-link {
+    color: inherit;
+    transition: color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $main-color;
+    }
+  }
+
   p {
     font-size: 1.6rem;
   }

@@ -107,6 +107,24 @@ section.active {
   .contact-box form {
     animation: fade-up 0.55s ease 0.16s backwards;
   }
+
+  .project-back,
+  .project-page .project-media {
+    animation: fade-up 0.55s ease backwards;
+  }
+
+  .project-back {
+    animation-delay: 0.04s;
+  }
+
+  .project-page .project-media {
+    animation-delay: 0.12s;
+  }
+
+  .project-highlight,
+  .project-other {
+    @include stagger-fade(6, 0.08s, 0.16s);
+  }
 }
 
 .home-img .img-box {

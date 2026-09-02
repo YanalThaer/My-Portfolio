@@ -1,0 +1,94 @@
+@if (data()) {
+  @if (project(); as project) {
+    <section class="project-page" [class.active]="transition.contentActive()">
+      <a routerLink="/projects" class="project-back">
+        <i class="bx bx-arrow-back" aria-hidden="true"></i>
+        {{ i18n.t().backToProjects }}
+      </a>
+
+      <div class="project-hero">
+        <div class="project-hero-copy">
+          <p class="numb" aria-hidden="true">{{ project.number }}</p>
+          @if (project.details?.role; as role) {
+            <p class="project-role">{{ role }}</p>
+          }
+          <h1 class="heading">{{ project.title }}</h1>
+          <p class="project-lead">{{ project.description }}</p>
+          <ul class="tech-list">
+            @for (tech of techs(); track tech) {
+              <li>{{ tech }}</li>
+            }
+          </ul>
+          <div class="live-github">
+            @if (project.liveUrl) {
+              <a
+                class="btn"
+                [href]="project.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ i18n.t().liveDemo }}
+              </a>
+            }
+            @if (project.github) {
+              <a
+                class="btn btn-outline"
+                [href]="project.github"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ i18n.t().githubRepo }}
+              </a>
+            }
+            @if (!project.github && !project.liveUrl) {
+              <p>{{ i18n.t().privateRepo }}</p>
+            }
+          </div>
+        </div>
+
+        <div class="project-media" [class.project-media-empty]="!project.image">
+          @if (project.image) {
+            <img [src]="project.image" [alt]="project.title + ' ' + i18n.t().preview" />
+          } @else {
+            <span aria-hidden="true">{{ initial() }}</span>
+          }
+        </div>
+      </div>
+
+      @if (project.details?.highlights; as highlights) {
+        <div class="project-highlights">
+          @for (item of highlights; track item.title) {
+            <article class="project-highlight">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.text }}</p>
+            </article>
+          }
+        </div>
+      }
+
+      @if (others().length) {
+        <div class="project-others">
+          <h2>{{ i18n.t().otherProjects }}</h2>
+          <div class="project-others-list">
+            @for (item of others(); track slugOf(item)) {
+              <a class="project-other" [routerLink]="['/projects', slugOf(item)]">
+                <span class="numb" aria-hidden="true">{{ item.number }}</span>
+                <span>
+                  <strong>{{ item.title }}</strong>
+                  <em>{{ item.tech }}</em>
+                </span>
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </section>
+  } @else {
+    <section class="not-found" [class.active]="transition.contentActive()">
+      <p class="numb">404</p>
+      <h1 class="heading">{{ i18n.t().pageNotFoundLead }} <span>{{ i18n.t().pageNotFoundSpan }}</span></h1>
+      <p class="desc">{{ i18n.t().projectNotFound }}</p>
+      <a routerLink="/projects" class="btn">{{ i18n.t().backToProjects }}</a>
+    </section>
+  }
+}

@@ -1,9 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { PageTransition } from '../../core/page-transition';
 import { I18n } from '../../core/i18n';
 import { Portfolio } from '../../core/portfolio';
 import { ProjectItem } from '../../core/portfolio.model';
+import { projectSlug, splitTech } from '../../core/projects';
 
 const GENERIC_TECH = new Set([
   'html',
@@ -18,7 +20,7 @@ const GENERIC_TECH = new Set([
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
@@ -57,14 +59,10 @@ export class Projects {
     this.selectedTech.set(tech);
   }
 
-  splitTech(tech: string): string[] {
-    return tech
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean);
-  }
+  splitTech = splitTech;
+  slugOf = projectSlug;
 
   projectTrack(project: ProjectItem): string {
-    return project.number + project.title;
+    return projectSlug(project);
   }
 }

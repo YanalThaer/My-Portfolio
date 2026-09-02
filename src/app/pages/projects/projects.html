@@ -38,7 +38,9 @@
 
           <div class="portfolio-detail">
             <p class="numb" aria-hidden="true">{{ project.number }}</p>
-            <h3>{{ project.title }}</h3>
+            <h3>
+              <a class="project-title-link" [routerLink]="['/projects', slugOf(project)]">{{ project.title }}</a>
+            </h3>
             <p>{{ project.description }}</p>
             <ul class="tech-list">
               @for (tech of splitTech(project.tech); track tech) {
@@ -46,6 +48,14 @@
               }
             </ul>
             <div class="live-github">
+              <a
+                class="project-link"
+                [routerLink]="['/projects', slugOf(project)]"
+                [attr.aria-label]="project.title + ' ' + i18n.t().viewDetails"
+              >
+                <i class="bx bx-book-open" aria-hidden="true"></i>
+                <span>{{ i18n.t().viewDetails }}</span>
+              </a>
               @if (project.liveUrl) {
                 <a
                   class="project-link"

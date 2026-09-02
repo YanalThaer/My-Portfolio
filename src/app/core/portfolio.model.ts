@@ -40,6 +40,16 @@ export interface ResumeData {
   about: string;
 }
 
+export interface ProjectHighlight {
+  title: string;
+  text: string;
+}
+
+export interface ProjectDetails {
+  role?: string;
+  highlights?: ProjectHighlight[];
+}
+
 export interface ProjectItem {
   number: string;
   title: string;
@@ -48,6 +58,8 @@ export interface ProjectItem {
   github: string | null;
   liveUrl?: string | null;
   image?: string | null;
+  slug?: string;
+  details?: ProjectDetails;
 }
 
 export interface ContactDetail {

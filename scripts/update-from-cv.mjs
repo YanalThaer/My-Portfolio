@@ -529,6 +529,18 @@ function arabicFieldsSchema() {
           properties: {
             title: { type: 'STRING' },
             description: { type: 'STRING' },
+            role: { type: 'STRING' },
+            highlights: {
+              type: 'ARRAY',
+              items: {
+                type: 'OBJECT',
+                properties: {
+                  title: { type: 'STRING' },
+                  text: { type: 'STRING' },
+                },
+                required: ['title', 'text'],
+              },
+            },
           },
           required: ['title', 'description'],
         },
@@ -566,6 +578,8 @@ function extractTranslatable(english) {
     projects: (english.projects || []).map((project) => ({
       title: project.title,
       description: project.description,
+      role: project.details?.role || '',
+      highlights: project.details?.highlights || [],
     })),
     contact: {
       title: english.contact.title,
@@ -589,6 +603,7 @@ Rules:
 - Translate company and university names when a well-known Arabic form exists (Orange Jordan -> أورنج الأردن, The Saudi Investment Bank -> البنك السعودي للاستثمار, Al-Zaytoonah University of Jordan -> جامعة الزيتونة الأردنية). Otherwise transliterate.
 - In dates, replace Present with حتى الآن. Keep the rest of the date format the same.
 - Translate the contact title, description, and address (Amman, Jordan -> عمّان، الأردن).
+- Translate project case-study role and highlight titles/text. Keep project titles in English.
 - Do not translate phone numbers, emails, or URLs.
 
 English content:
@@ -700,6 +715,8 @@ function applyArabicTranslation(english, translated) {
     },
     projects: (english.projects || []).map((project, index) => {
       const item = Array.isArray(t.projects) ? t.projects[index] || {} : {};
+      const sourceHighlights = Array.isArray(item.highlights) ? item.highlights : [];
+      const fallbackHighlights = project.details?.highlights || [];
       return {
         ...project,
         title: project.title,
@@ -708,6 +725,22 @@ function applyArabicTranslation(english, translated) {
         github: project.github,
         liveUrl: project.liveUrl,
         image: project.image,
+        slug: project.slug,
+        details: project.details
+          ? {
+              role: String(item.role || project.details.role || '').trim(),
+              highlights: (sourceHighlights.length ? sourceHighlights : fallbackHighlights).map(
+                (highlight, highlightIndex) => ({
+                  title: String(
+                    highlight.title || fallbackHighlights[highlightIndex]?.title || '',
+                  ).trim(),
+                  text: String(
+                    highlight.text || fallbackHighlights[highlightIndex]?.text || '',
+                  ).trim(),
+                }),
+              ),
+            }
+          : undefined,
       };
     }),
     contact: {
@@ -754,6 +787,14 @@ async function updateArabicPortfolio(key, english, { dryRun: skipWrite = false, 
   }
 }
 
+function slugifyTitle(value) {
+  return String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 function mergePortfolio(base, generated) {
   const name = String(generated.home?.name || base.home.name).trim();
   const roles = Array.isArray(generated.home?.roles)
@@ -786,11 +827,13 @@ function mergePortfolio(base, generated) {
     return {
       number: String(list.length - index).padStart(2, '0'),
       title,
+      slug: String(previous?.slug || project.slug || slugifyTitle(title)).trim(),
       description: String(project.description || '').trim(),
       tech: String(project.tech || '').trim(),
       github: normalizeGithub(project.github ?? previous?.github),
       liveUrl: normalizeGithub(project.liveUrl ?? previous?.liveUrl),
       image: String(previous?.image || project.image || '').trim() || null,
+      details: previous?.details || project.details || undefined,
     };
   });
 

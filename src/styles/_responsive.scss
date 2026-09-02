@@ -67,7 +67,10 @@
 
   .resume-container,
   .portfolio-container,
-  .contact-container {
+  .contact-container,
+  .project-hero,
+  .project-highlights,
+  .project-others-list {
     grid-template-columns: 1fr;
   }
 
@@ -102,7 +105,12 @@
   .resume-box h2,
   .resume-box .heading,
   .resume-box .desc,
-  .resume-detail.about .resume-item {
+  .resume-detail.about .resume-item,
+  .project-hero-copy {
+    text-align: center;
+  }
+
+  .project-hero-copy .heading {
     text-align: center;
   }
 

@@ -39,6 +39,10 @@ export interface UiStrings {
   githubRepo: string;
   privateRepo: string;
   preview: string;
+  viewDetails: string;
+  backToProjects: string;
+  otherProjects: string;
+  projectNotFound: string;
   resume: string;
   resumeSections: string;
   headingMy: string;
@@ -107,6 +111,10 @@ const UI: Record<Lang, UiStrings> = {
     githubRepo: 'GitHub repository',
     privateRepo: 'Private repository',
     preview: 'preview',
+    viewDetails: 'Case study',
+    backToProjects: 'Back to projects',
+    otherProjects: 'Other projects',
+    projectNotFound: 'This project page does not exist. Head back to the projects list.',
     resume: 'Resume',
     resumeSections: 'Resume sections',
     headingMy: 'My',
@@ -174,6 +182,10 @@ const UI: Record<Lang, UiStrings> = {
     githubRepo: 'مستودع GitHub',
     privateRepo: 'مستودع خاص',
     preview: 'معاينة',
+    viewDetails: 'التفاصيل',
+    backToProjects: 'العودة للمشاريع',
+    otherProjects: 'مشاريع أخرى',
+    projectNotFound: 'صفحة هذا المشروع غير موجودة. عد إلى قائمة المشاريع.',
     resume: 'السيرة الذاتية',
     resumeSections: 'أقسام السيرة',
     headingMy: '',
@@ -253,6 +265,9 @@ export class I18n {
       '/projects': `${this.t().navProjects} | ${name}`,
       '/contact': `${this.t().navContact} | ${name}`,
     };
+    if (path.startsWith('/projects/') && path !== '/projects') {
+      return `${this.t().navProjects} | ${name}`;
+    }
     if (path && !titles[path] && path !== '/') {
       return `${this.t().pageNotFoundLead} ${this.t().pageNotFoundSpan} | ${name}`;
     }

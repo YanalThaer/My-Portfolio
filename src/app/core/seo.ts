@@ -8,6 +8,7 @@ import { emailValue } from './contact-links';
 import { I18n } from './i18n';
 import { Portfolio } from './portfolio';
 import { PortfolioData } from './portfolio.model';
+import { findProject } from './projects';
 
 @Injectable({
   providedIn: 'root',
@@ -41,10 +42,17 @@ export class Seo {
     }
 
     const name = this.data.home.name;
-    const description = this.data.home.summary;
-    const pageTitle = this.i18n.pageTitle(this.router.url.split('?')[0], name);
-    const image = this.absoluteUrl('images/og.jpg');
-    const url = this.absoluteUrl(this.router.url.replace(/^\//, ''));
+    const path = this.router.url.split('?')[0];
+    const projectSlug = path.startsWith('/projects/') ? decodeURIComponent(path.slice('/projects/'.length)) : '';
+    const project = projectSlug ? findProject(this.data.projects, projectSlug) : undefined;
+    const description = project?.description || this.data.home.summary;
+    const pageTitle = project
+      ? `${project.title} | ${name}`
+      : projectSlug
+        ? `${this.i18n.t().pageNotFoundLead} ${this.i18n.t().pageNotFoundSpan} | ${name}`
+        : this.i18n.pageTitle(path, name);
+    const image = this.absoluteUrl(project?.image || 'images/og.jpg');
+    const url = this.absoluteUrl(this.router.url.replace(/^\//, '').split('?')[0]);
     const locale = this.i18n.lang() === 'ar' ? 'ar_JO' : 'en_US';
 
     this.title.setTitle(pageTitle);

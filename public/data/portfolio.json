@@ -106,38 +106,110 @@
     {
       "number": "04",
       "title": "Pro Gym Hub",
+      "slug": "pro-gym-hub",
       "description": "Gym and club management platform connecting clubs, trainers, and members. Handles subscriptions, progress tracking, and daily operations in one Laravel app.",
       "tech": "PHP, Laravel, MySQL, HTML, CSS, JavaScript",
       "github": "https://github.com/YanalThaer/Orange-ProGymHub.git",
       "liveUrl": null,
-      "image": null
+      "image": null,
+      "details": {
+        "role": "Full-stack · Orange coding academy",
+        "highlights": [
+          {
+            "title": "Problem",
+            "text": "Gyms were running memberships, trainers, and day-to-day operations across disconnected tools, which made subscriptions and progress hard to track in one place."
+          },
+          {
+            "title": "What I built",
+            "text": "A Laravel app that connects clubs, trainers, and members. I worked on the MySQL schema, REST-style flows, and the screens used for subscriptions, progress tracking, and daily operations."
+          },
+          {
+            "title": "Outcome",
+            "text": "One platform instead of scattered admin work. The project is the kind of full-stack delivery I later carried into Java and Angular work: clear data model, working UI, and team collaboration."
+          }
+        ]
+      }
     },
     {
       "number": "03",
       "title": "Design Hive",
+      "slug": "design-hive",
       "description": "Community for designers to publish work and interact through profiles, messaging, likes, and comments. Built with Laravel and Ajax.",
       "tech": "HTML, CSS, JavaScript, Laravel, Ajax",
       "github": "https://github.com/YanalThaer/Orange-DesignHive.git",
       "liveUrl": null,
-      "image": null
+      "image": null,
+      "details": {
+        "role": "Full-stack · Orange coding academy",
+        "highlights": [
+          {
+            "title": "Problem",
+            "text": "Designers needed a place to publish work and talk to each other without bolting together a profile page, a chat, and a feed as separate tools."
+          },
+          {
+            "title": "What I built",
+            "text": "A Laravel community with profiles, messaging, likes, and comments. Ajax kept the interactions feeling immediate instead of full page reloads on every like or message."
+          },
+          {
+            "title": "Outcome",
+            "text": "A complete social-style product from schema to UI. It shows I can ship user-facing features, not only CRUD admin screens."
+          }
+        ]
+      }
     },
     {
       "number": "02",
       "title": "Giving Hands",
+      "slug": "giving-hands",
       "description": "Web app that helps people in Jordan find and connect with charities. Placed 4th of 25+ teams at the Code for Good Hackathon.",
       "tech": "HTML, CSS, JavaScript, Bootstrap, Local Storage",
       "github": "https://github.com/YanalThaer/GivingTree.git",
       "liveUrl": null,
-      "image": null
+      "image": null,
+      "details": {
+        "role": "Hackathon team project · Code for Good",
+        "highlights": [
+          {
+            "title": "Problem",
+            "text": "People in Jordan often did not know which charity to contact, or how to reach them quickly when they wanted to help."
+          },
+          {
+            "title": "What I built",
+            "text": "A web app that lists charities and helps users find and connect with the right one. Built under hackathon time pressure with a small team."
+          },
+          {
+            "title": "Outcome",
+            "text": "4th place out of 25+ teams. The useful part for hiring is not the stack — it is shipping a real local problem under a deadline."
+          }
+        ]
+      }
     },
     {
       "number": "01",
       "title": "Bright Future",
+      "slug": "bright-future",
       "description": "Graduation project supporting people with Down syndrome through educational content, services, and opportunities. Backend built with Java, Spring Boot, and SQL Server.",
       "tech": "Spring Boot, Java, Maven, SQL Server",
       "github": null,
       "liveUrl": null,
-      "image": null
+      "image": null,
+      "details": {
+        "role": "Graduation project · Backend",
+        "highlights": [
+          {
+            "title": "Problem",
+            "text": "Families and people with Down syndrome needed a single place for educational content, related services, and opportunities, instead of scattered information."
+          },
+          {
+            "title": "What I built",
+            "text": "The Java Spring Boot backend and SQL Server model behind that platform: APIs for content, services, and opportunities, structured for a real product rather than a demo controller."
+          },
+          {
+            "title": "Outcome",
+            "text": "A working graduation service in the same family of tools I use at work today. The repository is private, so this page is the public write-up of what the project actually was."
+          }
+        ]
+      }
     }
   ],
   "contact": {

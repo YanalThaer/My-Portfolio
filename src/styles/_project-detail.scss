@@ -1,0 +1,209 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.project-page {
+  width: 100%;
+}
+
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+  color: $main-color;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: transform 0.25s ease;
+
+  i {
+    font-size: 2rem;
+    transform: scaleX(1);
+
+    html[dir='rtl'] & {
+      transform: scaleX(-1);
+    }
+  }
+
+  &:hover {
+    transform: translateX(-0.4rem);
+  }
+}
+
+html[dir='rtl'] .project-back:hover {
+  transform: translateX(0.4rem);
+}
+
+.project-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3.2rem;
+}
+
+.project-hero-copy {
+  .numb {
+    font-size: 3.2rem;
+    -webkit-text-stroke: 0.07rem $white-color;
+    color: transparent;
+    line-height: 1;
+  }
+
+  .heading {
+    text-align: start;
+    margin: 0.6rem 0 1.4rem;
+  }
+}
+
+.project-role {
+  margin-top: 0.8rem;
+  color: $main-color;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.project-lead {
+  font-size: 1.7rem;
+  line-height: 1.7;
+}
+
+.project-hero .tech-list {
+  margin-bottom: 2.4rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.project-hero .live-github {
+  margin-top: 0;
+  flex-wrap: wrap;
+}
+
+.project-hero .btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1.5rem;
+}
+
+.project-page .project-media {
+  aspect-ratio: 16 / 10;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  background: $second-bg-color;
+  border: 0.15rem solid $divider;
+  box-shadow: $card-shadow;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.project-media-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 20%, $main-soft, transparent 55%),
+    $second-bg-color;
+
+  span {
+    font-size: 8rem;
+    font-weight: 700;
+    color: $main-color;
+    line-height: 1;
+  }
+}
+
+.project-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 3.6rem;
+}
+
+.project-highlight {
+  padding: 2.4rem;
+  background: $second-bg-color;
+  border: 0.15rem solid $second-bg-color;
+  border-radius: 1.2rem;
+  box-shadow: $card-shadow;
+  transition:
+    border-color 0.3s ease,
+    transform 0.35s ease;
+
+  &:hover {
+    border-color: $main-color;
+    transform: translateY(-0.4rem);
+  }
+
+  h2 {
+    color: $main-color;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.55rem;
+    line-height: 1.7;
+  }
+}
+
+.project-others {
+  padding-top: 1rem;
+  border-top: 0.1rem solid $divider;
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.project-others-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  width: 100%;
+}
+
+.project-other {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.6rem 1.8rem;
+  background: $second-bg-color;
+  border: 0.15rem solid $second-bg-color;
+  border-radius: 1rem;
+  color: $white-color;
+  box-shadow: $card-shadow;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
+
+  &:hover {
+    border-color: $main-color;
+    transform: translateY(-0.25rem);
+  }
+
+  .numb {
+    font-size: 2.2rem;
+    -webkit-text-stroke: 0.06rem $white-color;
+    color: transparent;
+    line-height: 1;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.6rem;
+  }
+
+  em {
+    display: block;
+    margin-top: 0.4rem;
+    font-style: normal;
+    font-size: 1.3rem;
+    color: $disabled-color;
+  }
+}
