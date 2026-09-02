@@ -52,6 +52,7 @@
               }
             ],
             "styles": [
+              "src/vendor/boxicons/css/boxicons.min.css",
               "src/styles.scss"
             ]
           },
@@ -109,6 +110,7 @@
               }
             ],
             "styles": [
+              "src/vendor/boxicons/css/boxicons.min.css",
               "src/styles.scss"
             ]
           }
