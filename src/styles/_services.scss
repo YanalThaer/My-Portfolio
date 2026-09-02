@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+
+  .services-box {
+    padding: 3rem 2.5rem;
+    background: $second-bg-color;
+    border: 0.2rem solid $second-bg-color;
+    border-radius: 1rem;
+    transition: 0.5s;
+
+    &:hover {
+      border-color: $main-color;
+      transform: scale(1.02);
+
+      .icon:not(a i) {
+        color: $main-color;
+      }
+
+      .icon a {
+        background: $main-color;
+      }
+
+      h3 {
+        color: $main-color;
+      }
+    }
+  }
+}
+
+.services-box {
+  .icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+      font-size: 4.5rem;
+      transition: 0.5s;
+    }
+
+    a {
+      display: inline-flex;
+      background: $white-color;
+      border-radius: 50%;
+      padding: 1rem;
+      transition: 0.5s;
+
+      i {
+        font-size: 3rem;
+        color: $bg-color;
+        transform: rotate(225deg);
+      }
+
+      &:hover i {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  h3 {
+    font-size: 3rem;
+    margin: 0.5rem 0 2rem;
+    transition: 0.5s;
+  }
+
+  p {
+    font-size: 1.6rem;
+  }
+}

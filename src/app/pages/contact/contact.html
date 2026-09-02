@@ -1,0 +1,122 @@
+@if (data(); as portfolio) {
+  <section class="contact" [class.active]="transition.contentActive()" aria-labelledby="contact-heading">
+    <div class="contact-container">
+      <div class="contact-box">
+        <h2 id="contact-heading">{{ portfolio.contact.title }}</h2>
+        <p class="desc">{{ portfolio.contact.description }}</p>
+        @for (detail of portfolio.contact.details; track detail.label) {
+          @if (hrefFor(detail.label, detail.value); as href) {
+            <a class="contact-detail contact-detail-link" [href]="href">
+              <i [class]="'bx ' + detail.icon" aria-hidden="true"></i>
+              <div class="detail">
+                <p>{{ detail.label }}</p>
+                <p>{{ detail.value }}</p>
+              </div>
+            </a>
+          } @else {
+            <div class="contact-detail">
+              <i [class]="'bx ' + detail.icon" aria-hidden="true"></i>
+              <div class="detail">
+                <p>{{ detail.label }}</p>
+                <p>{{ detail.value }}</p>
+              </div>
+            </div>
+          }
+        }
+        @if (whatsappUrl(); as whatsapp) {
+          <a
+            class="contact-detail contact-detail-link"
+            [href]="whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="bx bxl-whatsapp" aria-hidden="true"></i>
+            <div class="detail">
+              <p>WhatsApp</p>
+              <p>{{ whatsappLabel() }}</p>
+            </div>
+          </a>
+        }
+      </div>
+
+      <div class="contact-box">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <h2 class="heading">Contact <span>Me</span></h2>
+          <input
+            class="honeypot"
+            type="checkbox"
+            formControlName="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="field-box">
+            <div class="field">
+              <label class="sr-only" for="from_name">Full name</label>
+              <input
+                id="from_name"
+                type="text"
+                formControlName="from_name"
+                placeholder="Full name"
+                autocomplete="name"
+                [class.invalid]="showError('from_name')"
+                [attr.aria-invalid]="showError('from_name')"
+                [attr.aria-describedby]="showError('from_name') ? 'from_name-error' : null"
+              />
+              @if (showError('from_name')) {
+                <p id="from_name-error" class="field-error">{{ errorOf('from_name') }}</p>
+              }
+            </div>
+            <div class="field">
+              <label class="sr-only" for="email_id">Email address</label>
+              <input
+                id="email_id"
+                type="email"
+                formControlName="email_id"
+                placeholder="Email address"
+                autocomplete="email"
+                [class.invalid]="showError('email_id')"
+                [attr.aria-invalid]="showError('email_id')"
+                [attr.aria-describedby]="showError('email_id') ? 'email_id-error' : null"
+              />
+              @if (showError('email_id')) {
+                <p id="email_id-error" class="field-error">{{ errorOf('email_id') }}</p>
+              }
+            </div>
+            <div class="field field-wide">
+              <label class="sr-only" for="phone">Phone number</label>
+              <input
+                id="phone"
+                type="tel"
+                formControlName="phone"
+                placeholder="Phone number (optional)"
+                autocomplete="tel"
+              />
+            </div>
+            <div class="field field-wide">
+              <label class="sr-only" for="message">Your message</label>
+              <textarea
+                id="message"
+                formControlName="message"
+                placeholder="Your message"
+                [class.invalid]="showError('message')"
+                [attr.aria-invalid]="showError('message')"
+                [attr.aria-describedby]="showError('message') ? 'message-error' : null"
+              ></textarea>
+              @if (showError('message')) {
+                <p id="message-error" class="field-error">{{ errorOf('message') }}</p>
+              }
+            </div>
+          </div>
+
+          <button type="submit" class="btn" [disabled]="sending()">
+            {{ sending() ? 'Sending...' : 'Send Message' }}
+          </button>
+          <div id="form-status" role="status" aria-live="polite" [style.color]="statusColor()">
+            {{ status() }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,38 @@
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header [class.active]="transition.headerActive()">
+  <a routerLink="/" class="logo" aria-label="Yanal home">{{ data()?.logo || 'Yanal.' }}</a>
+
+  <button
+    type="button"
+    class="bx"
+    [class.bx-menu]="!menuOpen()"
+    [class.bx-x]="menuOpen()"
+    id="menu-icon"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="primary-nav"
+    [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+    (click)="toggleMenu()"
+  ></button>
+
+  <nav id="primary-nav" aria-label="Primary" [class.active]="menuOpen()">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/work" routerLinkActive="active">Work</a>
+    <a routerLink="/resume" routerLinkActive="active">Resume</a>
+    <a routerLink="/projects" routerLinkActive="active">Projects</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  </nav>
+</header>
+
+<div class="bars-box" [class.active]="transition.barsActive()" aria-hidden="true">
+  <div class="bar" style="--i: 6"></div>
+  <div class="bar" style="--i: 5"></div>
+  <div class="bar" style="--i: 4"></div>
+  <div class="bar" style="--i: 3"></div>
+  <div class="bar" style="--i: 2"></div>
+  <div class="bar" style="--i: 1"></div>
+</div>
+
+<main id="main-content" tabindex="-1">
+  <router-outlet />
+</main>

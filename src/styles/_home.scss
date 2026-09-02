@@ -1,0 +1,148 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.home {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.home-detail {
+  h1 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
+  }
+
+  h2 {
+    display: inline-block;
+    font-size: 3.2rem;
+    margin-top: -1rem;
+
+    span {
+      position: relative;
+      display: inline-block;
+      color: transparent;
+      -webkit-text-stroke: 0.07rem $main-color;
+      animation: display-text 16s linear infinite;
+      animation-delay: calc(-4s * var(--i));
+
+      &::before {
+        content: attr(data-text);
+        position: absolute;
+        width: 0;
+        border-right: 0.2rem solid $main-color;
+        color: $main-color;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: fill-text 4s linear infinite;
+      }
+    }
+  }
+
+  p {
+    font-size: 1.6rem;
+    margin: 1rem 0 2.5rem;
+  }
+
+  .btn-sci {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+
+    .sci {
+      margin-left: 0.8rem;
+
+      a {
+        display: inline-flex;
+        padding: 0.8rem;
+        border: 0.2rem solid $main-color;
+        border-radius: 50%;
+        font-size: 2rem;
+        color: $main-color;
+        margin: 0 0.8rem;
+        transition: 0.5s;
+
+        &:hover {
+          background: $main-color;
+          color: $bg-color;
+          box-shadow: 0 0 1rem $main-color;
+        }
+      }
+    }
+  }
+}
+
+@keyframes display-text {
+  25%,
+  100% {
+    display: none;
+  }
+}
+
+@keyframes fill-text {
+  10%,
+  100% {
+    width: 0;
+  }
+
+  70%,
+  90% {
+    width: 100%;
+  }
+}
+
+.home-img .img-box {
+  position: relative;
+  width: 32vw;
+  height: 32vw;
+  border-radius: 50%;
+  padding: 0.5rem;
+  @include flex-center;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50rem;
+    height: 50rem;
+    background: conic-gradient(transparent, transparent, transparent, $main-color);
+    transform: rotate(0deg);
+    animation: rotate-border 10s linear infinite;
+  }
+
+  &::after {
+    animation-delay: -5s;
+  }
+
+  .img-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: $bg-color;
+    border-radius: 50%;
+    border: 0.01rem solid $bg-color;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 3rem;
+      left: 50%;
+      display: block;
+      width: 85%;
+      height: auto;
+      transform: translateX(-50%);
+      object-fit: contain;
+      mix-blend-mode: lighten;
+    }
+  }
+}
+
+@keyframes rotate-border {
+  100% {
+    transform: rotate(360deg);
+  }
+}

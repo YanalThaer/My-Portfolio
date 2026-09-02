@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Yanal">
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="#1f242d"/>
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="none" stroke="#7cf03d" stroke-width="2"/>
+  <path
+    d="M9.6 8.4 L16 17.8 L22.4 8.4 M16 16.6 V23.8"
+    fill="none"
+    stroke="#7cf03d"
+    stroke-width="3.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

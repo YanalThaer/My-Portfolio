@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  font-family: $font-family;
+}
+
+:root {
+  --bg-color: #{$bg-color};
+  --second-bg-color: #{$second-bg-color};
+  --main-color: #{$main-color};
+  --white-color: #{$white-color};
+  --disabled-color: #{$disabled-color};
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  color: $white-color;
+  background: $bg-color;
+}
+
+main#main-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1.5rem;
+  top: -6rem;
+  z-index: 300;
+  padding: 1rem 1.6rem;
+  background: $main-color;
+  color: $bg-color;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  &:focus {
+    top: 1.5rem;
+  }
+}
+
+:focus-visible {
+  outline: 0.2rem solid $main-color;
+  outline-offset: 0.3rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.heading {
+  font-size: 4.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  span {
+    color: $main-color;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: $main-color;
+  border: 0.2rem solid $main-color;
+  border-radius: 4rem;
+  box-shadow: 0 0 1rem $main-color;
+  font-size: 1.6rem;
+  color: $bg-color;
+  font-weight: 500;
+  transform: 0.5s;
+
+  &:hover {
+    background: transparent;
+    color: $main-color;
+    box-shadow: none;
+  }
+
+  &.btn-outline {
+    margin-left: 0;
+    background: transparent;
+    color: $main-color;
+    box-shadow: none;
+
+    &:hover {
+      background: $main-color;
+      color: $bg-color;
+      box-shadow: 0 0 1rem $main-color;
+    }
+  }
+}

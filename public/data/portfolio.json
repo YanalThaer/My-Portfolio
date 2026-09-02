@@ -1,0 +1,167 @@
+{
+  "logo": "Yanal.",
+  "home": {
+    "name": "Yanal Al-hasan",
+    "roles": [
+      {
+        "text": "Software Engineer",
+        "i": 4
+      },
+      {
+        "text": "Full-Stack Developer",
+        "i": 3
+      },
+      {
+        "text": "Back-End Developer",
+        "i": 2
+      },
+      {
+        "text": "Java Developer",
+        "i": 1
+      }
+    ],
+    "summary": "Software engineer experienced in building scalable applications with Java, Spring Boot, Angular, and microservices. Currently working on enterprise banking systems, with a focus on distributed, secure, and reliable solutions.",
+    "cvUrl": "files/Yanal CV.pdf",
+    "cvLabel": "Download CV",
+    "image": "images/home.webp",
+    "socials": [
+      {
+        "url": "https://github.com/YanalThaer",
+        "icon": "bxl-github",
+        "label": "GitHub"
+      },
+      {
+        "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
+        "icon": "bxl-linkedin",
+        "label": "LinkedIn"
+      }
+    ]
+  },
+  "services": [
+    {
+      "title": "Backend & Microservices",
+      "description": "I build Java and Spring Boot services for distributed systems, including REST APIs and event-driven work with Kafka.",
+      "icon": "bx-server"
+    },
+    {
+      "title": "Full-Stack Delivery",
+      "description": "I connect Angular front ends to backend APIs, and ship complete web apps with a focus on clean, maintainable code.",
+      "icon": "bx-code-alt"
+    },
+    {
+      "title": "Data & APIs",
+      "description": "I design and work with MySQL, SQL Server, and MongoDB, and integrate APIs with an eye on performance and clear data models.",
+      "icon": "bx-data"
+    }
+  ],
+  "resume": {
+    "tabs": ["Experience", "Education", "Skills", "About"],
+    "experience": [
+      {
+        "year": "06-2025 - Present",
+        "title": "Software Engineer",
+        "company": "The Saudi Investment Bank",
+        "description": "Developing backend services and Angular features for enterprise banking systems. Work spans Java, Spring Boot, and microservices, with a focus on secure, reliable delivery."
+      },
+      {
+        "year": "01-2025 - 05-2025",
+        "title": "Full-Stack Developer Trainee",
+        "company": "Orange Jordan",
+        "description": "Built full-stack Laravel apps, including Pro Gym Hub and Design Hive. Designed MySQL schemas, optimized queries, and integrated REST APIs in a team setting."
+      },
+      {
+        "year": "09-2024 - 12-2024",
+        "title": "Java Developer Trainee",
+        "company": "FintechPath",
+        "description": "Completed a backend training program focused on Java, APIs, and practical project work as a foundation for enterprise development."
+      }
+    ],
+    "education": [
+      {
+        "year": "10-2020 - 02-2025",
+        "title": "Bachelor's Degree in Computer Science",
+        "company": "Al-Zaytoonah University of Jordan",
+        "description": "Graduated in Computer Science. Coursework included data structures, object-oriented programming, databases, and software engineering."
+      }
+    ],
+    "skills": [
+      { "name": "Java", "icon": "bxl-java" },
+      { "name": "Spring Boot", "icon": "bxl-spring-boot" },
+      { "name": "Angular", "icon": "bxl-angular" },
+      { "name": "Microservices", "icon": "bx-sitemap" },
+      { "name": "Apache Kafka", "icon": "bx-broadcast" },
+      { "name": "JavaScript", "icon": "bxl-javascript" },
+      { "name": "HTML5", "icon": "bxl-html5" },
+      { "name": "CSS", "icon": "bxl-css3" },
+      { "name": "PHP", "icon": "bxl-php" },
+      { "name": "Laravel", "icon": "bxl-php" },
+      { "name": "MySQL", "icon": "bxs-data" },
+      { "name": "SQL Server", "icon": "bxs-data" },
+      { "name": "MongoDB", "icon": "bxs-data" },
+      { "name": "Git and GitHub", "icon": "bxl-github" }
+    ],
+    "about": "I am a software engineer who enjoys building practical, high-quality applications. My work spans Java, Spring Boot, Angular, and microservices, with a strong interest in clean code and solving real problems in team settings. I learn quickly and look for chances to improve with every project."
+  },
+  "projects": [
+    {
+      "number": "04",
+      "title": "Pro Gym Hub",
+      "description": "Gym and club management platform connecting clubs, trainers, and members. Handles subscriptions, progress tracking, and daily operations in one Laravel app.",
+      "tech": "PHP, Laravel, MySQL, HTML, CSS, JavaScript",
+      "github": "https://github.com/YanalThaer/Orange-ProGymHub.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "03",
+      "title": "Design Hive",
+      "description": "Community for designers to publish work and interact through profiles, messaging, likes, and comments. Built with Laravel and Ajax.",
+      "tech": "HTML, CSS, JavaScript, Laravel, Ajax",
+      "github": "https://github.com/YanalThaer/Orange-DesignHive.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "02",
+      "title": "Giving Hands",
+      "description": "Web app that helps people in Jordan find and connect with charities. Placed 4th of 25+ teams at the Code for Good Hackathon.",
+      "tech": "HTML, CSS, JavaScript, Bootstrap, Local Storage",
+      "github": "https://github.com/YanalThaer/GivingTree.git",
+      "liveUrl": null,
+      "image": null
+    },
+    {
+      "number": "01",
+      "title": "Bright Future",
+      "description": "Graduation project supporting people with Down syndrome through educational content, services, and opportunities. Backend built with Java, Spring Boot, and SQL Server.",
+      "tech": "Spring Boot, Java, Maven, SQL Server",
+      "github": null,
+      "liveUrl": null,
+      "image": null
+    }
+  ],
+  "contact": {
+    "title": "Get in touch",
+    "description": "You can reach me by phone, email, or WhatsApp. To send a longer message, fill in the form — your phone number there is optional.",
+    "details": [
+      {
+        "icon": "bxs-phone",
+        "label": "Phone",
+        "value": "+962 779576855"
+      },
+      {
+        "icon": "bxs-envelope",
+        "label": "Email",
+        "value": "yanalthaer33@gmail.com"
+      },
+      {
+        "icon": "bxs-map",
+        "label": "Address",
+        "value": "Amman, Jordan"
+      }
+    ],
+    "web3forms": {
+      "accessKey": "471a2972-27e2-4da6-aa84-28baa0f51374"
+    }
+  }
+}
