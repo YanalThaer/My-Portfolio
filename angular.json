@@ -53,6 +53,7 @@
             ],
             "styles": [
               "src/vendor/boxicons/css/boxicons.min.css",
+              "src/vendor/fonts/poppins/poppins.css",
               "src/styles.scss"
             ]
           },
@@ -111,6 +112,7 @@
             ],
             "styles": [
               "src/vendor/boxicons/css/boxicons.min.css",
+              "src/vendor/fonts/poppins/poppins.css",
               "src/styles.scss"
             ]
           }
