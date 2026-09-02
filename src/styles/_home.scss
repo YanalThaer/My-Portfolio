@@ -60,12 +60,17 @@
         font-size: 2rem;
         color: $main-color;
         margin: 0 0.8rem;
-        transition: 0.5s;
+        transition:
+          background-color 0.35s ease,
+          color 0.35s ease,
+          box-shadow 0.35s ease,
+          transform 0.35s ease;
 
         &:hover {
           background: $main-color;
           color: $bg-color;
           box-shadow: 0 0 1rem $main-color;
+          transform: translateY(-0.25rem);
         }
       }
     }

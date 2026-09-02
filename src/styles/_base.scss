@@ -127,12 +127,17 @@ main#main-content {
   font-size: 1.6rem;
   color: $bg-color;
   font-weight: 500;
-  transform: 0.5s;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
 
   &:hover {
     background: transparent;
     color: $main-color;
     box-shadow: none;
+    transform: translateY(-0.25rem);
   }
 
   &.btn-outline {

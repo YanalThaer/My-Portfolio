@@ -1,0 +1,139 @@
+@use 'variables' as *;
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(2.2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes photo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1.2rem);
+  }
+}
+
+@keyframes heading-glow {
+  0%,
+  100% {
+    text-shadow: none;
+  }
+
+  50% {
+    text-shadow: 0 0 1.2rem color-mix(in srgb, var(--main-color) 45%, transparent);
+  }
+}
+
+@mixin stagger-fade($count: 8, $step: 0.08s, $base: 0.06s) {
+  animation: fade-up 0.5s ease backwards;
+
+  @for $i from 1 through $count {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$base + $step * ($i - 1)};
+    }
+  }
+}
+
+section.active {
+  .heading,
+  .home-detail h1,
+  .contact-box > h2 {
+    animation: fade-up 0.5s ease backwards;
+  }
+
+  .heading span {
+    animation: heading-glow 2.8s ease-in-out 0.4s 2;
+  }
+
+  .home-detail h2 {
+    animation: fade-up 0.5s ease 0.08s backwards;
+  }
+
+  .home-detail > p:not(.sr-only) {
+    animation: fade-up 0.5s ease 0.16s backwards;
+  }
+
+  .home-detail .btn-sci > .btn:nth-child(1) {
+    animation: fade-up 0.5s ease 0.24s backwards;
+  }
+
+  .home-detail .btn-sci > .btn:nth-child(2) {
+    animation: fade-up 0.5s ease 0.32s backwards;
+  }
+
+  .home-detail .sci {
+    animation: fade-up 0.5s ease 0.4s backwards;
+  }
+
+  .home-img {
+    animation: fade-scale 0.7s ease 0.12s backwards;
+  }
+
+  .services-box,
+  .portfolio-box,
+  .filter-btn,
+  .resume-btn,
+  .contact-detail {
+    @include stagger-fade(8, 0.08s, 0.1s);
+  }
+
+  .resume-detail.active > .resume-list,
+  .resume-detail.active .resume-list > .resume-item {
+    @include stagger-fade(10, 0.07s, 0.08s);
+  }
+
+  .contact-box form {
+    animation: fade-up 0.55s ease 0.16s backwards;
+  }
+}
+
+.home-img .img-box {
+  animation: photo-float 5.5s ease-in-out 0.8s infinite;
+}
+
+.not-found.active {
+  .numb,
+  .heading,
+  .desc,
+  .btn {
+    animation: fade-up 0.5s ease backwards;
+  }
+
+  .numb {
+    animation-delay: 0.05s;
+  }
+
+  .heading {
+    animation-delay: 0.12s;
+  }
+
+  .desc {
+    animation-delay: 0.2s;
+  }
+
+  .btn {
+    animation-delay: 0.28s;
+  }
+}

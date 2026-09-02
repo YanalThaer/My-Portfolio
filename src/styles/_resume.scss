@@ -32,6 +32,15 @@
     border-radius: 0.8rem;
     cursor: pointer;
     box-shadow: $card-shadow;
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease,
+      transform 0.3s ease;
+
+    &:hover {
+      border-color: $main-color;
+      transform: translateY(-0.15rem);
+    }
 
     &.active {
       border-color: $main-color;
@@ -50,6 +59,16 @@
 
   &.active {
     display: block;
+  }
+
+  &.experience {
+    > .resume-list {
+      height: auto;
+    }
+
+    > .resume-list + .resume-list {
+      margin-top: 2.4rem;
+    }
   }
 
   &.skills {
@@ -83,6 +102,7 @@
 
       &:hover i {
         color: $main-color;
+        transform: scale(1.08);
       }
     }
   }
@@ -133,6 +153,13 @@
     flex-direction: column;
     justify-content: center;
     box-shadow: $card-shadow;
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease;
+
+    &:hover {
+      transform: translateY(-0.4rem);
+    }
   }
 }
 

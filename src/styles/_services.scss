@@ -11,11 +11,13 @@
     border: 0.2rem solid $second-bg-color;
     border-radius: 1rem;
     box-shadow: $card-shadow;
-    transition: 0.5s;
+    transition:
+      0.45s ease,
+      transform 0.45s ease;
 
     &:hover {
       border-color: $main-color;
-      transform: scale(1.02);
+      transform: translateY(-0.6rem) scale(1.02);
 
       .icon:not(a i) {
         color: $main-color;
