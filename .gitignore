@@ -45,5 +45,13 @@ Thumbs.db
 # Local secrets and generated backups
 .env
 src/app/core/env.ts
+/backup/
+/content/
 public/data/portfolio.backup.json
+public/data/portfolio.ar.backup.json
 reports/
+
+# Local update tooling — stays on this machine. Vercel only needs sync-env + generate-favicon.
+/scripts/*
+!/scripts/sync-env.mjs
+!/scripts/generate-favicon.mjs
