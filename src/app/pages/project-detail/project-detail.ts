@@ -6,10 +6,11 @@ import { I18n } from '../../core/i18n';
 import { PageTransition } from '../../core/page-transition';
 import { Portfolio } from '../../core/portfolio';
 import { findProject, projectSlug, splitTech } from '../../core/projects';
+import { UiIcon } from '../../shared/ui-icon';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, UiIcon],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.scss',
 })

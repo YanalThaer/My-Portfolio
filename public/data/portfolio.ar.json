@@ -35,12 +35,12 @@
       {
         "url": "https://github.com/YanalThaer",
         "label": "GitHub",
-        "icon": "bxl-github"
+        "icon": "devicon-github-original"
       },
       {
         "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
         "label": "LinkedIn",
-        "icon": "bxl-linkedin"
+        "icon": "devicon-linkedin-plain"
       }
     ]
   },
@@ -48,21 +48,26 @@
     {
       "title": "الباك إند والخدمات المصغّرة",
       "description": "أبني خدمات Java وSpring Boot للأنظمة الموزّعة، بما في ذلك واجهات REST والعمل المعتمد على الأحداث مع Kafka.",
-      "icon": "bx-server"
+      "icon": "server"
     },
     {
       "title": "التطوير المتكامل",
       "description": "أربط واجهات Angular بواجهات الباك إند، وأسلّم تطبيقات ويب مكتملة مع التركيز على كود واضح وقابل للصيانة.",
-      "icon": "bx-code-alt"
+      "icon": "code"
     },
     {
       "title": "البيانات وواجهات البرمجة",
       "description": "أصمم وأعمل مع MySQL وSQL Server وMongoDB، وأدمج واجهات البرمجة مع الانتباه للأداء ونماذج البيانات الواضحة.",
-      "icon": "bx-data"
+      "icon": "database"
     }
   ],
   "resume": {
-    "tabs": ["الخبرة", "التعليم", "المهارات", "نبذة"],
+    "tabs": [
+      "الخبرة",
+      "التعليم",
+      "المهارات",
+      "نبذة"
+    ],
     "experience": [
       {
         "year": "06-2025 - حتى الآن",
@@ -94,59 +99,59 @@
     "skills": [
       {
         "name": "Java",
-        "icon": "bxl-java"
+        "icon": "devicon-java-plain"
       },
       {
         "name": "Spring Boot",
-        "icon": "bxl-spring-boot"
+        "icon": "devicon-spring-plain"
       },
       {
         "name": "Angular",
-        "icon": "bxl-angular"
+        "icon": "devicon-angular-plain"
       },
       {
         "name": "Microservices",
-        "icon": "bx-sitemap"
+        "icon": "sitemap"
       },
       {
         "name": "Apache Kafka",
-        "icon": "bx-broadcast"
+        "icon": "devicon-apachekafka-original"
       },
       {
         "name": "JavaScript",
-        "icon": "bxl-javascript"
+        "icon": "devicon-javascript-plain"
       },
       {
         "name": "HTML5",
-        "icon": "bxl-html5"
+        "icon": "devicon-html5-plain"
       },
       {
         "name": "CSS",
-        "icon": "bxl-css3"
+        "icon": "devicon-css3-plain"
       },
       {
         "name": "PHP",
-        "icon": "bxl-php"
+        "icon": "devicon-php-plain"
       },
       {
         "name": "Laravel",
-        "icon": "bxl-php"
+        "icon": "devicon-laravel-original"
       },
       {
         "name": "MySQL",
-        "icon": "bxs-data"
+        "icon": "devicon-mysql-plain"
       },
       {
         "name": "SQL Server",
-        "icon": "bxs-data"
+        "icon": "devicon-microsoftsqlserver-plain"
       },
       {
         "name": "MongoDB",
-        "icon": "bxs-data"
+        "icon": "devicon-mongodb-plain"
       },
       {
         "name": "Git and GitHub",
-        "icon": "bxl-github"
+        "icon": "devicon-github-original"
       }
     ],
     "about": "أنا مهندس برمجيات أستمتع ببناء تطبيقات عملية وعالية الجودة. عملي يشمل Java وSpring Boot وAngular والخدمات المصغّرة، مع اهتمام قوي بالكود النظيف وحل مشكلات حقيقية ضمن فرق العمل. أتعلم بسرعة وأبحث عن فرص للتحسين مع كل مشروع."
@@ -266,19 +271,19 @@
     "description": "يمكنك الوصول إليّ عبر الهاتف أو البريد أو واتساب. لإرسال رسالة أطول، عبّئ النموذج — رقم الهاتف فيه اختياري.",
     "details": [
       {
-        "icon": "bxs-phone",
+        "icon": "phone",
         "kind": "phone",
         "label": "الهاتف",
         "value": "+962 779576855"
       },
       {
-        "icon": "bxs-envelope",
+        "icon": "mail",
         "kind": "email",
         "label": "البريد",
         "value": "yanalthaer33@gmail.com"
       },
       {
-        "icon": "bxs-map",
+        "icon": "map",
         "kind": "address",
         "label": "العنوان",
         "value": "عمّان، الأردن"

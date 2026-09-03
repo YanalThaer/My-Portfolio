@@ -21,12 +21,12 @@
         <div class="sci">
           @for (social of portfolio.home.socials; track social.url) {
             <a [href]="social.url" [attr.aria-label]="social.label" target="_blank" rel="noopener noreferrer">
-              <i [class]="'bx ' + social.icon" aria-hidden="true"></i>
+              <app-icon [name]="social.icon" />
             </a>
           }
           @if (whatsappUrl(); as whatsapp) {
             <a [href]="whatsapp" [attr.aria-label]="i18n.t().whatsappChat" target="_blank" rel="noopener noreferrer">
-              <i class="bx bxl-whatsapp" aria-hidden="true"></i>
+              <app-icon name="whatsapp" />
             </a>
           }
         </div>

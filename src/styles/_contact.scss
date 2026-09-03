@@ -117,7 +117,7 @@
 }
 
 .contact-detail {
-  i {
+  app-icon {
     display: inline-flex;
     background: $second-bg-color;
     color: $main-color;
@@ -152,7 +152,7 @@
     &:hover {
       transform: translateX(0.6rem);
 
-      i {
+      app-icon {
         background: $main-color;
         color: $bg-color;
       }

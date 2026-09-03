@@ -60,7 +60,7 @@
                 [routerLink]="['/projects', slugOf(project)]"
                 [attr.aria-label]="project.title + ' ' + i18n.t().viewDetails"
               >
-                <i class="bx bx-book-open" aria-hidden="true"></i>
+                <app-icon name="book" />
                 <span>{{ i18n.t().viewDetails }}</span>
               </a>
               @if (project.liveUrl) {
@@ -71,7 +71,7 @@
                   rel="noopener noreferrer"
                   [attr.aria-label]="project.title + ' ' + i18n.t().liveDemo"
                 >
-                  <i class="bx bx-link-external" aria-hidden="true"></i>
+                  <app-icon name="external" />
                   <span>{{ i18n.t().liveDemo }}</span>
                 </a>
               }
@@ -83,7 +83,7 @@
                   rel="noopener noreferrer"
                   [attr.aria-label]="project.title + ' ' + i18n.t().githubRepo"
                 >
-                  <i class="bx bxl-github" aria-hidden="true"></i>
+                  <app-icon name="github" />
                   <span>{{ i18n.t().githubRepo }}</span>
                 </a>
               }

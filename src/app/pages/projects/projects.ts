@@ -6,6 +6,7 @@ import { I18n } from '../../core/i18n';
 import { Portfolio } from '../../core/portfolio';
 import { ProjectItem } from '../../core/portfolio.model';
 import { projectSlug, splitTech } from '../../core/projects';
+import { UiIcon } from '../../shared/ui-icon';
 
 const GENERIC_TECH = new Set([
   'html',
@@ -20,7 +21,7 @@ const GENERIC_TECH = new Set([
 
 @Component({
   selector: 'app-projects',
-  imports: [RouterLink],
+  imports: [RouterLink, UiIcon],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })

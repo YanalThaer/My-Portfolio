@@ -60,12 +60,7 @@
       "
       (click)="theme.toggle()"
     >
-      <i
-        class="bx"
-        [class.bx-sun]="theme.mode() === 'dark'"
-        [class.bx-moon]="theme.mode() === 'light'"
-        aria-hidden="true"
-      ></i>
+      <app-icon [name]="theme.mode() === 'dark' ? 'sun' : 'moon'" />
     </button>
     <div class="accent-picker">
       <button
@@ -75,7 +70,7 @@
         [attr.aria-expanded]="accentOpen()"
         [attr.aria-label]="i18n.t().chooseAccent"
       >
-        <i class="bx bx-palette" aria-hidden="true"></i>
+        <app-icon name="palette" />
       </button>
       @if (accentOpen()) {
         <div
@@ -147,15 +142,14 @@
     </div>
     <button
       type="button"
-      class="bx"
-      [class.bx-menu]="!menuOpen()"
-      [class.bx-x]="menuOpen()"
       id="menu-icon"
       [attr.aria-expanded]="menuOpen()"
       aria-controls="primary-nav"
       [attr.aria-label]="menuOpen() ? i18n.t().closeMenu : i18n.t().openMenu"
       (click)="toggleMenu()"
-    ></button>
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+    </button>
   </div>
 </header>
 

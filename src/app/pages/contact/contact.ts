@@ -7,13 +7,14 @@ import { I18n } from '../../core/i18n';
 import { PageTransition } from '../../core/page-transition';
 import { Portfolio } from '../../core/portfolio';
 import { ContactDetail } from '../../core/portfolio.model';
+import { UiIcon } from '../../shared/ui-icon';
 
 type FormField = 'from_name' | 'email_id' | 'phone' | 'message';
 
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, UiIcon],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })

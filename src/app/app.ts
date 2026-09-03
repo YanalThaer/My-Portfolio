@@ -8,10 +8,11 @@ import { PageTransition } from './core/page-transition';
 import { Portfolio } from './core/portfolio';
 import { Seo } from './core/seo';
 import { ThemeService } from './core/theme';
+import { UiIcon } from './shared/ui-icon';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, UiIcon],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

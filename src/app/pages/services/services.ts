@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { PageTransition } from '../../core/page-transition';
 import { I18n } from '../../core/i18n';
 import { Portfolio } from '../../core/portfolio';
+import { UiIcon } from '../../shared/ui-icon';
 
 @Component({
   selector: 'app-services',
-  imports: [RouterLink],
+  imports: [RouterLink, UiIcon],
   templateUrl: './services.html',
   styleUrl: './services.scss',
 })

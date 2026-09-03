@@ -85,7 +85,7 @@
       border-inline-start-width: 0.15rem;
       align-items: center;
 
-      i {
+      app-icon {
         font-size: 4.2rem;
         transition: 0.5s;
       }
@@ -103,7 +103,7 @@
         text-align: center;
       }
 
-      &:hover i {
+      &:hover app-icon {
         color: $main-color;
         transform: scale(1.08);
       }

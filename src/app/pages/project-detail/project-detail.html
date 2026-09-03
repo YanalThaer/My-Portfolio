@@ -2,7 +2,7 @@
   @if (project(); as project) {
     <section class="project-page" [class.active]="transition.contentActive()">
       <a routerLink="/projects" class="project-back">
-        <i class="bx bx-arrow-back" aria-hidden="true"></i>
+        <app-icon name="back" />
         {{ i18n.t().backToProjects }}
       </a>
 

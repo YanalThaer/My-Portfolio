@@ -7,7 +7,7 @@
         @for (detail of portfolio.contact.details; track detail.label) {
           @if (hrefFor(detail); as href) {
             <a class="contact-detail contact-detail-link" [href]="href">
-              <i [class]="'bx ' + detail.icon" aria-hidden="true"></i>
+              <app-icon [name]="detail.icon" />
               <div class="detail">
                 <p>{{ detail.label }}</p>
                 <p>{{ detail.value }}</p>
@@ -15,7 +15,7 @@
             </a>
           } @else {
             <div class="contact-detail">
-              <i [class]="'bx ' + detail.icon" aria-hidden="true"></i>
+              <app-icon [name]="detail.icon" />
               <div class="detail">
                 <p>{{ detail.label }}</p>
                 <p>{{ detail.value }}</p>
@@ -30,7 +30,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="bx bxl-whatsapp" aria-hidden="true"></i>
+            <app-icon name="whatsapp" />
             <div class="detail">
               <p>{{ i18n.t().whatsapp }}</p>
               <p>{{ whatsappLabel() }}</p>

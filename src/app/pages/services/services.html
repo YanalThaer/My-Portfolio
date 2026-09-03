@@ -5,9 +5,9 @@
       @for (service of portfolio.services; track service.title) {
         <article class="services-box">
           <div class="icon">
-            <i [class]="'bx ' + service.icon" aria-hidden="true"></i>
+            <app-icon [name]="service.icon" />
             <a routerLink="/contact" [attr.aria-label]="i18n.t().contactAbout + ' ' + service.title">
-              <i class="bx bx-arrow-back" aria-hidden="true"></i>
+              <app-icon name="back" />
             </a>
           </div>
           <h3>{{ service.title }}</h3>

@@ -5,10 +5,11 @@ import { whatsappUrlFromDetails } from '../../core/contact-links';
 import { PageTransition } from '../../core/page-transition';
 import { I18n } from '../../core/i18n';
 import { Portfolio } from '../../core/portfolio';
+import { UiIcon } from '../../shared/ui-icon';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, UiIcon],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

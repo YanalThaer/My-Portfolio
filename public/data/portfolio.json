@@ -35,12 +35,12 @@
       {
         "url": "https://github.com/YanalThaer",
         "label": "GitHub",
-        "icon": "bxl-github"
+        "icon": "devicon-github-original"
       },
       {
         "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
         "label": "LinkedIn",
-        "icon": "bxl-linkedin"
+        "icon": "devicon-linkedin-plain"
       }
     ]
   },
@@ -48,21 +48,26 @@
     {
       "title": "Backend & Microservices",
       "description": "I build Java and Spring Boot services for distributed systems, including REST APIs and event-driven work with Kafka.",
-      "icon": "bx-server"
+      "icon": "server"
     },
     {
       "title": "Full-Stack Delivery",
       "description": "I connect Angular front ends to backend APIs, and ship complete web apps with a focus on clean, maintainable code.",
-      "icon": "bx-code-alt"
+      "icon": "code"
     },
     {
       "title": "Data & APIs",
       "description": "I design and work with MySQL, SQL Server, and MongoDB, and integrate APIs with an eye on performance and clear data models.",
-      "icon": "bx-data"
+      "icon": "database"
     }
   ],
   "resume": {
-    "tabs": ["Experience", "Education", "Skills", "About"],
+    "tabs": [
+      "Experience",
+      "Education",
+      "Skills",
+      "About"
+    ],
     "experience": [
       {
         "year": "06-2025 - Present",
@@ -94,59 +99,59 @@
     "skills": [
       {
         "name": "Java",
-        "icon": "bxl-java"
+        "icon": "devicon-java-plain"
       },
       {
         "name": "Spring Boot",
-        "icon": "bxl-spring-boot"
+        "icon": "devicon-spring-plain"
       },
       {
         "name": "Angular",
-        "icon": "bxl-angular"
+        "icon": "devicon-angular-plain"
       },
       {
         "name": "Microservices",
-        "icon": "bx-sitemap"
+        "icon": "sitemap"
       },
       {
         "name": "Apache Kafka",
-        "icon": "bx-broadcast"
+        "icon": "devicon-apachekafka-original"
       },
       {
         "name": "JavaScript",
-        "icon": "bxl-javascript"
+        "icon": "devicon-javascript-plain"
       },
       {
         "name": "HTML5",
-        "icon": "bxl-html5"
+        "icon": "devicon-html5-plain"
       },
       {
         "name": "CSS",
-        "icon": "bxl-css3"
+        "icon": "devicon-css3-plain"
       },
       {
         "name": "PHP",
-        "icon": "bxl-php"
+        "icon": "devicon-php-plain"
       },
       {
         "name": "Laravel",
-        "icon": "bxl-php"
+        "icon": "devicon-laravel-original"
       },
       {
         "name": "MySQL",
-        "icon": "bxs-data"
+        "icon": "devicon-mysql-plain"
       },
       {
         "name": "SQL Server",
-        "icon": "bxs-data"
+        "icon": "devicon-microsoftsqlserver-plain"
       },
       {
         "name": "MongoDB",
-        "icon": "bxs-data"
+        "icon": "devicon-mongodb-plain"
       },
       {
         "name": "Git and GitHub",
-        "icon": "bxl-github"
+        "icon": "devicon-github-original"
       }
     ],
     "about": "I am a software engineer who enjoys building practical, high-quality applications. My work spans Java, Spring Boot, Angular, and microservices, with a strong interest in clean code and solving real problems in team settings. I learn quickly and look for chances to improve with every project."
@@ -266,19 +271,19 @@
     "description": "You can reach me by phone, email, or WhatsApp. To send a longer message, fill in the form — your phone number there is optional.",
     "details": [
       {
-        "icon": "bxs-phone",
+        "icon": "phone",
         "kind": "phone",
         "label": "Phone",
         "value": "+962 779576855"
       },
       {
-        "icon": "bxs-envelope",
+        "icon": "mail",
         "kind": "email",
         "label": "Email",
         "value": "yanalthaer33@gmail.com"
       },
       {
-        "icon": "bxs-map",
+        "icon": "map",
         "kind": "address",
         "label": "Address",
         "value": "Amman, Jordan"

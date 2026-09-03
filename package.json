@@ -6,8 +6,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node scripts/sync-env.mjs && node scripts/generate-favicon.mjs && ng serve",
-    "build": "node scripts/sync-env.mjs && node scripts/generate-favicon.mjs && ng build",
+    "start": "node scripts/sync-env.mjs && ng serve",
+    "build": "node scripts/sync-env.mjs && ng build",
     "generate-favicon": "node scripts/generate-favicon.mjs",
     "update-from-cv": "node scripts/update-from-cv.mjs",
     "update-from-linkedin": "node scripts/update-from-cv.mjs --from-linkedin",
@@ -41,6 +41,7 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@vercel/speed-insights": "^2.0.0",
+    "devicon": "^2.17.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

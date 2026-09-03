@@ -94,6 +94,12 @@ nav a {
   background: transparent;
   color: $white-color;
   line-height: 1;
+  border: 0;
+  padding: 0;
+
+  app-icon {
+    pointer-events: none;
+  }
 }
 
 .header-tools {
@@ -137,8 +143,8 @@ nav a {
   font-family: inherit;
 }
 
-.theme-toggle .bx,
-.accent-toggle .bx {
+.theme-toggle app-icon,
+.accent-toggle app-icon {
   font-size: 1.8rem;
   line-height: 1;
 }

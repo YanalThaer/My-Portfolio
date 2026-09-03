@@ -89,7 +89,7 @@
           <div class="resume-list">
             @for (skill of portfolio.resume.skills; track skill.name) {
               <div class="resume-item">
-                <i [class]="'bx ' + skill.icon" aria-hidden="true"></i>
+                <app-icon [name]="skill.icon" />
                 <span class="skill-name">{{ skill.name }}</span>
               </div>
             }
