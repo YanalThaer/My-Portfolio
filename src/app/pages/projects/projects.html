@@ -1,4 +1,5 @@
-@if (data(); as portfolio) {
+@if (transition.ready(data())) {
+  @if (data(); as portfolio) {
   <section class="portfolio" [class.active]="transition.contentActive()" aria-labelledby="projects-heading">
     <h2 id="projects-heading" class="heading">{{ i18n.t().latestLead }} <span>{{ i18n.t().latestSpan }}</span></h2>
 
@@ -30,7 +31,7 @@
       }
       @for (project of filteredProjects(); track projectTrack(project)) {
         <article class="portfolio-box">
-          <div class="project-media" [class.project-media-empty]="!project.image">
+          <a class="project-media" [class.project-media-empty]="!project.image" [routerLink]="['/projects', slugOf(project)]">
             @if (project.image) {
               <img [src]="project.image" [alt]="project.title + ' ' + i18n.t().preview" />
             } @else {
@@ -39,7 +40,7 @@
                 <span class="project-cover-title">{{ project.title }}</span>
               </div>
             }
-          </div>
+          </a>
 
           <div class="portfolio-detail">
             @if (project.image) {
@@ -96,4 +97,7 @@
       }
     </div>
   </section>
+  }
+} @else {
+  <app-page-skeleton page="projects" />
 }

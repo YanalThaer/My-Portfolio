@@ -73,6 +73,23 @@ import { isDevicon, resolveIconName } from '../core/icons';
             <rect x="15" y="17" width="6" height="4" rx="1" />
             <path d="M12 7v4M6 17v-6h12v6" />
           }
+          @case ('copy') {
+            <rect x="8" y="8" width="12" height="12" rx="2" />
+            <path d="M16 8V6.2A2.2 2.2 0 0 0 13.8 4H6.2A2.2 2.2 0 0 0 4 6.2v7.6A2.2 2.2 0 0 0 6.2 16H8" />
+          }
+          @case ('check') {
+            <path d="m5 12 5 5 9-9" />
+          }
+          @case ('search') {
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="m20 20-3.8-3.8" />
+          }
+          @case ('arrow') {
+            <path d="M7 17 17 7M8 7h9v9" />
+          }
+          @case ('up') {
+            <path d="m6 14 6-6 6 6" />
+          }
           @default {
             <path d="M10 13a3.5 3.5 0 0 1 5.6-.4l1.5 1.5a3.5 3.5 0 0 1-5 5l-.8-.8" />
             <path d="M14 11a3.5 3.5 0 0 1-5.6.4L6.9 9.9a3.5 3.5 0 0 1 5-5l.8.8" />

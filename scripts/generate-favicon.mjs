@@ -11,8 +11,8 @@ const root = path.resolve(path.dirname(__filename), '..');
 const publicDir = path.join(root, 'public');
 const dataPath = path.join(root, 'public', 'data', 'portfolio.json');
 
-const BG = '#1f242d';
-const GREEN = '#7cf03d';
+const BG = '#0f172a';
+const GREEN = '#38bdf8';
 
 export function monogramFromName(name, logo = '') {
   const source = String(name || logo || '').trim();

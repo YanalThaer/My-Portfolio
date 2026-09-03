@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WEB3FORMS_ACCESS_KEY } from '../../core/env';
-import { contactHref, phoneValue, whatsappUrlFromDetails } from '../../core/contact-links';
+import { contactHref, isEmail as isEmailDetail, phoneValue, whatsappUrlFromDetails } from '../../core/contact-links';
 import { I18n } from '../../core/i18n';
 import { PageTransition } from '../../core/page-transition';
 import { Portfolio } from '../../core/portfolio';
 import { ContactDetail } from '../../core/portfolio.model';
+import { PageSkeleton } from '../../shared/page-skeleton';
 import { UiIcon } from '../../shared/ui-icon';
 
 type FormField = 'from_name' | 'email_id' | 'phone' | 'message';
@@ -14,7 +15,7 @@ type FormField = 'from_name' | 'email_id' | 'phone' | 'message';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, UiIcon],
+  imports: [ReactiveFormsModule, UiIcon, PageSkeleton],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
@@ -29,6 +30,8 @@ export class Contact {
   protected readonly statusColor = signal('');
   protected readonly sending = signal(false);
   protected readonly submitted = signal(false);
+  protected readonly copiedEmail = signal(false);
+  private copiedTimer: ReturnType<typeof setTimeout> | undefined;
 
   protected readonly form = this.fb.nonNullable.group({
     from_name: ['', Validators.required],
@@ -127,6 +130,25 @@ export class Contact {
 
   hrefFor(detail: ContactDetail): string | null {
     return contactHref(detail.label, detail.value, detail.kind);
+  }
+
+  isEmail(detail: ContactDetail): boolean {
+    return isEmailDetail(detail);
+  }
+
+  async copyEmail(value: string): Promise<void> {
+    const email = value.trim();
+    if (!email) {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(email);
+      this.copiedEmail.set(true);
+      clearTimeout(this.copiedTimer);
+      this.copiedTimer = setTimeout(() => this.copiedEmail.set(false), 2000);
+    } catch {
+      this.copiedEmail.set(false);
+    }
   }
 
   whatsappUrl(): string | null {

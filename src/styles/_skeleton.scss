@@ -1,0 +1,261 @@
+@use 'variables' as *;
+
+.sk-page {
+  pointer-events: none;
+
+  .home-img .img-box,
+  .home-img .img-box::before,
+  .home-img .img-box::after,
+  .home-img {
+    animation: none !important;
+  }
+
+  &.active {
+    .heading,
+    .home-detail h1,
+    .home-detail h2,
+    .home-tagline,
+    .home-summary,
+    .home-skills,
+    .home-detail .cv-link,
+    .home-detail .sci,
+    .services-box,
+    .portfolio-box,
+    .filter-btn,
+    .contact-detail,
+    .contact-box > h2,
+    .project-page .project-media {
+      animation: none !important;
+    }
+  }
+}
+
+.sk {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text-color) 8%, var(--second-bg-color));
+  border-radius: 0.7rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--text-color) 12%, transparent),
+      transparent
+    );
+    animation: sk-shine 1.2s ease infinite;
+  }
+}
+
+html[dir='rtl'] .sk::after {
+  animation-name: sk-shine-rtl;
+}
+
+@keyframes sk-shine {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sk-shine-rtl {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.sk-h1 {
+  width: min(36rem, 90%);
+  height: 4.6rem;
+  border-radius: 1rem;
+}
+
+.sk-h2 {
+  width: min(28rem, 80%);
+  height: 2.6rem;
+  margin-top: 0.8rem;
+}
+
+.sk-tag {
+  width: min(24rem, 70%);
+  height: 1.6rem;
+  margin-top: 1rem;
+}
+
+.sk-heading {
+  width: min(28rem, 70%);
+  height: 3.6rem;
+  margin: 0 auto 2.4rem;
+  border-radius: 1rem;
+}
+
+.sk-heading-start {
+  width: min(26rem, 80%);
+  height: 3.2rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.sk-text {
+  width: min(52rem, 100%);
+  height: 1.4rem;
+  margin-top: 1rem;
+}
+
+.sk-line {
+  height: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+.sk-w30 {
+  width: 30%;
+}
+
+.sk-w40 {
+  width: 40%;
+}
+
+.sk-w50 {
+  width: 50%;
+}
+
+.sk-w60 {
+  width: 60%;
+}
+
+.sk-w70 {
+  width: 70%;
+}
+
+.sk-w80 {
+  width: 80%;
+}
+
+.sk-chip {
+  width: 8.5rem;
+  height: 3.2rem;
+  border-radius: 999rem;
+}
+
+.sk-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.sk-btn {
+  width: 16rem;
+  height: 4.4rem;
+  border-radius: 4rem;
+}
+
+.sk-link {
+  width: 10rem;
+  height: 1.6rem;
+}
+
+.sk-sci {
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+}
+
+.sk-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  flex-shrink: 0;
+}
+
+.sk-tab {
+  display: block;
+  width: 100%;
+  height: 5.3rem;
+  margin-bottom: 1.4rem;
+  border-radius: 1rem;
+}
+
+.sk-cv {
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+}
+
+.sk-photo {
+  background: color-mix(in srgb, var(--text-color) 6%, var(--bg-color));
+}
+
+.sk-media {
+  background: color-mix(in srgb, var(--text-color) 6%, var(--bg-color));
+}
+
+.sk-back {
+  margin-bottom: 2rem;
+}
+
+.sk-detail {
+  flex: 1;
+  min-width: 0;
+}
+
+.sk-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.sk-field {
+  height: 4.6rem;
+  border-radius: 1rem;
+}
+
+.sk-field-wide,
+.sk-area {
+  grid-column: 1 / -1;
+}
+
+.sk-area {
+  height: 14rem;
+  border-radius: 1.2rem;
+}
+
+.sk-page .home-skills {
+  margin-top: 1.6rem;
+}
+
+.sk-page .services-box .sk-icon {
+  margin-bottom: 1.6rem;
+}
+
+.sk-page .services-box .sk-line {
+  height: 2rem;
+  margin: 0 0 1.2rem;
+}
+
+.sk-page .resume-item .sk-line:first-child {
+  margin-top: 0;
+}
+
+.sk-page .contact-detail {
+  gap: 1.4rem;
+}
+
+.sk-page .project-media.sk-media {
+  min-height: 22rem;
+  border-radius: 1.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk::after {
+    animation: none !important;
+  }
+}

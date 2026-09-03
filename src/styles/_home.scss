@@ -18,11 +18,21 @@
     line-height: 1.08;
   }
 
+  .home-tagline {
+    margin: 0.8rem 0 0;
+    max-width: 54rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: $main-color;
+  }
+
   h2 {
     display: inline-block;
     max-width: 100%;
     font-size: clamp(2.2rem, 4vw, 3.2rem);
-    margin-top: -0.6rem;
+    margin-top: 0.6rem;
 
     span {
       position: relative;
@@ -45,12 +55,41 @@
     }
   }
 
-  p {
+  .home-summary {
     font-size: 1.7rem;
     line-height: 1.75;
-    margin: 1.6rem 0 2.8rem;
+    margin: 1.6rem 0 1.6rem;
     max-width: 54rem;
     color: $muted;
+  }
+
+  .home-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 0 0 2.4rem;
+    padding: 0;
+    max-width: 54rem;
+    list-style: none;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1rem 0.55rem 0.75rem;
+      border: 0.12rem solid $card-border;
+      border-radius: 999rem;
+      background: $second-bg-color;
+      color: $white-color;
+      font-size: 1.3rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    app-icon {
+      font-size: 1.7rem;
+      color: $main-color;
+    }
   }
 
   .btn-sci {
@@ -58,6 +97,19 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1.2rem;
+
+    .cv-link {
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: $main-color;
+      text-decoration: underline;
+      text-underline-offset: 0.35rem;
+      margin-inline-end: 0.4rem;
+
+      &:hover {
+        color: $white-color;
+      }
+    }
 
     .sci {
       margin-inline-start: 0.4rem;
@@ -162,8 +214,8 @@
 }
 
 html[data-theme='light'] .home-img .img-item {
-  background: #1f242d;
-  border-color: #1f242d;
+  background: #0f172a;
+  border-color: #0f172a;
 }
 
 @keyframes rotate-border {

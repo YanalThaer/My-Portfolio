@@ -103,6 +103,7 @@ nav a {
 }
 
 .header-tools {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -144,13 +145,9 @@ nav a {
 }
 
 .theme-toggle app-icon,
-.accent-toggle app-icon {
+.search-toggle app-icon {
   font-size: 1.8rem;
   line-height: 1;
-}
-
-.accent-picker {
-  position: relative;
 }
 
 .accent-panel {
@@ -207,7 +204,7 @@ nav a {
   position: relative;
   overflow: hidden;
   background:
-    conic-gradient(from 90deg, #7cf03d, #22d3ee, #60a5fa, #a78bfa, #f472b6, #fb923c, #facc15, #7cf03d);
+    conic-gradient(from 90deg, #38bdf8, #7cf03d, #22d3ee, #60a5fa, #a78bfa, #f472b6, #fb923c, #facc15, #38bdf8);
 
   input {
     position: absolute;
@@ -223,7 +220,7 @@ nav a {
 
 .accent-default {
   background:
-    linear-gradient(135deg, #1f242d 50%, #eef1f5 50%);
+    linear-gradient(135deg, #0f172a 50%, #eef1f5 50%);
 }
 
 .accent-lock-hint {
@@ -251,46 +248,6 @@ nav a {
   margin-top: 1rem;
 }
 
-.bars-box {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-
-  .bar {
-    width: 100%;
-    height: 100%;
-    background: $bg-color;
-    animation: head-bars $transition-bar ease-in-out both;
-    animation-delay: calc(#{$transition-bar-stagger} * var(--i));
-  }
-
-  &.active .bar {
-    animation: show-bars $transition-bar ease-in-out both;
-    animation-delay: calc(#{$transition-bar-stagger} * var(--i));
-  }
-}
-
-@keyframes head-bars {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes show-bars {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
 section {
   position: absolute;
   width: 100%;
@@ -311,4 +268,156 @@ section {
     opacity: 1;
     overflow: auto;
   }
+}
+
+.shortcuts-toggle {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.to-top {
+  position: fixed;
+  inset-inline-end: 2.4rem;
+  bottom: max(2.4rem, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0.15rem solid $main-color;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg-color) 82%, transparent);
+  color: $main-color;
+  backdrop-filter: blur(1.2rem);
+  cursor: pointer;
+  box-shadow: $card-shadow;
+
+  app-icon {
+    font-size: 2.2rem;
+  }
+
+  &:hover {
+    background: $main-color;
+    color: $bg-color;
+  }
+}
+
+html.nav-open {
+  section.active {
+    overflow: hidden;
+  }
+
+  .to-top {
+    display: none;
+  }
+}
+
+.shortcuts-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: color-mix(in srgb, var(--bg-color) 72%, transparent);
+  backdrop-filter: blur(0.8rem);
+}
+
+.shortcuts-panel {
+  width: min(42rem, 100%);
+  padding: 2.2rem 2.4rem 2.4rem;
+  border-radius: 1.4rem;
+  background: $second-bg-color;
+  border: 0.15rem solid $card-border;
+  box-shadow: $card-shadow, 0 1.6rem 3.2rem #00000050;
+}
+
+.shortcuts-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+  }
+}
+
+.shortcuts-close {
+  border: 0;
+  background: transparent;
+  color: $main-color;
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shortcuts-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shortcuts-panel li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 0.85rem 0;
+  border-bottom: 0.1rem solid $divider;
+  font-size: 1.5rem;
+
+  span {
+    margin-inline-start: auto;
+  }
+
+  kbd + kbd {
+    margin-inline-start: 0.4rem;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.shortcuts-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $main-color;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: start;
+
+  span {
+    margin-inline-start: auto;
+  }
+}
+
+.shortcuts-panel kbd {
+  display: inline-flex;
+  min-width: 2.6rem;
+  justify-content: center;
+  padding: 0.25rem 0.7rem;
+  border: 0.12rem solid $card-border;
+  border-radius: 0.5rem;
+  background: $bg-color;
+  color: $main-color;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.4;
 }

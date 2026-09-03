@@ -71,20 +71,32 @@ section.active {
     animation: fade-up 0.5s ease 0.08s backwards;
   }
 
-  .home-detail > p:not(.sr-only) {
+  .home-tagline {
+    animation: fade-up 0.5s ease 0.12s backwards;
+  }
+
+  .home-summary {
     animation: fade-up 0.5s ease 0.16s backwards;
   }
 
+  .home-skills {
+    animation: fade-up 0.5s ease 0.2s backwards;
+  }
+
   .home-detail .btn-sci > .btn:nth-child(1) {
-    animation: fade-up 0.5s ease 0.24s backwards;
+    animation: fade-up 0.5s ease 0.28s backwards;
   }
 
   .home-detail .btn-sci > .btn:nth-child(2) {
-    animation: fade-up 0.5s ease 0.32s backwards;
+    animation: fade-up 0.5s ease 0.36s backwards;
+  }
+
+  .home-detail .cv-link {
+    animation: fade-up 0.5s ease 0.4s backwards;
   }
 
   .home-detail .sci {
-    animation: fade-up 0.5s ease 0.4s backwards;
+    animation: fade-up 0.5s ease 0.44s backwards;
   }
 
   .home-img {
@@ -95,6 +107,7 @@ section.active {
   .portfolio-box,
   .filter-btn,
   .resume-btn,
+  .contact-detail-row,
   .contact-detail {
     @include stagger-fade(8, 0.08s, 0.1s);
   }

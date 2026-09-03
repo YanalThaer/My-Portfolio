@@ -73,8 +73,15 @@
   }
 
   .home-detail {
-    p {
+    p,
+    .home-tagline,
+    .home-summary {
       max-width: none;
+      margin-inline: auto;
+    }
+
+    .home-skills {
+      justify-content: center;
       margin-inline: auto;
     }
 
@@ -106,11 +113,27 @@
     gap: 2.4rem;
   }
 
-  .portfolio-container,
-  .resume-list {
-    height: auto;
-    max-height: none;
-    overflow: visible;
+  .resume-box:first-child {
+    position: static;
+  }
+
+  .resume-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .resume-box .resume-btn {
+    width: auto;
+    flex: 1 1 12rem;
+    height: 4.6rem;
+    margin-bottom: 0;
+  }
+
+  .resume-box .resume-cv {
+    width: 100%;
+    height: 4.6rem;
+    margin-top: 0;
   }
 
   .contact-container {
@@ -121,7 +144,8 @@
     align-self: stretch;
   }
 
-  .contact-box .field-box {
+  .contact-box .field-box,
+  .sk-fields {
     grid-template-columns: 1fr;
   }
 
@@ -143,6 +167,12 @@
     min-width: 3.4rem;
     min-height: 3.2rem;
     padding: 0.35rem 0.65rem;
+  }
+
+  .to-top {
+    inset-inline-end: 1.6rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .resume-box .heading {

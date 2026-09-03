@@ -1,114 +1,129 @@
-@if (data(); as portfolio) {
-  <section class="resume" [class.active]="transition.contentActive()" aria-labelledby="resume-heading">
-    <h1 id="resume-heading" class="sr-only">{{ i18n.t().resume }}</h1>
-    <div class="resume-container">
-      <div class="resume-box" role="tablist" [attr.aria-label]="i18n.t().resumeSections">
-        @for (tab of portfolio.resume.tabs; track tab; let idx = $index) {
-          <button
-            class="resume-btn"
-            [class.active]="activeTab() === idx"
-            type="button"
-            role="tab"
-            [id]="'resume-tab-' + idx"
-            [attr.aria-selected]="activeTab() === idx"
-            [attr.aria-controls]="'resume-panel-' + idx"
-            (click)="selectTab(idx)"
-          >
-            {{ tab }}
-          </button>
-        }
-      </div>
-
-      <div class="resume-box">
-        <div
-          class="resume-detail experience"
-          [class.active]="activeTab() === 0"
-          role="tabpanel"
-          id="resume-panel-0"
-          aria-labelledby="resume-tab-0"
-        >
-          <h2 class="heading">
-            @if (i18n.t().headingMy) {
-              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[0] }}</span>
-            } @else {
-              <span>{{ portfolio.resume.tabs[0] }}</span>
-            }
-          </h2>
-          @for (item of portfolio.resume.experience; track item.title) {
-            <div class="resume-list">
-              <article class="resume-item">
-                <p class="year">{{ item.year }}</p>
-                <h3>{{ item.title }}</h3>
-                <p class="company">{{ item.company }}</p>
-                <p>{{ item.description }}</p>
-              </article>
-            </div>
-          }
-        </div>
-
-        <div
-          class="resume-detail education"
-          [class.active]="activeTab() === 1"
-          role="tabpanel"
-          id="resume-panel-1"
-          aria-labelledby="resume-tab-1"
-        >
-          <h2 class="heading">
-            @if (i18n.t().headingMy) {
-              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[1] }}</span>
-            } @else {
-              <span>{{ portfolio.resume.tabs[1] }}</span>
-            }
-          </h2>
-          <div class="resume-list">
-            @for (item of portfolio.resume.education; track item.title) {
-              <article class="resume-item">
-                <p class="year">{{ item.year }}</p>
-                <h3>{{ item.title }}</h3>
-                <p class="company">{{ item.company }}</p>
-                <p>{{ item.description }}</p>
-              </article>
+@if (transition.ready(data())) {
+  @if (data(); as portfolio) {
+    <section
+      class="resume"
+      [class.active]="transition.contentActive()"
+      aria-labelledby="resume-heading"
+    >
+      <h1 id="resume-heading" class="sr-only">{{ i18n.t().resume }}</h1>
+      <div class="resume-container">
+        <div class="resume-box">
+          <div class="resume-tabs" role="tablist" [attr.aria-label]="i18n.t().resumeSections">
+            @for (tab of portfolio.resume.tabs; track tab; let idx = $index) {
+              <button
+                class="resume-btn"
+                [class.active]="activeTab() === idx"
+                type="button"
+                role="tab"
+                [id]="'resume-tab-' + idx"
+                [attr.aria-selected]="activeTab() === idx"
+                [attr.aria-controls]="'resume-panel-' + idx"
+                [attr.tabindex]="activeTab() === idx ? 0 : -1"
+                (click)="selectTab(idx)"
+                (keydown)="onTabKey($event, idx)"
+              >
+                {{ tab }}
+              </button>
             }
           </div>
+          <a class="resume-cv" [href]="portfolio.home.cvUrl" download>{{
+            portfolio.home.cvLabel
+          }}</a>
         </div>
 
-        <div
-          class="resume-detail skills"
-          [class.active]="activeTab() === 2"
-          role="tabpanel"
-          id="resume-panel-2"
-          aria-labelledby="resume-tab-2"
-        >
-          <h2 class="heading">
-            @if (i18n.t().headingMy) {
-              {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[2] }}</span>
-            } @else {
-              <span>{{ portfolio.resume.tabs[2] }}</span>
-            }
-          </h2>
-          <div class="resume-list">
-            @for (skill of portfolio.resume.skills; track skill.name) {
-              <div class="resume-item">
-                <app-icon [name]="skill.icon" />
-                <span class="skill-name">{{ skill.name }}</span>
+        <div class="resume-box">
+          <div
+            class="resume-detail experience"
+            [class.active]="activeTab() === 0"
+            role="tabpanel"
+            id="resume-panel-0"
+            aria-labelledby="resume-tab-0"
+          >
+            <h2 class="heading">
+              @if (i18n.t().headingMy) {
+                {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[0] }}</span>
+              } @else {
+                <span>{{ portfolio.resume.tabs[0] }}</span>
+              }
+            </h2>
+            @for (item of portfolio.resume.experience; track item.title) {
+              <div class="resume-list">
+                <article class="resume-item">
+                  <p class="year">{{ item.year }}</p>
+                  <h3>{{ item.title }}</h3>
+                  <p class="company">{{ item.company }}</p>
+                  <p>{{ item.description }}</p>
+                </article>
               </div>
             }
           </div>
-        </div>
 
-        <div
-          class="resume-detail about"
-          [class.active]="activeTab() === 3"
-          role="tabpanel"
-          id="resume-panel-3"
-          aria-labelledby="resume-tab-3"
-        >
-          <h2 class="heading">{{ portfolio.resume.tabs[3] }}</h2>
-          <div class="resume-list">
-            <p>{{ portfolio.resume.about }}</p>
+          <div
+            class="resume-detail education"
+            [class.active]="activeTab() === 1"
+            role="tabpanel"
+            id="resume-panel-1"
+            aria-labelledby="resume-tab-1"
+          >
+            <h2 class="heading">
+              @if (i18n.t().headingMy) {
+                {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[1] }}</span>
+              } @else {
+                <span>{{ portfolio.resume.tabs[1] }}</span>
+              }
+            </h2>
+            <div class="resume-list">
+              @for (item of portfolio.resume.education; track item.title) {
+                <article class="resume-item">
+                  <p class="year">{{ item.year }}</p>
+                  <h3>{{ item.title }}</h3>
+                  <p class="company">{{ item.company }}</p>
+                  <p>{{ item.description }}</p>
+                </article>
+              }
+            </div>
+          </div>
+
+          <div
+            class="resume-detail skills"
+            [class.active]="activeTab() === 2"
+            role="tabpanel"
+            id="resume-panel-2"
+            aria-labelledby="resume-tab-2"
+          >
+            <h2 class="heading">
+              @if (i18n.t().headingMy) {
+                {{ i18n.t().headingMy }} <span>{{ portfolio.resume.tabs[2] }}</span>
+              } @else {
+                <span>{{ portfolio.resume.tabs[2] }}</span>
+              }
+            </h2>
+            <div class="resume-list">
+              @for (skill of portfolio.resume.skills; track skill.name) {
+                <div class="resume-item">
+                  <app-icon [name]="skill.icon" />
+                  <span class="skill-name">{{ skill.name }}</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div
+            class="resume-detail about"
+            [class.active]="activeTab() === 3"
+            role="tabpanel"
+            id="resume-panel-3"
+            aria-labelledby="resume-tab-3"
+          >
+            <h2 class="heading">{{ portfolio.resume.tabs[3] }}</h2>
+            <div class="resume-list">
+              <p>{{ portfolio.resume.about }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  }
+} @else {
+  <app-page-skeleton page="resume" />
 }

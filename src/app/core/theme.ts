@@ -10,8 +10,9 @@ export interface ColorPreset {
 }
 
 export const ACCENT_PRESETS: ColorPreset[] = [
+  { hex: '#38bdf8', en: 'Sky', ar: 'سماوي' },
   { hex: '#7cf03d', en: 'Green', ar: 'أخضر' },
-  { hex: '#22d3ee', en: 'Cyan', ar: 'سماوي' },
+  { hex: '#22d3ee', en: 'Cyan', ar: 'فيروزي' },
   { hex: '#60a5fa', en: 'Blue', ar: 'أزرق' },
   { hex: '#a78bfa', en: 'Violet', ar: 'بنفسجي' },
   { hex: '#f472b6', en: 'Pink', ar: 'وردي' },
@@ -32,7 +33,7 @@ export const BACKGROUND_PRESETS: ColorPreset[] = [
 ];
 
 export const DEFAULT_ACCENT = ACCENT_PRESETS[0].hex;
-export const DEFAULT_BG_DARK = '#1f242d';
+export const DEFAULT_BG_DARK = '#0f172a';
 export const DEFAULT_BG_LIGHT = '#eef1f5';
 
 const THEME_KEY = 'portfolio-theme';

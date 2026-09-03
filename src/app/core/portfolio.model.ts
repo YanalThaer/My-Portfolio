@@ -6,6 +6,7 @@ export interface SocialLink {
 
 export interface HomeData {
   name: string;
+  tagline?: string;
   roles: { text: string; i: number }[];
   summary: string;
   cvUrl: string;

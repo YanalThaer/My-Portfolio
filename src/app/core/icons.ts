@@ -17,6 +17,11 @@ const UI_GLYPHS = new Set([
   'database',
   'sitemap',
   'link',
+  'copy',
+  'check',
+  'search',
+  'arrow',
+  'up',
 ]);
 
 const ALIAS: Record<string, string> = {
@@ -44,6 +49,11 @@ const ALIAS: Record<string, string> = {
   sitemap: 'sitemap',
   'bx-link': 'link',
   link: 'link',
+  copy: 'copy',
+  check: 'check',
+  search: 'search',
+  arrow: 'arrow',
+  up: 'up',
   'bx-arrow-back': 'back',
   back: 'back',
   'bx-link-external': 'external',

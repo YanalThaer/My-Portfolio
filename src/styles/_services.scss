@@ -56,11 +56,10 @@
       app-icon {
         font-size: 3rem;
         color: $bg-color;
-        transform: rotate(225deg);
       }
 
       &:hover app-icon {
-        transform: rotate(180deg);
+        transform: translate(0.15rem, -0.15rem);
       }
     }
   }

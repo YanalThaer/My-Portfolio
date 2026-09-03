@@ -25,6 +25,12 @@ export interface UiStrings {
   resetTheme: string;
   themeLockedHint: string;
   contactMe: string;
+  viewProjects: string;
+  backToTop: string;
+  loading: string;
+  homeSkills: string;
+  copyEmail: string;
+  copiedEmail: string;
   imA: string;
   whatsappChat: string;
   whatIDoLead: string;
@@ -72,6 +78,21 @@ export interface UiStrings {
   whatsapp: string;
   jobTitle: string;
   logoHome: string;
+  shortcutsTitle: string;
+  shortcutsHint: string;
+  shortcutTheme: string;
+  shortcutLang: string;
+  shortcutAccent: string;
+  shortcutCursor: string;
+  shortcutHelp: string;
+  shortcutClose: string;
+  shortcutPalette: string;
+  searchOpen: string;
+  paletteTitle: string;
+  palettePlaceholder: string;
+  paletteEmpty: string;
+  cursorOn: string;
+  cursorOff: string;
 }
 
 const UI: Record<Lang, UiStrings> = {
@@ -97,6 +118,12 @@ const UI: Record<Lang, UiStrings> = {
     resetTheme: 'Reset to default',
     themeLockedHint: 'Light and dark are locked while colors are customized. Press Reset to unlock them.',
     contactMe: 'Contact Me',
+    viewProjects: 'View projects',
+    backToTop: 'Back to top',
+    loading: 'Loading page',
+    homeSkills: 'Core skills',
+    copyEmail: 'Copy email',
+    copiedEmail: 'Email copied',
     imA: "I'm a",
     whatsappChat: 'Chat on WhatsApp',
     whatIDoLead: 'What I',
@@ -145,6 +172,21 @@ const UI: Record<Lang, UiStrings> = {
     whatsapp: 'WhatsApp',
     jobTitle: 'Software Engineer',
     logoHome: 'Yanal home',
+    shortcutsTitle: 'Keyboard shortcuts',
+    shortcutsHint: 'Shortcuts',
+    shortcutTheme: 'Light / dark',
+    shortcutLang: 'Language',
+    shortcutAccent: 'Colors',
+    shortcutCursor: 'Custom cursor on / off',
+    shortcutHelp: 'This list',
+    shortcutClose: 'Close',
+    shortcutPalette: 'Command palette',
+    searchOpen: 'Search',
+    paletteTitle: 'Command palette',
+    palettePlaceholder: 'Go to a page, project, or action…',
+    paletteEmpty: 'Nothing matches.',
+    cursorOn: 'Turn custom cursor on',
+    cursorOff: 'Turn custom cursor off',
   },
   ar: {
     skip: 'تخطي إلى المحتوى',
@@ -168,6 +210,12 @@ const UI: Record<Lang, UiStrings> = {
     resetTheme: 'إعادة للرئيسي',
     themeLockedHint: 'الفاتح والغامق مقفولان أثناء تخصيص الألوان. اضغط إعادة للرئيسي حتى يشتغلوا.',
     contactMe: 'تواصل معي',
+    viewProjects: 'عرض المشاريع',
+    backToTop: 'العودة للأعلى',
+    loading: 'جاري تحميل الصفحة',
+    homeSkills: 'المهارات الأساسية',
+    copyEmail: 'نسخ البريد',
+    copiedEmail: 'تم نسخ البريد',
     imA: 'أنا',
     whatsappChat: 'محادثة واتساب',
     whatIDoLead: 'ماذا',
@@ -215,6 +263,21 @@ const UI: Record<Lang, UiStrings> = {
     whatsapp: 'واتساب',
     jobTitle: 'مهندس برمجيات',
     logoHome: 'الرئيسية — ينال',
+    shortcutsTitle: 'اختصارات الكيبورد',
+    shortcutsHint: 'الاختصارات',
+    shortcutTheme: 'فاتح / غامق',
+    shortcutLang: 'اللغة',
+    shortcutAccent: 'الألوان',
+    shortcutCursor: 'تشغيل / إيقاف الكرسر المخصص',
+    shortcutHelp: 'هذه القائمة',
+    shortcutClose: 'إغلاق',
+    shortcutPalette: 'قائمة الأوامر',
+    searchOpen: 'بحث',
+    paletteTitle: 'قائمة الأوامر',
+    palettePlaceholder: 'روح لصفحة أو مشروع أو أمر…',
+    paletteEmpty: 'ما في نتيجة.',
+    cursorOn: 'تشغيل الكرسر المخصص',
+    cursorOff: 'إيقاف الكرسر المخصص',
   },
 };
 

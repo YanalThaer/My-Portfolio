@@ -25,10 +25,22 @@
     margin: 1.5rem 0 2.5rem;
   }
 
+  .contact-detail-row,
   .contact-detail {
     display: flex;
     align-items: center;
     margin: 2rem 0;
+  }
+
+  .contact-detail-row {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    .contact-detail {
+      margin: 0;
+      min-width: 0;
+      flex: 1;
+    }
   }
 
   form {
@@ -162,6 +174,42 @@
 
 html[dir='rtl'] .contact-detail.contact-detail-link:hover {
   transform: translateX(-0.6rem);
+}
+
+.copy-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.7rem 1.1rem;
+  border: 0.12rem solid $card-border;
+  border-radius: 0.8rem;
+  background: $second-bg-color;
+  color: $white-color;
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  app-icon {
+    font-size: 1.6rem;
+    color: $main-color;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: $main-color;
+    color: $main-color;
+  }
 }
 
 #form-status {

@@ -1,27 +1,41 @@
-@if (data(); as portfolio) {
+@if (transition.ready(data())) {
+  @if (data(); as portfolio) {
   <section class="contact" [class.active]="transition.contentActive()" aria-labelledby="contact-heading">
     <div class="contact-container">
       <div class="contact-box">
         <h2 id="contact-heading">{{ portfolio.contact.title }}</h2>
         <p class="desc">{{ portfolio.contact.description }}</p>
         @for (detail of portfolio.contact.details; track detail.label) {
-          @if (hrefFor(detail); as href) {
-            <a class="contact-detail contact-detail-link" [href]="href">
-              <app-icon [name]="detail.icon" />
-              <div class="detail">
-                <p>{{ detail.label }}</p>
-                <p>{{ detail.value }}</p>
+          <div class="contact-detail-row">
+            @if (hrefFor(detail); as href) {
+              <a class="contact-detail contact-detail-link" [href]="href">
+                <app-icon [name]="detail.icon" />
+                <div class="detail">
+                  <p>{{ detail.label }}</p>
+                  <p>{{ detail.value }}</p>
+                </div>
+              </a>
+            } @else {
+              <div class="contact-detail">
+                <app-icon [name]="detail.icon" />
+                <div class="detail">
+                  <p>{{ detail.label }}</p>
+                  <p>{{ detail.value }}</p>
+                </div>
               </div>
-            </a>
-          } @else {
-            <div class="contact-detail">
-              <app-icon [name]="detail.icon" />
-              <div class="detail">
-                <p>{{ detail.label }}</p>
-                <p>{{ detail.value }}</p>
-              </div>
-            </div>
-          }
+            }
+            @if (isEmail(detail)) {
+              <button
+                type="button"
+                class="copy-email"
+                (click)="copyEmail(detail.value)"
+                [attr.aria-label]="copiedEmail() ? i18n.t().copiedEmail : i18n.t().copyEmail"
+              >
+                <app-icon [name]="copiedEmail() ? 'check' : 'copy'" />
+                <span>{{ copiedEmail() ? i18n.t().copiedEmail : i18n.t().copyEmail }}</span>
+              </button>
+            }
+          </div>
         }
         @if (whatsappUrl(); as whatsapp) {
           <a
@@ -119,4 +133,7 @@
       </div>
     </div>
   </section>
+  }
+} @else {
+  <app-page-skeleton page="contact" />
 }

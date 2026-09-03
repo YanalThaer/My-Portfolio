@@ -22,14 +22,14 @@ html[lang='ar'] {
 }
 
 :root {
-  --accent: #7cf03d;
+  --accent: #38bdf8;
 }
 
 :root,
 html[data-theme='dark'] {
   color-scheme: dark;
-  --bg-color: #1f242d;
-  --second-bg-color: #323946;
+  --bg-color: #0f172a;
+  --second-bg-color: #1e293b;
   --main-color: var(--accent);
   --text-color: #fff;
   --muted: color-mix(in srgb, var(--text-color) 68%, transparent);
@@ -44,7 +44,7 @@ html[data-theme='light'] {
   color-scheme: light;
   --bg-color: #eef1f5;
   --second-bg-color: #fff;
-  --main-color: color-mix(in srgb, var(--accent) 64%, #0b140c);
+  --main-color: color-mix(in srgb, var(--accent) 64%, #0b1220);
   --text-color: #1c232d;
   --muted: color-mix(in srgb, var(--text-color) 70%, transparent);
   --disabled-color: #1c232d66;
@@ -92,6 +92,17 @@ main#main-content {
 :focus-visible {
   outline: 0.2rem solid $main-color;
   outline-offset: 0.3rem;
+}
+
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+html.custom-cursor.custom-cursor-text input,
+html.custom-cursor.custom-cursor-text textarea,
+html.custom-cursor.custom-cursor-text select {
+  cursor: text !important;
 }
 
 .sr-only {

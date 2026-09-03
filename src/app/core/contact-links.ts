@@ -12,7 +12,7 @@ function isPhone(detail: { kind?: string; label: string }): boolean {
   return key.includes('phone') || key.includes('هاتف');
 }
 
-function isEmail(detail: { kind?: string; label: string; value?: string }): boolean {
+export function isEmail(detail: { kind?: string; label: string; value?: string }): boolean {
   if (detail.kind === 'email') {
     return true;
   }

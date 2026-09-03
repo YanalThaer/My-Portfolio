@@ -62,23 +62,13 @@
     >
       <app-icon [name]="theme.mode() === 'dark' ? 'sun' : 'moon'" />
     </button>
-    <div class="accent-picker">
-      <button
-        type="button"
-        class="tool-btn accent-toggle"
-        (click)="toggleAccentPanel($event)"
-        [attr.aria-expanded]="accentOpen()"
+    @if (accentOpen()) {
+      <div
+        class="accent-panel"
+        role="dialog"
         [attr.aria-label]="i18n.t().chooseAccent"
+        (click)="$event.stopPropagation()"
       >
-        <app-icon name="palette" />
-      </button>
-      @if (accentOpen()) {
-        <div
-          class="accent-panel"
-          role="dialog"
-          [attr.aria-label]="i18n.t().chooseAccent"
-          (click)="$event.stopPropagation()"
-        >
           <p class="accent-panel-title">{{ i18n.t().accentColor }}</p>
           <div class="accent-swatches">
             @for (preset of theme.presets; track preset.hex) {
@@ -137,9 +127,27 @@
           <button type="button" class="accent-reset" (click)="theme.reset()">
             {{ i18n.t().resetTheme }}
           </button>
-        </div>
-      }
-    </div>
+      </div>
+    }
+    <button
+      type="button"
+      class="tool-btn search-toggle"
+      (click)="togglePalette($event)"
+      [attr.aria-expanded]="extras.paletteOpen()"
+      [attr.title]="i18n.t().searchOpen"
+      [attr.aria-label]="i18n.t().searchOpen"
+    >
+      <app-icon name="search" />
+    </button>
+    <button
+      type="button"
+      class="tool-btn shortcuts-toggle"
+      (click)="toggleHelp($event)"
+      [attr.aria-expanded]="helpOpen()"
+      [attr.aria-label]="i18n.t().shortcutsHint"
+    >
+      ?
+    </button>
     <button
       type="button"
       id="menu-icon"
@@ -153,15 +161,72 @@
   </div>
 </header>
 
-<div class="bars-box" [class.active]="transition.barsActive()" aria-hidden="true">
-  <div class="bar" style="--i: 6"></div>
-  <div class="bar" style="--i: 5"></div>
-  <div class="bar" style="--i: 4"></div>
-  <div class="bar" style="--i: 3"></div>
-  <div class="bar" style="--i: 2"></div>
-  <div class="bar" style="--i: 1"></div>
-</div>
-
 <main id="main-content" tabindex="-1">
   <router-outlet />
 </main>
+
+@if (helpOpen()) {
+  <div class="shortcuts-overlay" (click)="closeHelp()">
+    <div
+      class="shortcuts-panel"
+      role="dialog"
+      [attr.aria-label]="i18n.t().shortcutsTitle"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="shortcuts-head">
+        <h2>{{ i18n.t().shortcutsTitle }}</h2>
+        <button type="button" class="shortcuts-close" (click)="closeHelp()">
+          {{ i18n.t().shortcutClose }}
+        </button>
+      </div>
+      <ul>
+        @for (item of pageShortcuts(); track item.key) {
+          <li>
+            <kbd>{{ item.key }}</kbd>
+            <span>{{ item.label }}</span>
+          </li>
+        }
+        <li>
+          <kbd>L</kbd>
+          <span>{{ i18n.t().shortcutLang }}</span>
+        </li>
+        <li>
+          <kbd>T</kbd>
+          <span>{{ i18n.t().shortcutTheme }}</span>
+        </li>
+        <li>
+          <button type="button" class="shortcuts-action" (click)="openColorsFromHelp($event)">
+            <kbd>A</kbd>
+            <span>{{ i18n.t().shortcutAccent }}</span>
+          </button>
+        </li>
+        <li>
+          <kbd>M</kbd>
+          <span>{{ i18n.t().shortcutCursor }}</span>
+        </li>
+        <li>
+          <kbd>Ctrl</kbd>
+          <kbd>K</kbd>
+          <span>{{ i18n.t().shortcutPalette }}</span>
+        </li>
+        <li>
+          <kbd>?</kbd>
+          <span>{{ i18n.t().shortcutHelp }}</span>
+        </li>
+        <li>
+          <kbd>Esc</kbd>
+          <span>{{ i18n.t().shortcutClose }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+}
+
+<app-command-palette (openColors)="openColorsFromPalette()" (openHelp)="openHelpFromPalette()" />
+<app-site-cursor />
+
+@if (showToTop()) {
+  <button type="button" class="to-top" (click)="scrollToTop()" [attr.aria-label]="i18n.t().backToTop">
+    <app-icon name="up" />
+  </button>
+}

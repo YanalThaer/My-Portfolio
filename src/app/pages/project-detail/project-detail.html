@@ -1,5 +1,6 @@
-@if (data()) {
-  @if (project(); as project) {
+@if (!transition.ready(data())) {
+  <app-page-skeleton page="project" />
+} @else if (project(); as project) {
     <section class="project-page" [class.active]="transition.contentActive()">
       <a routerLink="/projects" class="project-back">
         <app-icon name="back" />
@@ -39,6 +40,13 @@
                 {{ i18n.t().githubRepo }}
               </a>
             }
+            <a
+              routerLink="/contact"
+              class="btn"
+              [class.btn-outline]="!!project.liveUrl || !!project.github"
+            >
+              {{ i18n.t().contactMe }}
+            </a>
             @if (!project.github && !project.liveUrl) {
               <p>{{ i18n.t().privateRepo }}</p>
             }
@@ -85,12 +93,11 @@
         </div>
       }
     </section>
-  } @else {
-    <section class="not-found" [class.active]="transition.contentActive()">
+} @else {
+    <section class="not-found active">
       <p class="numb">404</p>
       <h1 class="heading">{{ i18n.t().pageNotFoundLead }} <span>{{ i18n.t().pageNotFoundSpan }}</span></h1>
       <p class="desc">{{ i18n.t().projectNotFound }}</p>
       <a routerLink="/projects" class="btn">{{ i18n.t().backToProjects }}</a>
     </section>
-  }
 }
