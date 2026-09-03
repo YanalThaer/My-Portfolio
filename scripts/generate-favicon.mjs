@@ -5,7 +5,6 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { backupCurrent } from './backup.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const root = path.resolve(path.dirname(__filename), '..');
@@ -118,10 +117,14 @@ function isDirectRun() {
 
 if (isDirectRun()) {
   try {
-    const snapshot = backupCurrent('favicon');
+    const backupFile = path.join(path.dirname(__filename), 'backup.mjs');
+    if (existsSync(backupFile)) {
+      const { backupCurrent } = await import('./backup.mjs');
+      const snapshot = backupCurrent('favicon');
+      console.log(`Backup saved to ${path.relative(root, snapshot.folder)}`);
+    }
     const letter = await generateFaviconAssets();
     console.log(`Wrote favicon assets for "${letter}" to public/`);
-    console.log(`Backup saved to ${path.relative(root, snapshot.folder)}`);
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);
