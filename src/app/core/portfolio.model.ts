@@ -78,8 +78,17 @@ export interface ContactData {
   };
 }
 
+export interface NavLabels {
+  home: string;
+  work: string;
+  resume: string;
+  projects: string;
+  contact: string;
+}
+
 export interface PortfolioData {
   logo: string;
+  nav?: NavLabels;
   home: HomeData;
   services: ServiceItem[];
   resume: ResumeData;

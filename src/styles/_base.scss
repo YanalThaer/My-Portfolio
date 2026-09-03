@@ -4,6 +4,8 @@ html {
   font-size: 62.5%;
   height: 100%;
   font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 html[lang='ar'] {
@@ -30,10 +32,12 @@ html[data-theme='dark'] {
   --second-bg-color: #323946;
   --main-color: var(--accent);
   --text-color: #fff;
+  --muted: color-mix(in srgb, var(--text-color) 68%, transparent);
   --disabled-color: #ffffff33;
   --main-soft: color-mix(in srgb, var(--main-color) 18%, transparent);
-  --divider: color-mix(in srgb, var(--text-color) 16%, transparent);
-  --card-shadow: none;
+  --divider: color-mix(in srgb, var(--text-color) 14%, transparent);
+  --card-border: color-mix(in srgb, var(--text-color) 10%, transparent);
+  --card-shadow: 0 1.2rem 3rem #0000002e;
 }
 
 html[data-theme='light'] {
@@ -42,16 +46,20 @@ html[data-theme='light'] {
   --second-bg-color: #fff;
   --main-color: color-mix(in srgb, var(--accent) 64%, #0b140c);
   --text-color: #1c232d;
+  --muted: color-mix(in srgb, var(--text-color) 70%, transparent);
   --disabled-color: #1c232d66;
   --main-soft: color-mix(in srgb, var(--main-color) 14%, transparent);
   --divider: color-mix(in srgb, var(--text-color) 12%, transparent);
-  --card-shadow: 0 0.8rem 2.4rem #1c232d14;
+  --card-border: color-mix(in srgb, var(--text-color) 10%, transparent);
+  --card-shadow: 0 1rem 2.8rem #1c232d12;
 }
 
 body {
   height: 100%;
+  overflow-x: hidden;
   color: $white-color;
   background: $bg-color;
+  line-height: 1.6;
   transition:
     background-color 0.25s ease,
     color 0.25s ease;
@@ -110,7 +118,9 @@ main#main-content {
 .heading {
   font-size: 4.5rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.4rem;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 
   span {
     color: $main-color;
@@ -123,10 +133,10 @@ main#main-content {
   background: $main-color;
   border: 0.2rem solid $main-color;
   border-radius: 4rem;
-  box-shadow: 0 0 1rem $main-color;
+  box-shadow: 0 0.6rem 1.6rem color-mix(in srgb, var(--main-color) 28%, transparent);
   font-size: 1.6rem;
   color: $bg-color;
-  font-weight: 500;
+  font-weight: 600;
   transition:
     background-color 0.35s ease,
     color 0.35s ease,
@@ -149,7 +159,7 @@ main#main-content {
     &:hover {
       background: $main-color;
       color: $bg-color;
-      box-shadow: 0 0 1rem $main-color;
+      box-shadow: 0 0.6rem 1.6rem color-mix(in srgb, var(--main-color) 28%, transparent);
     }
   }
 }

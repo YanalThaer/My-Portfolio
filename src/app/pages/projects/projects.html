@@ -30,14 +30,21 @@
       }
       @for (project of filteredProjects(); track projectTrack(project)) {
         <article class="portfolio-box">
-          @if (project.image) {
-            <div class="project-media">
+          <div class="project-media" [class.project-media-empty]="!project.image">
+            @if (project.image) {
               <img [src]="project.image" [alt]="project.title + ' ' + i18n.t().preview" />
-            </div>
-          }
+            } @else {
+              <div class="project-cover">
+                <span class="project-cover-num">{{ project.number }}</span>
+                <span class="project-cover-title">{{ project.title }}</span>
+              </div>
+            }
+          </div>
 
           <div class="portfolio-detail">
-            <p class="numb" aria-hidden="true">{{ project.number }}</p>
+            @if (project.image) {
+              <p class="numb" aria-hidden="true">{{ project.number }}</p>
+            }
             <h3>
               <a class="project-title-link" [routerLink]="['/projects', slugOf(project)]">{{ project.title }}</a>
             </h3>

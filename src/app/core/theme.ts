@@ -63,13 +63,15 @@ export class ThemeService {
   readonly isCustomized = computed(
     () => this.accent() !== DEFAULT_ACCENT || this.background() !== null,
   );
+  readonly monogram = signal('');
 
   constructor() {
     effect(() => {
       const theme = this.mode();
       const accent = this.accent();
       const background = this.background();
-      this.apply(theme, accent, background);
+      const letter = this.monogram();
+      this.apply(theme, accent, background, letter);
       try {
         localStorage.setItem(THEME_KEY, theme);
         localStorage.setItem(ACCENT_KEY, accent);
@@ -115,6 +117,13 @@ export class ThemeService {
     this.mode.set('dark');
     this.accent.set(DEFAULT_ACCENT);
     this.background.set(null);
+  }
+
+  setMonogram(letter: string): void {
+    const next = String(letter || '').trim();
+    if (next !== this.monogram()) {
+      this.monogram.set(next);
+    }
   }
 
   private readMode(): ThemeMode {
@@ -163,7 +172,7 @@ export class ThemeService {
     }
   }
 
-  private apply(theme: ThemeMode, accent: string, background: string | null): void {
+  private apply(theme: ThemeMode, accent: string, background: string | null, letter: string): void {
     const root = this.document.documentElement;
     root.dataset['theme'] = theme;
     root.style.setProperty('--accent', accent);
@@ -194,27 +203,38 @@ export class ThemeService {
     if (meta) {
       meta.setAttribute('content', pageBg);
     }
-    this.updateFavicon(accent, pageBg);
+    if (letter) {
+      this.updateFavicon(accent, pageBg, letter);
+    }
   }
 
-  private updateFavicon(accent: string, background: string): void {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="8" fill="${background}"/><rect x="1" y="1" width="30" height="30" rx="8" fill="none" stroke="${accent}" stroke-width="2"/><path d="M9.6 8.4 L16 17.8 L22.4 8.4 M16 16.6 V23.8" fill="none" stroke="${accent}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-    const image = new Image();
-    image.onload = () => {
-      const canvas = this.document.createElement('canvas');
-      canvas.width = 64;
-      canvas.height = 64;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
-        this.setFavicon(svgUrl, 'image/svg+xml', 'any');
-        return;
-      }
-      ctx.drawImage(image, 0, 0, 64, 64);
-      this.setFavicon(canvas.toDataURL('image/png'), 'image/png', '64x64');
-    };
-    image.onerror = () => this.setFavicon(svgUrl, 'image/svg+xml', 'any');
-    image.src = svgUrl;
+  private updateFavicon(accent: string, background: string, letter: string): void {
+    const size = 64;
+    const canvas = this.document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return;
+    }
+
+    const pad = size / 32;
+    const radius = size * 0.25;
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = background;
+    ctx.beginPath();
+    ctx.roundRect(pad, pad, size - pad * 2, size - pad * 2, radius);
+    ctx.fill();
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = size / 16;
+    ctx.stroke();
+    ctx.fillStyle = accent;
+    const wide = /[MWم]/i.test(letter);
+    ctx.font = `800 ${wide ? 28 : 34}px Cairo, Poppins, "Segoe UI", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(letter, size / 2, size / 2 + 1);
+    this.setFavicon(canvas.toDataURL('image/png'), 'image/png', '64x64');
   }
 
   private setFavicon(href: string, type: string, sizes: string): void {

@@ -8,7 +8,6 @@
 
       <div class="project-hero">
         <div class="project-hero-copy">
-          <p class="numb" aria-hidden="true">{{ project.number }}</p>
           @if (project.details?.role; as role) {
             <p class="project-role">{{ role }}</p>
           }
@@ -50,7 +49,10 @@
           @if (project.image) {
             <img [src]="project.image" [alt]="project.title + ' ' + i18n.t().preview" />
           } @else {
-            <span aria-hidden="true">{{ initial() }}</span>
+            <div class="project-cover">
+              <span class="project-cover-num">{{ project.number }}</span>
+              <span class="project-cover-title">{{ project.title }}</span>
+            </div>
           }
         </div>
       </div>

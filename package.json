@@ -6,13 +6,17 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node scripts/sync-env.mjs && ng serve",
-    "build": "node scripts/sync-env.mjs && ng build",
+    "start": "node scripts/sync-env.mjs && node scripts/generate-favicon.mjs && ng serve",
+    "build": "node scripts/sync-env.mjs && node scripts/generate-favicon.mjs && ng build",
+    "generate-favicon": "node scripts/generate-favicon.mjs",
     "update-from-cv": "node scripts/update-from-cv.mjs",
     "update-from-linkedin": "node scripts/update-from-cv.mjs --from-linkedin",
     "update-linkedin": "node scripts/update-from-cv.mjs --linkedin-only",
     "update-ar": "node scripts/update-from-cv.mjs --translate-ar",
     "update-photo": "node scripts/update-photo.mjs",
+    "studio-photo": "node scripts/studio-photo.mjs",
+    "export-content": "node scripts/export-content.mjs",
+    "update-from-excel": "node scripts/update-from-excel.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -46,6 +50,7 @@
     "@angular/cli": "^20.3.35",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
+    "exceljs": "^4.4.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -54,6 +59,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "pdfjs-dist": "^6.3.289",
     "pngjs": "^7.0.0",
+    "sharp": "^0.35.4",
     "typescript": "~5.9.2"
   }
 }

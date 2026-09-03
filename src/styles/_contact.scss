@@ -17,6 +17,8 @@
 
   p {
     font-size: 1.6rem;
+    line-height: 1.7;
+    color: $muted;
   }
 
   .desc {
@@ -31,9 +33,10 @@
 
   form {
     background: $second-bg-color;
-    padding: 2.5rem 3.5rem 3.5rem;
-    border-radius: 1rem;
+    padding: 2.8rem 3.2rem 3.2rem;
+    border-radius: 1.4rem;
     text-align: center;
+    border: 0.15rem solid $card-border;
     box-shadow: $card-shadow;
   }
 
@@ -55,6 +58,13 @@
       flex-direction: column;
       text-align: start;
       min-width: 0;
+      gap: 0.6rem;
+    }
+
+    .field-label {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: $muted;
     }
 
     .field-wide {
@@ -63,10 +73,10 @@
 
     input,
     textarea {
-      padding: 1.5rem;
+      padding: 1.4rem 1.5rem;
       background: $bg-color;
-      border: 0.15rem solid $bg-color;
-      border-radius: 0.6rem;
+      border: 0.15rem solid $card-border;
+      border-radius: 0.8rem;
       font-size: 1.6rem;
       color: $white-color;
       transition:
@@ -113,7 +123,7 @@
     color: $main-color;
     font-size: 3rem;
     padding: 1.2rem;
-    border-radius: 0.6rem;
+    border-radius: 1rem;
     margin-inline-end: 1.5rem;
     transition:
       background-color 0.3s ease,
@@ -122,6 +132,13 @@
 
   .detail p:first-child {
     color: $main-color;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .detail p:last-child {
+    color: $white-color;
+    overflow-wrap: anywhere;
   }
 
   &.contact-detail-link {

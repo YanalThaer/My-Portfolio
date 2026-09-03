@@ -39,10 +39,5 @@ export class ProjectDetail {
     return tech ? splitTech(tech) : [];
   });
 
-  protected readonly initial = computed(() => {
-    const title = this.project()?.title?.trim();
-    return title ? title.charAt(0).toUpperCase() : '';
-  });
-
   slugOf = projectSlug;
 }

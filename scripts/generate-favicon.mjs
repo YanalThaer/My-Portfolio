@@ -1,110 +1,50 @@
-import { writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+// npm run generate-favicon
+// Reads the first letter of home.name in portfolio.json and writes public favicon files.
+
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PNG } from 'pngjs';
+import sharp from 'sharp';
+import { backupCurrent } from './backup.mjs';
 
-const BG = { r: 0x1f, g: 0x24, b: 0x2d, a: 255 };
-const GREEN = { r: 0x7c, g: 0xf0, b: 0x3d, a: 255 };
-const CLEAR = { r: 0, g: 0, b: 0, a: 0 };
+const __filename = fileURLToPath(import.meta.url);
+const root = path.resolve(path.dirname(__filename), '..');
+const publicDir = path.join(root, 'public');
+const dataPath = path.join(root, 'public', 'data', 'portfolio.json');
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const publicDir = join(root, 'public');
+const BG = '#1f242d';
+const GREEN = '#7cf03d';
 
-function mix(a, b, t) {
-  const k = Math.max(0, Math.min(1, t));
-  return {
-    r: a.r + (b.r - a.r) * k,
-    g: a.g + (b.g - a.g) * k,
-    b: a.b + (b.b - a.b) * k,
-    a: a.a + (b.a - a.a) * k,
-  };
+export function monogramFromName(name, logo = '') {
+  const source = String(name || logo || '').trim();
+  const match = source.match(/\p{L}/u);
+  return match ? match[0].toLocaleUpperCase('en-US') : 'Y';
 }
 
-function cover(distance) {
-  return Math.max(0, Math.min(1, 0.55 - distance));
+function xmlEscape(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
 }
 
-function sdRoundRect(px, py, cx, cy, halfW, halfH, radius) {
-  const dx = Math.abs(px - cx) - (halfW - radius);
-  const dy = Math.abs(py - cy) - (halfH - radius);
-  const ox = Math.max(dx, 0);
-  const oy = Math.max(dy, 0);
-  return Math.hypot(ox, oy) + Math.min(Math.max(dx, dy), 0) - radius;
-}
+function iconSvg(size, letter, { fullBleed = false } = {}) {
+  const safe = xmlEscape(letter || 'Y');
+  const wide = /[MWم]/i.test(letter);
+  const fontSize = size * (wide ? 0.46 : 0.54);
+  const radius = fullBleed ? 0 : size * 0.25;
+  const pad = fullBleed ? 0 : size * (1 / 32);
+  const inner = size - pad * 2;
+  const stroke = Math.max(1, size * (2 / 32));
+  const fontFamily = "Poppins, Cairo, 'Segoe UI', Arial, sans-serif";
 
-function sdSegment(px, py, ax, ay, bx, by, radius) {
-  const pax = px - ax;
-  const pay = py - ay;
-  const bax = bx - ax;
-  const bay = by - ay;
-  const denom = bax * bax + bay * bay;
-  const h = denom === 0 ? 0 : Math.max(0, Math.min(1, (pax * bax + pay * bay) / denom));
-  return Math.hypot(pax - bax * h, pay - bay * h) - radius;
-}
-
-function sdY(px, py, size) {
-  const x = px / size;
-  const y = py / size;
-  const stroke = 0.056;
-  const left = sdSegment(x, y, 0.3, 0.262, 0.5, 0.556, stroke);
-  const right = sdSegment(x, y, 0.7, 0.262, 0.5, 0.556, stroke);
-  const stem = sdSegment(x, y, 0.5, 0.519, 0.5, 0.744, stroke);
-  return Math.min(left, right, stem) * size;
-}
-
-function colorAt(px, py, size, { opaque = false, fullBleed = false } = {}) {
-  const yMark = sdY(px, py, size);
-
-  if (fullBleed) {
-    return mix(BG, GREEN, cover(yMark));
-  }
-
-  const cx = size / 2;
-  const pad = size * (1 / 32);
-  const half = size / 2 - pad;
-  const radius = size * 0.25;
-  const border = size * (2 / 32);
-  const rect = sdRoundRect(px, py, cx, cx, half, half, radius);
-  const inner = rect + border;
-
-  let color = opaque ? BG : CLEAR;
-  color = mix(color, BG, cover(rect));
-  color = mix(color, GREEN, Math.min(cover(rect), 1 - cover(inner)));
-  color = mix(color, GREEN, cover(yMark));
-  return color;
-}
-
-function renderPng(size, options = {}) {
-  const png = new PNG({ width: size, height: size });
-  const samples = size <= 32 ? 4 : 3;
-
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let a = 0;
-      for (let sy = 0; sy < samples; sy++) {
-        for (let sx = 0; sx < samples; sx++) {
-          const px = x + (sx + 0.5) / samples;
-          const py = y + (sy + 0.5) / samples;
-          const color = colorAt(px, py, size, options);
-          r += color.r;
-          g += color.g;
-          b += color.b;
-          a += color.a;
-        }
-      }
-      const n = samples * samples;
-      const i = (size * y + x) << 2;
-      png.data[i] = Math.round(r / n);
-      png.data[i + 1] = Math.round(g / n);
-      png.data[i + 2] = Math.round(b / n);
-      png.data[i + 3] = Math.round(a / n);
-    }
-  }
-
-  return PNG.sync.write(png);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+  <rect x="${pad}" y="${pad}" width="${inner}" height="${inner}" rx="${radius}" fill="${BG}"/>
+  <rect x="${pad}" y="${pad}" width="${inner}" height="${inner}" rx="${radius}" fill="none" stroke="${GREEN}" stroke-width="${stroke}"/>
+  <text x="${size / 2}" y="${size / 2}" text-anchor="middle" dominant-baseline="central" font-family="${fontFamily}" font-size="${fontSize}" font-weight="800" fill="${GREEN}">${safe}</text>
+</svg>`;
 }
 
 function pngToIco(images) {
@@ -138,20 +78,52 @@ function pngToIco(images) {
   return buf;
 }
 
-const png16 = renderPng(16);
-const png32 = renderPng(32);
-const png48 = renderPng(48);
-const apple = renderPng(180, { fullBleed: true });
+async function raster(size, letter, options = {}) {
+  return sharp(Buffer.from(iconSvg(size, letter, options)))
+    .png()
+    .toBuffer();
+}
 
-writeFileSync(join(publicDir, 'favicon-32.png'), png32);
-writeFileSync(join(publicDir, 'apple-touch-icon.png'), apple);
-writeFileSync(
-  join(publicDir, 'favicon.ico'),
-  pngToIco([
-    { size: 16, data: png16 },
-    { size: 32, data: png32 },
-    { size: 48, data: png48 },
-  ]),
-);
+export async function generateFaviconAssets(name) {
+  let letterSource = name;
+  if (!letterSource && existsSync(dataPath)) {
+    const portfolio = JSON.parse(readFileSync(dataPath, 'utf8'));
+    letterSource = portfolio.logo || portfolio.home?.name;
+  }
+  const letter = monogramFromName(letterSource);
+  const png16 = await raster(16, letter);
+  const png32 = await raster(32, letter);
+  const png48 = await raster(48, letter);
+  const apple = await raster(180, letter, { fullBleed: true });
 
-console.log('Wrote favicon.svg assets to public/');
+  writeFileSync(path.join(publicDir, 'favicon.svg'), iconSvg(32, letter));
+  writeFileSync(path.join(publicDir, 'favicon-32.png'), png32);
+  writeFileSync(path.join(publicDir, 'apple-touch-icon.png'), apple);
+  writeFileSync(
+    path.join(publicDir, 'favicon.ico'),
+    pngToIco([
+      { size: 16, data: png16 },
+      { size: 32, data: png32 },
+      { size: 48, data: png48 },
+    ]),
+  );
+
+  return letter;
+}
+
+function isDirectRun() {
+  const invoked = process.argv[1] ? path.resolve(process.argv[1]) : '';
+  return path.normalize(invoked) === path.normalize(__filename);
+}
+
+if (isDirectRun()) {
+  try {
+    const snapshot = backupCurrent('favicon');
+    const letter = await generateFaviconAssets();
+    console.log(`Wrote favicon assets for "${letter}" to public/`);
+    console.log(`Backup saved to ${path.relative(root, snapshot.folder)}`);
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
+}

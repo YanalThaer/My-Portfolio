@@ -1,7 +1,14 @@
 {
   "logo": "Yanal.",
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "resume": "Resume",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
   "home": {
-    "name": "Yanal Al-hasan",
+    "name": "Yanal Alhasan",
     "roles": [
       {
         "text": "Software Engineer",
@@ -23,17 +30,17 @@
     "summary": "Software engineer experienced in building scalable applications with Java, Spring Boot, Angular, and microservices. Currently working on enterprise banking systems, with a focus on distributed, secure, and reliable solutions.",
     "cvUrl": "files/Yanal CV.pdf",
     "cvLabel": "Download CV",
-    "image": "images/home.webp",
+    "image": "images/home.png",
     "socials": [
       {
         "url": "https://github.com/YanalThaer",
-        "icon": "bxl-github",
-        "label": "GitHub"
+        "label": "GitHub",
+        "icon": "bxl-github"
       },
       {
         "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
-        "icon": "bxl-linkedin",
-        "label": "LinkedIn"
+        "label": "LinkedIn",
+        "icon": "bxl-linkedin"
       }
     ]
   },
@@ -85,20 +92,62 @@
       }
     ],
     "skills": [
-      { "name": "Java", "icon": "bxl-java" },
-      { "name": "Spring Boot", "icon": "bxl-spring-boot" },
-      { "name": "Angular", "icon": "bxl-angular" },
-      { "name": "Microservices", "icon": "bx-sitemap" },
-      { "name": "Apache Kafka", "icon": "bx-broadcast" },
-      { "name": "JavaScript", "icon": "bxl-javascript" },
-      { "name": "HTML5", "icon": "bxl-html5" },
-      { "name": "CSS", "icon": "bxl-css3" },
-      { "name": "PHP", "icon": "bxl-php" },
-      { "name": "Laravel", "icon": "bxl-php" },
-      { "name": "MySQL", "icon": "bxs-data" },
-      { "name": "SQL Server", "icon": "bxs-data" },
-      { "name": "MongoDB", "icon": "bxs-data" },
-      { "name": "Git and GitHub", "icon": "bxl-github" }
+      {
+        "name": "Java",
+        "icon": "bxl-java"
+      },
+      {
+        "name": "Spring Boot",
+        "icon": "bxl-spring-boot"
+      },
+      {
+        "name": "Angular",
+        "icon": "bxl-angular"
+      },
+      {
+        "name": "Microservices",
+        "icon": "bx-sitemap"
+      },
+      {
+        "name": "Apache Kafka",
+        "icon": "bx-broadcast"
+      },
+      {
+        "name": "JavaScript",
+        "icon": "bxl-javascript"
+      },
+      {
+        "name": "HTML5",
+        "icon": "bxl-html5"
+      },
+      {
+        "name": "CSS",
+        "icon": "bxl-css3"
+      },
+      {
+        "name": "PHP",
+        "icon": "bxl-php"
+      },
+      {
+        "name": "Laravel",
+        "icon": "bxl-php"
+      },
+      {
+        "name": "MySQL",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "SQL Server",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "MongoDB",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "Git and GitHub",
+        "icon": "bxl-github"
+      }
     ],
     "about": "I am a software engineer who enjoys building practical, high-quality applications. My work spans Java, Spring Boot, Angular, and microservices, with a strong interest in clean code and solving real problems in team settings. I learn quickly and look for chances to improve with every project."
   },

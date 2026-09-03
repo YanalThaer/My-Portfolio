@@ -1,5 +1,12 @@
 {
-  "logo": "Yanal.",
+  "logo": "ينال.",
+  "nav": {
+    "home": "الرئيسية",
+    "work": "العمل",
+    "resume": "السيرة",
+    "projects": "المشاريع",
+    "contact": "تواصل"
+  },
   "home": {
     "name": "ينال الحسن",
     "roles": [
@@ -23,17 +30,17 @@
     "summary": "مهندس برمجيات ذو خبرة في بناء تطبيقات قابلة للتوسع باستخدام Java وSpring Boot وAngular والخدمات المصغّرة. أعمل حالياً على أنظمة مصرفية مؤسسية، مع التركيز على حلول موزّعة وآمنة وموثوقة.",
     "cvUrl": "files/Yanal CV.pdf",
     "cvLabel": "تحميل السيرة",
-    "image": "images/home.webp",
+    "image": "images/home.png",
     "socials": [
       {
         "url": "https://github.com/YanalThaer",
-        "icon": "bxl-github",
-        "label": "GitHub"
+        "label": "GitHub",
+        "icon": "bxl-github"
       },
       {
         "url": "https://www.linkedin.com/in/yanal-al-hasan-934869271/",
-        "icon": "bxl-linkedin",
-        "label": "LinkedIn"
+        "label": "LinkedIn",
+        "icon": "bxl-linkedin"
       }
     ]
   },
@@ -85,20 +92,62 @@
       }
     ],
     "skills": [
-      { "name": "Java", "icon": "bxl-java" },
-      { "name": "Spring Boot", "icon": "bxl-spring-boot" },
-      { "name": "Angular", "icon": "bxl-angular" },
-      { "name": "Microservices", "icon": "bx-sitemap" },
-      { "name": "Apache Kafka", "icon": "bx-broadcast" },
-      { "name": "JavaScript", "icon": "bxl-javascript" },
-      { "name": "HTML5", "icon": "bxl-html5" },
-      { "name": "CSS", "icon": "bxl-css3" },
-      { "name": "PHP", "icon": "bxl-php" },
-      { "name": "Laravel", "icon": "bxl-php" },
-      { "name": "MySQL", "icon": "bxs-data" },
-      { "name": "SQL Server", "icon": "bxs-data" },
-      { "name": "MongoDB", "icon": "bxs-data" },
-      { "name": "Git and GitHub", "icon": "bxl-github" }
+      {
+        "name": "Java",
+        "icon": "bxl-java"
+      },
+      {
+        "name": "Spring Boot",
+        "icon": "bxl-spring-boot"
+      },
+      {
+        "name": "Angular",
+        "icon": "bxl-angular"
+      },
+      {
+        "name": "Microservices",
+        "icon": "bx-sitemap"
+      },
+      {
+        "name": "Apache Kafka",
+        "icon": "bx-broadcast"
+      },
+      {
+        "name": "JavaScript",
+        "icon": "bxl-javascript"
+      },
+      {
+        "name": "HTML5",
+        "icon": "bxl-html5"
+      },
+      {
+        "name": "CSS",
+        "icon": "bxl-css3"
+      },
+      {
+        "name": "PHP",
+        "icon": "bxl-php"
+      },
+      {
+        "name": "Laravel",
+        "icon": "bxl-php"
+      },
+      {
+        "name": "MySQL",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "SQL Server",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "MongoDB",
+        "icon": "bxs-data"
+      },
+      {
+        "name": "Git and GitHub",
+        "icon": "bxl-github"
+      }
     ],
     "about": "أنا مهندس برمجيات أستمتع ببناء تطبيقات عملية وعالية الجودة. عملي يشمل Java وSpring Boot وAngular والخدمات المصغّرة، مع اهتمام قوي بالكود النظيف وحل مشكلات حقيقية ضمن فرق العمل. أتعلم بسرعة وأبحث عن فرص للتحسين مع كل مشروع."
   },

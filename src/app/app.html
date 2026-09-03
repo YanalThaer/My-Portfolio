@@ -1,8 +1,8 @@
 <a href="#main-content" class="skip-link">{{ i18n.t().skip }}</a>
 
 <header [class.active]="transition.headerActive()">
-  <a routerLink="/" class="logo" [attr.aria-label]="i18n.t().logoHome">
-    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <a routerLink="/" class="logo" [attr.aria-label]="logoLabel()">
+    <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
       <rect x="1" y="1" width="30" height="30" rx="8" fill="var(--bg-color)" />
       <rect
         x="1"
@@ -14,23 +14,26 @@
         stroke="currentColor"
         stroke-width="2"
       />
-      <path
-        d="M9.6 8.4 L16 17.8 L22.4 8.4 M16 16.6 V23.8"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="3.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+      @if (monogram()) {
+        <text
+          x="16"
+          y="16.4"
+          text-anchor="middle"
+          dominant-baseline="central"
+          fill="currentColor"
+          font-weight="800"
+          [attr.font-size]="monogramWide() ? 13 : 16"
+        >{{ monogram() }}</text>
+      }
     </svg>
   </a>
 
   <nav id="primary-nav" aria-label="Primary" [class.active]="menuOpen()">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ i18n.t().navHome }}</a>
-    <a routerLink="/work" routerLinkActive="active">{{ i18n.t().navWork }}</a>
-    <a routerLink="/resume" routerLinkActive="active">{{ i18n.t().navResume }}</a>
-    <a routerLink="/projects" routerLinkActive="active">{{ i18n.t().navProjects }}</a>
-    <a routerLink="/contact" routerLinkActive="active">{{ i18n.t().navContact }}</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ nav().home }}</a>
+    <a routerLink="/work" routerLinkActive="active">{{ nav().work }}</a>
+    <a routerLink="/resume" routerLinkActive="active">{{ nav().resume }}</a>
+    <a routerLink="/projects" routerLinkActive="active">{{ nav().projects }}</a>
+    <a routerLink="/contact" routerLinkActive="active">{{ nav().contact }}</a>
   </nav>
 
   <div class="header-tools">
